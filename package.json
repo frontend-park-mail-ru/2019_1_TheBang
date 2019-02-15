@@ -1,0 +1,24 @@
+{
+  "name": "2019_1_TheBang",
+  "version": "1.0.0",
+  "description": "The best team 🤟",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frontend-park-mail-ru/2019_1_TheBang.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/frontend-park-mail-ru/2019_1_TheBang/issues"
+  },
+  "homepage": "https://github.com/frontend-park-mail-ru/2019_1_TheBang#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
