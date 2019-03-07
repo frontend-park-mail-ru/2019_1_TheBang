@@ -1,0 +1,18 @@
+.mobile-input {
+    display: none;
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    width: $burger_size;
+    height: $burger_size;
+    z-index: 4;
+    opacity: 0;
+
+    @media all and (max-width: $screen-md) {
+        display: block;
+    }
+
+    &:checked {
+        z-index: 4; 
+    }
+}

@@ -13,7 +13,7 @@
         <input type="checkbox" class="mobile-input">
         <i class="mobile-burger fa fa-bars fa-2x"></i>
         <div class="menu">
-            <a class="menu__header" href="#">
+            <a href="#" class="menu__header">
                 <div class="menu__logo">
                 </div><h1>TheBang!</h1>
             </a>
@@ -40,16 +40,19 @@
         </div>
         <div class="content">
             <div class="form-container">
-                <h1 class="title">Регистрация</h1>
+                <h1 class="title">Профиль</h1>
                 <form class="form">
-                    <div class="form-item">
-                        <input type="input" class="form-item__input" placeholder="Логин">
+                    <label>Логин</label>
+                    <div class="form-item" id="login">
+                        <input type="input" class="form-item__input" placeholder="Логин" disabled="disabled">
                         <i class="fas fa-user form-item__icon"></i>
                     </div>
-                    <div class="form-item">
-                            <input type="input" class="form-item__input" placeholder="Никнейм">
-                            <i class="fab fa-suse form-item__icon"></i>
-                        </div>
+                    <label>Никнейм</label>
+                    <div class="form-item" id="login">
+                        <input type="input" class="form-item__input" placeholder="Никнейм">
+                        <i class="fab fa-suse form-item__icon"></i>
+                    </div>
+                    <label>Пароль</label>
                     <div class="form-item">
                         <input type="password" class="form-item__input" placeholder="Пароль">
                         <i class="fas fa-unlock form-item__icon"></i>
@@ -57,17 +60,11 @@
                             <i class="fa fa-eye form-item__eye-icon"></i>
                         </button>
                     </div>
-                    <div class="form-item">
-                        <input type="password" class="form-item__input" placeholder="Повторите пароль">
-                        <i class="fas fa-unlock form-item__icon"></i>
-                        <button class="form-item__eye">
-                            <i class="fa fa-eye form-item__eye-icon"></i>
-                        </button>
-                    </div>
-                    <button class="button">Зарегистрироваться</button>
+                    <button class="button">Сохранить</button>
                 </form>
-                <a class="link" href="#">Войти</a> 
+                <a class="link" href="#">Редактировать</a> 
             </div>
         </div>
     </div>
 </body>
+</html>

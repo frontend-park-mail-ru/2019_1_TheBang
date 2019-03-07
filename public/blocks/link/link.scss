@@ -1,0 +1,13 @@
+.link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border-top: 1px $menu-item_color solid;
+    margin-top: 10px;
+    color: $menu-item_color;
+
+    &:hover, &:focus {
+        text-decoration: underline;
+    }
+}

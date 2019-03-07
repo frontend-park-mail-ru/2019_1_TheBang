@@ -1,0 +1,11 @@
+.liderboard {
+    margin-top: 20px;
+    border: 5px $menu-item_color solid;
+    color: white;
+    border-collapse: collapse;
+
+    & > * > * > td {
+        border: 5px $menu-item_color solid;
+        padding: 10px;
+    }
+}

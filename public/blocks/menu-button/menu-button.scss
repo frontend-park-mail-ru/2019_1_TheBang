@@ -1,0 +1,36 @@
+.menu-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: $button-height;
+    color: white;
+    background-color: $menu-item_color;
+    opacity: 0.8;
+    margin-top: 10px;
+    box-shadow: $item_box-shadow;
+    margin: 10px;
+    border-radius: $border-radius;
+
+    &:hover {
+        box-shadow: 0 0 10px 0 $menu-item_color_hover inset, 0 0 10px 4px $menu-item_color_hover;
+        border: none;
+    }
+
+    &:active {
+        background-color: $content_color;
+        opacity: $content_opacity;
+        box-shadow: none;
+        border: none;
+        margin: 10px 0 10px 0;
+        border-radius: 0;
+    }
+
+    @media all and (max-width: $screen-md) {
+        &:active {
+            background-color: $title-color;
+            opacity: 1;
+            margin: 10px;
+            border-radius: $border-radius;
+        }
+    }
+}
