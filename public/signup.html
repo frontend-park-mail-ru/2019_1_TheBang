@@ -13,7 +13,7 @@
         <input type="checkbox" class="mobile-input">
         <i class="mobile-burger fa fa-bars fa-2x"></i>
         <div class="menu">
-            <a href="#" class="menu__header">
+            <a class="menu__header" href="#">
                 <div class="menu__logo">
                 </div><h1>TheBang!</h1>
             </a>
@@ -40,12 +40,16 @@
         </div>
         <div class="content">
             <div class="form-container">
-                <h1 class="title">Вход</h1>
+                <h1 class="title">Регистрация</h1>
                 <form class="form">
                     <div class="form-item">
                         <input type="input" class="form-item__input" placeholder="Логин">
                         <i class="fas fa-user form-item__icon"></i>
                     </div>
+                    <div class="form-item">
+                            <input type="input" class="form-item__input" placeholder="Никнейм">
+                            <i class="fab fa-suse form-item__icon"></i>
+                        </div>
                     <div class="form-item">
                         <input type="password" class="form-item__input" placeholder="Пароль">
                         <i class="fas fa-unlock form-item__icon"></i>
@@ -53,19 +57,17 @@
                             <i class="fa fa-eye form-item__eye-icon"></i>
                         </button>
                     </div>
-                    <div class="password">
-                        <label class="checkbox">
-                            <input class="checkbox__input" type="checkbox">
-                            <span class="checkbox__custom"></span>
-                            <span>Запомнить</span>
-                        </label>
-                        <a class="password__link" href="#">Забыли пароль?</a>
+                    <div class="form-item">
+                        <input type="password" class="form-item__input" placeholder="Повторите пароль">
+                        <i class="fas fa-unlock form-item__icon"></i>
+                        <button class="form-item__eye">
+                            <i class="fa fa-eye form-item__eye-icon"></i>
+                        </button>
                     </div>
-                    <button class="button">Войти</button>
+                    <button class="button">Зарегистрироваться</button>
                 </form>
-                <a class="link" href="#">Зарегистрироваться</a> 
+                <a class="link" href="#">Войти</a> 
             </div>
         </div>
     </div>
 </body>
-</html>

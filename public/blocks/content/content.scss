@@ -1,0 +1,14 @@
+.content {
+    display: flex;
+    padding: 80px 40px 40px 40px;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    background-color: $content_color;
+    opacity: $content_opacity;
+    overflow-y: auto;
+
+    @media all and (max-width: $screen-md) {
+        padding: 0;
+    }
+}

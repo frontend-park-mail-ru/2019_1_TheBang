@@ -1,0 +1,31 @@
+@font-face {
+    font-family: Title;
+    src: url(../fonts/10062.ttf);
+}
+
+$screen-md: 700px;
+$screen-lg: 992px;
+
+$menu_min-width: 250px;
+
+$logo_size: 50px;
+
+$button_height: 70px;
+
+$menu-item_color: rgb(3, 22, 51);
+$menu-item_color_hover: rgb(52, 152, 219);
+$menu-item_opacity: 0.9;
+
+$content_color: rgb(33, 80, 119);
+$content_opacity: 0.8;
+
+$title_font-family: Title, Helvetica, serif;
+$title_color: rgb(255, 22, 53);
+$title_color_border: rgb(201, 17, 42);
+$title_color_hover: rgb(255, 99, 88);
+
+$border-radius: 10px;
+
+$item_box-shadow: 0px 4px 30px 0px rgba(50, 50, 50, 1);
+
+$burger_size: 50px;
