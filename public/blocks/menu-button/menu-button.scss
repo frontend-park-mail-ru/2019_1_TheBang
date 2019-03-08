@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: $button-height;
+    min-height: $button-height;
     color: white;
     background-color: $menu-item_color;
     opacity: 0.8;

@@ -1,0 +1,80 @@
+.grid {
+    display: grid;
+    grid-template-columns: 200px 80px auto;
+    grid-template-rows: auto;
+    grid-template-areas: 
+        "avatar login-label login"
+        "avatar nickname-label nickname"
+        "avatar password-label password"
+        "upload . ."
+        "button button button";
+
+    justify-items: center;
+    align-items: center;
+    grid-gap: 20px;
+    padding: 0px 40px 0px 40px;
+
+    @media all and (max-width: $screen-lg) {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "avatar"
+            "upload"
+            "login-label"
+            "login"
+            "nickname-label"
+            "nickname"
+            "password-label"
+            "password"
+            "button";
+        
+        grid-gap: 10px;
+    }
+
+    &__avatar {
+        grid-area: avatar;
+        border: 5px $menu-item_color solid;
+        border-radius: $border-radius;
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    &__upload {
+        grid-area: upload;
+        opacity: 0;
+        width: 50px;
+        height: 50px;
+        z-index: 99999;
+    }
+
+    &__login-label {
+        grid-area: login-label;
+    }
+
+    &__login {
+        grid-area: login;
+    }
+
+    &__nickname-label {
+        grid-area: nickname-label;
+    }
+
+    &__nickname {
+        grid-area: nickname;
+    }
+    &__upload-icon {
+        grid-area: upload;
+    }
+
+    &__password-label {
+        grid-area: password-label;
+    }
+
+    &__password {
+        grid-area: password;
+    }
+
+    &__button {
+        grid-area: button;
+    }
+}

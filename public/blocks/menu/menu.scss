@@ -4,6 +4,7 @@
     width: 25%;
     min-width: $menu_min-width;
     font-family: $title_font-family;
+    overflow-y: auto;
 
     @media all and (max-width: $screen-md) {
         position: fixed;
