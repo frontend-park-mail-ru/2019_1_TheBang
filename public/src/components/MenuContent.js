@@ -6,7 +6,7 @@ import btn from "./menu/btn";
 import header from "./menu/header";
 
 
-class MenuContent {
+class MenuContent { // контроллер
     constructor () {
         this.header = header;
         this.btn = btn;

@@ -1,12 +1,14 @@
 import GameContent from "../components/GameContent";
+import app from "../app";
 
-
-
-class GamePageController {
+class GamePage {
     constructor() {
-        this.name = 'game';
-        this.targetRender = document.getElementById('root');
+        this.targetRender = app;
         this.content = new GameContent();
+    }
+
+    getTargetRender() {
+        return this.targetRender;
     }
 
     render()  {
@@ -15,9 +17,6 @@ class GamePageController {
         `
     }
 
-    afterRender() {
-    }
-
 }
 
-export default GamePageController;
+export default GamePage;

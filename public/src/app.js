@@ -1,62 +1,46 @@
 import '../css/index.scss';
 
-import AuthPageController from "./controllers/AuthPageController";
-import ProfilePageController from "./controllers/ProfilePageController";
-import HomePageController from "./controllers/HomePageController";
-import NotFoundPageController from "./controllers/NotFoundPageController";
-import SignUpPageController from "./controllers/SignUpPageController";
-import AuthorsPageController from "./controllers/AuthorsPageController";
-import GamePageController from "./controllers/GamePageController";
-import AboutPageController from "./controllers/AboutPageController";
+import AuthPage from "./controllers/AuthPage";
+import ProfilePage from "./controllers/ProfilePage";
+import HomePage from "./controllers/HomePage";
+import NotFoundPage from "./controllers/NotFoundPage";
+import SignUpPage from "./controllers/SignUpPage";
+import AuthorsPage from "./controllers/AuthorsPage";
+import GamePage from "./controllers/GamePage";
+import AboutPage from "./controllers/AboutPage";
+import Router from "./Router";
+
 
 const app = document.getElementById('root');
-const routes = {};
 
+let router = new Router();
 
-function route (path, controller) {
-    routes[path] = {controller: controller};
-}
+router.addUrl('/', HomePage, 'index');
+router.addUrl('/profile', ProfilePage, 'profile');
+router.addUrl('/auth', AuthPage, 'auth');
+router.addUrl('/signup', SignUpPage, 'signup');
+router.addUrl('/authors', AuthorsPage, 'authors');
+router.addUrl('/game', GamePage, 'game');
+router.addUrl('/about', AboutPage, 'about');
 
+router.addUrl('404', NotFoundPage, 'not_found');
 
-function router () {
+function pageLoader () {
     let url = location.hash.slice(1) || '/';
-    let route = routes[url];
+    let controller = router.getController(url);
 
-    if (!route) {
-        let error = new NotFoundPageController();
-        app.innerHTML = error.render();
-        return;
-    }
-
-    let controller = new route.controller();
-
-    let element = controller.targetRender;
-
-    if (!element) {
-        let temp = controller.content;
-        let t = controller.name;
-        controller = new HomePageController();
-        controller.content = temp;
-        controller.name = t;
-        element = controller.targetRender;
-    }
+    controller = new controller();
+    let element = controller.getTargetRender();
 
     element.innerHTML = controller.render();
-    controller.afterRender();
+
+    if (controller.afterRender) {
+        controller.afterRender()
+    }
 
 }
 
+window.addEventListener('hashchange', pageLoader);
+window.addEventListener('load', pageLoader);
 
-window.addEventListener('hashchange', router);
-window.addEventListener('load', router);
-
-
-route('/', HomePageController);
-route('/profile', ProfilePageController);
-
-route('/auth', AuthPageController);
-
-route('/signup', SignUpPageController);
-route('/authors', AuthorsPageController);
-route('/game', GamePageController);
-route('/about', AboutPageController);
+export default app;
