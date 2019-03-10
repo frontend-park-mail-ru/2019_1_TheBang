@@ -25,7 +25,7 @@ class SignUpContent {
                     ${this.repeatPassword('Повторите пароль', 'password')}
                     ${this.button('Зарегистрироваться')}
                 </form>
-                ${this.link('Войти')} 
+                ${this.link('Войти', 'auth')} 
             </div>
         `
     }

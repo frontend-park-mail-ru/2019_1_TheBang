@@ -24,7 +24,7 @@ class AuthContent {
                     ${this.passwordBlock.render()}
                     ${this.button('Войти')}
                 </form>
-                ${this.link('Зарегистрироваться')}
+                ${this.link('Зарегистрироваться', 'signup')}
             </div>
         `
     }

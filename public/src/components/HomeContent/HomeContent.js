@@ -9,7 +9,7 @@ class HomeContent {
             <div class="home">
                 ${this.title('Название игры')}
                 <div class="home__img"></div>
-                <a href="#"><div class="home__button"></div></a>
+                <a href="#/game"><div class="home__button"></div></a>
             </div>
         `
     }
