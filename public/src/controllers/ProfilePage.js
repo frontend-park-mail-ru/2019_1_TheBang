@@ -7,6 +7,10 @@ class ProfilePage extends FormController {
         super(ProfileContent);
     }
 
+    makeRequest() {
+        // поживем подождем)
+    }
+
 }
 
 export default ProfilePage;
