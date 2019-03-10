@@ -25,6 +25,8 @@ class IndexController {
         this.baseComponent();
 
         return `
+                <input type="checkbox" class="mobile-input">
+                <i class="mobile-burger fa fa-bars fa-2x"></i>
                 <div class="menu">
                 ${this.menu.render()}
                 </div>
@@ -38,7 +40,7 @@ class IndexController {
         return this.targetRender;
     }
 
-    async afterRender() {
+    afterRender() {
         MenuContent.activateButton(this.pageName);
     }
 

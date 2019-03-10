@@ -43,6 +43,17 @@ module.exports = {
                     },
                 ],
             },
+            {
+                test: /\.ttf$/,
+                use: [
+                    {
+                        loader: 'ttf-loader',
+                        options: {
+                            name: './font/[name].[ext]',
+                        },
+                    },
+                ]
+            },
         ]
     },
     plugins: [

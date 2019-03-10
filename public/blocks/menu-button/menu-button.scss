@@ -16,7 +16,7 @@
         border: none;
     }
 
-    &:active {
+    &_selected {
         background-color: $content_color;
         opacity: $content_opacity;
         box-shadow: none;
@@ -25,8 +25,9 @@
         border-radius: 0;
     }
 
+
     @media all and (max-width: $screen-md) {
-        &:active {
+        &_selected {
             background-color: $title-color;
             opacity: 1;
             margin: 10px;
