@@ -35,11 +35,10 @@ class FormController extends IndexController{
 
             cancelError();
 
-            let originalPassowrd = checkEqualPassword();
+            let originalPassowrd = hasEqualPassword();
 
             [].forEach.call(formInputs, (input) => {
-                // cancelError(input);
-                if (checkRequired(input)) {
+                if (hasUnRequired(input)) {
                     error = true
                 }
             });
@@ -74,7 +73,7 @@ function insertAfter(elem, refElem) {
 }
 
 
-function checkEqualPassword() {
+function hasEqualPassword() {
     let passOne = document.getElementsByClassName("form-item__input_pass_repeat")[0];
     let passTwo = document.getElementsByClassName("form-item__input_pass")[0];
 
@@ -83,16 +82,8 @@ function checkEqualPassword() {
     }
 
     if (!(passOne.value === passTwo.value)) {
+        createErrorMessage(passTwo, "Пароли не совпадают!");
         passTwo.classList.remove("form-item__input_success");
-        passTwo.classList.add("form-item__input_error");
-        let error = document.createElement("span");
-
-        error.innerText = "Пароли не совпадают!";
-        error.className = "form-item__error-message";
-
-        let parentDiv = passTwo.parentNode;
-
-        insertAfter(error, parentDiv);
         return true
 
     } else {
@@ -103,24 +94,28 @@ function checkEqualPassword() {
 }
 
 
-function checkRequired(field) {
+function hasUnRequired(field) {
     if (!field.value) {
-        field.classList.remove("form-item__input_success");
-        field.classList.add("form-item__input_error");
-        let error = document.createElement("span");
-
-        error.innerText = "Это поле обязательно!";
-        error.className = "form-item__error-message";
-
-        let parentDiv = field.parentNode;
-
-        insertAfter(error, parentDiv);
+        createErrorMessage(field, "Это поле обязательно!");
         return true
     } else {
         field.classList.remove("form-item__input_error");
         field.classList.add("form-item__input_success");
         return false
     }
+}
+
+
+function createErrorMessage(field, msg) {
+    field.classList.remove("form-item__input_success");
+    field.classList.add("form-item__input_error");
+
+    let error = document.createElement("span");
+
+    error.innerText = msg;
+    error.className = "form-item__error-message";
+
+    insertAfter(error, field.parentNode);
 }
 
 
