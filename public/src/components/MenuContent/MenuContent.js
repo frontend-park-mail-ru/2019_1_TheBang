@@ -49,8 +49,6 @@ class MenuContent {
             });
         }
     }
-
-
 }
 
 export default MenuContent;

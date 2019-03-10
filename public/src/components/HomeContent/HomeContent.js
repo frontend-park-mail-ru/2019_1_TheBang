@@ -1,7 +1,16 @@
+import title from "../../blocks/title/title";
+
 class HomeContent {
+    constructor () {
+        this.title = title;
+    }
     render() {
         return `
-        <h1 class="title">Здесь будет красивая картинка с кнопкой играть</h1>
+            <div class="home">
+                ${this.title('Название игры')}
+                <div class="home__img"></div>
+                <a href="#"><div class="home__button"></div></a>
+            </div>
         `
     }
 }
