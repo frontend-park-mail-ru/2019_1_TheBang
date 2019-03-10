@@ -1,8 +1,8 @@
 import SignUpContent from "../components/SignUpContent";
-import IndexController from "./section/IndexController";
+import FormController from "./section/FormController";
 
 
-class SignUpPage extends IndexController {
+class SignUpPage extends FormController{
     constructor() {
         super(SignUpContent);
     }
