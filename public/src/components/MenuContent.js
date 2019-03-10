@@ -1,7 +1,3 @@
-import authIcon from '../../img/sign_in.svg';
-import authorsIcon from '../../img/users.svg';
-import signupIcon from '../../img/access.svg';
-import gameIcon from '../../img/game1.svg';
 import btn from "./menu/btn";
 import header from "./menu/header";
 
@@ -17,13 +13,13 @@ class MenuContent { // контроллер
          ${this.header()}
 
         <nav class="menu__nav">
-            ${this.btn("Авторизация", "/auth", authIcon)}
+            ${this.btn("Авторизация", "/auth")}
             
-            ${this.btn("Регистрация", "/signup", signupIcon)}
+            ${this.btn("Регистрация", "/signup")}
 
-            ${this.btn("Авторы", "/authors", authorsIcon)}
+            ${this.btn("Авторы", "/authors")}
 
-            ${this.btn("Играть", "/game", gameIcon)}
+            ${this.btn("Играть", "/game")}
 
             <div class="menu__nav__item menu__nav__item__href">
                 <a href="#/about">
