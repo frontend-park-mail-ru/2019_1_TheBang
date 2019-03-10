@@ -1,4 +1,4 @@
-import '../css/index.scss';
+import '../css/style.scss';
 
 import AuthPage from "./controllers/AuthPage";
 import ProfilePage from "./controllers/ProfilePage";
@@ -7,7 +7,7 @@ import NotFoundPage from "./controllers/NotFoundPage";
 import SignUpPage from "./controllers/SignUpPage";
 import AuthorsPage from "./controllers/AuthorsPage";
 import GamePage from "./controllers/GamePage";
-import AboutPage from "./controllers/AboutPage";
+import LeadersPage from "./controllers/LeadersPage";
 import Router from "./Router";
 
 
@@ -21,7 +21,7 @@ router.addUrl('/auth', AuthPage, 'auth');
 router.addUrl('/signup', SignUpPage, 'signup');
 router.addUrl('/authors', AuthorsPage, 'authors');
 router.addUrl('/game', GamePage, 'game');
-router.addUrl('/about', AboutPage, 'about');
+router.addUrl('/leaders', LeadersPage, 'leaders');
 
 router.addUrl('404', NotFoundPage, 'not_found');
 

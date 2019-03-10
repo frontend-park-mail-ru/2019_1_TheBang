@@ -1,11 +1,8 @@
-function btn(title, path) {
-    return `
-                <a class="menu__nav__item" href="#${path}">
-                <span class="menu__nav__item__title">
-                ${title}
-                </span>
-            </a>
+const btn = (title, path) =>
     `
-}
+                 <a class="menu-button" href="#${path}"> 
+                    <b>${title}</b>
+                </a>
+    `;
 
 export default btn;
