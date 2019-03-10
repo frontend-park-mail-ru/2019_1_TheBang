@@ -3,15 +3,14 @@ import IndexController from "./IndexController";
 class FormController extends IndexController{
     constructor(content) {
         super(content);
-
+        this.form = ""
     }
 
     afterRender() {
         super.afterRender();
+        this.form = document.querySelector('form');
 
-        let form = document.querySelector('form');
-
-        let passInput = [].filter.call(form.elements, (item) => {
+        let passInput = [].filter.call(this.form.elements, (item) => {
             return item.placeholder && (Boolean(~item.placeholder.indexOf("Пароль")));
         })[0];
 
@@ -26,10 +25,10 @@ class FormController extends IndexController{
         });
 
 
-        form.addEventListener('submit', (e) => {
+        this.form.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            let formInputs = form.getElementsByClassName("form-item__input");
+            let formInputs = this.form.getElementsByClassName("form-item__input");
             let error = false;
 
 
@@ -47,10 +46,36 @@ class FormController extends IndexController{
                 return
             }
 
-            // тут будет запрос к апи
+            if (this.makeRequest) {
+                this.makeRequest()
+            }
 
         })
     }
+
+    createError(msg) {
+        let err = document.createElement("span");
+        err.innerText = msg;
+        err.className = "form-item__error-message";
+        this.form.append(err);
+    }
+
+    createSuccess(msg) {
+        let ok = document.createElement("span");
+        ok.innerText = msg;
+        ok.className = "form-item__success-message";
+        this.form.append(ok);
+    }
+
+    getRequest(data) {
+        return {
+            mode: 'cors',
+            method: "POST",
+            body: JSON.stringify(data),
+            credentials: 'include'
+        }
+    }
+
 
 }
 
