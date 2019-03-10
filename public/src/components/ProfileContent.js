@@ -1,5 +1,7 @@
 import avatar from '../../blocks/grid/img/avatar.svg';
 
+// переделать профиль
+
 class ProfileContent {
     render() {
         return `
@@ -10,25 +12,25 @@ class ProfileContent {
                 
                     <img src=dist/${avatar} alt="Avatar" class="grid__avatar">
                     
-                    <label class="grid__login-label">Логин</label>
+                    
                     <div class="form-item grid__login">
                         <input type="input" class="form-item__input" placeholder="Логин" disabled="disabled">
                         <i class="fas fa-user form-item__icon"></i>
                     </div>
                     
-                    <label class="grid__nickname-label">Никнейм</label>
+                    
                     <div class="form-item grid__nickname">
                         <input type="input" class="form-item__input" placeholder="Никнейм">
                         <i class="fab fa-suse form-item__icon"></i>
                     </div>
                     
-                    <label class="grid__password-label">Пароль</label>
+                    
                     <div class="form-item grid__password">
                         <input type="password" class="form-item__input" placeholder="Пароль">
                         <i class="fas fa-unlock form-item__icon"></i>
-                        <button class="form-item__eye">
+                        <div class="form-item__eye">
                             <i class="fa fa-eye form-item__eye-icon"></i>
-                        </button>
+                        </div>
                     </div>
                     
                     <input type="file" class="grid__upload">
@@ -37,7 +39,7 @@ class ProfileContent {
                     <button class="button grid__button">Сохранить</button>
                     
                 </form>
-                <a class="link" href="#">Редактировать</a> 
+              
             </div>
         `
     }
