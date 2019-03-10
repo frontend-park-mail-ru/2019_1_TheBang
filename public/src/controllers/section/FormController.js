@@ -83,7 +83,6 @@ function hasEqualPassword() {
 
     if (!(passOne.value === passTwo.value)) {
         createErrorMessage(passTwo, "Пароли не совпадают!");
-        passTwo.classList.remove("form-item__input_success");
         return true
 
     } else {
