@@ -1,7 +1,7 @@
 {
-  "name": "frontend-spa",
+  "name": "2019_1_TheBang",
   "version": "1.0.0",
-  "description": "",
+  "description": "The best team 🤟",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,9 +9,17 @@
     "start": "webpack && node server",
     "watch": "webpack -w"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frontend-park-mail-ru/2019_1_TheBang.git"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/frontend-park-mail-ru/2019_1_TheBang/issues"
+  },
+  "homepage": "https://github.com/frontend-park-mail-ru/2019_1_TheBang#readme",
   "dependencies": {
     "express": "^4.16.4",
     "babel-cli": "^6.26.0",
@@ -28,7 +36,7 @@
   },
   "devDependencies": {
     "express": "^4.16.4",
-    "webpack": "^4.29.5"
+    "webpack": "^4.29.5",
     "@babel/core": "^7.3.4",
     "@babel/plugin-proposal-class-properties": "^7.3.4",
     "babel-core": "^7.0.0-bridge.0",
