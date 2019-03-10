@@ -1,4 +1,4 @@
-import SignUpContent from "../components/SignUpContent";
+import SignUpContent from "../components/SignUpContent/SignUpContent";
 import IndexController from "./section/IndexController";
 
 

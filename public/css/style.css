@@ -1,4 +1,4 @@
-@font-face {
+/* @font-face {
   font-family: Title;
   src: url(../fonts/10062.ttf); }
 .button {
@@ -339,6 +339,6 @@ a::-moz-focus-inner {
   border: 0; }
 
 a {
-  text-decoration: none; }
+  text-decoration: none; } 
 
-/*# sourceMappingURL=style.css.map */
+sourceMappingURL=style.css.map */

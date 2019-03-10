@@ -1,4 +1,4 @@
-import AuthContent from "../components/AuthContent";
+import AuthContent from "../components/AuthContent/AuthContent";
 import IndexController from "./section/IndexController";
 
 

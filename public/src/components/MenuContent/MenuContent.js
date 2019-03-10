@@ -1,25 +1,25 @@
-import btn from "./menu/btn";
-import header from "./menu/header";
-
+import btn from "../../blocks/menu-button/menu-button";
 
 class MenuContent {
     constructor () {
-        this.header = header;
         this.btn = btn;
     }
 
     render() {
         return `
-         ${this.header()}
+            <a href="#" class="menu__header">
+                    <div class="menu__logo">
+                    </div><h1>TheBang!</h1>
+            </a>
 
-        <nav class="menu__nav">
-                ${this.btn('Профиль', '/profile')}
-                ${this.btn('Авторизация', '/auth')}
-                ${this.btn('Регистрация', '/signup')}
-                ${this.btn('Авторы', '/authors')}
-                ${this.btn('Играть', '/game')}
-                ${this.btn('Таблица лидеров', '/leaders')}
-           </nav>
+            <nav class="menu__nav">
+                    ${this.btn('Профиль', '/profile')}
+                    ${this.btn('Авторизация', '/auth')}
+                    ${this.btn('Регистрация', '/signup')}
+                    ${this.btn('Авторы', '/authors')}
+                    ${this.btn('Играть', '/game')}
+                    ${this.btn('Таблица лидеров', '/leaders')}
+            </nav>
         `
     }
 

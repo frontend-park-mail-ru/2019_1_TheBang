@@ -1,11 +1,17 @@
-import avatar from '../../blocks/grid/img/avatar.svg';
+import title from "../../blocks/title/title";
+import avatar from "../../blocks/grid/img/avatar.svg";
+import button from "../../blocks/button/button";
 
 class ProfileContent {
+    constructor () {
+        this.title = title;
+        this.button = button;
+    }
+
     render() {
         return `
-        <div class="form-container">
-                <h1 class="title">Профиль</h1>
-                
+            <div class="form-container">
+                ${this.title('Профиль')}
                 <form class="grid">
                 
                     <img src=dist/${avatar} alt="Avatar" class="grid__avatar">
@@ -34,10 +40,10 @@ class ProfileContent {
                     <input type="file" class="grid__upload">
                     <i class="fa fa-upload fa-3x grid__upload-icon" aria-hidden="true"></i>
                     
-                    <button class="button grid__button">Сохранить</button>
+                    <button class="button grid__button hidden">Сохранить</button>
                     
                 </form>
-                <a class="link" href="#">Редактировать</a> 
+                ${this.button('Редактировать')}
             </div>
         `
     }

@@ -1,4 +1,4 @@
-import GameContent from "../components/GameContent";
+import GameContent from "../components/GameContent/GameContent";
 import app from "../app";
 
 class GamePage {

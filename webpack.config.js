@@ -2,6 +2,7 @@ const path = require('path');
 const src = path.resolve(__dirname, 'public/src');
 const build = path.resolve(__dirname, 'dist');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const HtmlWebpackPlugin = require ('html-webpack-plugin');
 
 module.exports = {
     mode: 'development',
@@ -54,9 +55,19 @@ module.exports = {
                     },
                 ]
             },
+            {
+                test: /\.pug$/,
+                loader: 'pug-loader',
+                options:{
+                    pretty: true
+                }
+            },
         ]
     },
     plugins: [
-        new ExtractTextPlugin('bundle.css')
+        new ExtractTextPlugin('bundle.css'),
+        new HtmlWebpackPlugin({
+            template: 'index.pug',
+        })
     ]
 };

@@ -1,4 +1,4 @@
-import LeaderContent from "../components/LeaderContent";
+import LeaderContent from "../components/LeaderContent/LeaderContent";
 import IndexController from "./section/IndexController";
 
 

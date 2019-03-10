@@ -1,4 +1,4 @@
-import ProfileContent from "../components/ProfileContent";
+import ProfileContent from "../components/ProfileContent/ProfileContent";
 import IndexController from "./section/IndexController";
 
 

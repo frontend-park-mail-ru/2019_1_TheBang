@@ -1,10 +1,10 @@
-import MenuContent from "../../components/MenuContent";
+import MenuContent from "../../components/MenuContent/MenuContent";
 import app from "../../app";
 
 class IndexController {
     constructor(content) {
-        this.content = new content();
         this.targetRender = document.getElementsByClassName('content')[0];
+        this.content = new content();
     }
 
     getTargetRender() {

@@ -1,4 +1,4 @@
-import HomeContent from "../components/HomeContent";
+import HomeContent from "../components/HomeContent/HomeContent";
 import IndexController from "./section/IndexController";
 
 

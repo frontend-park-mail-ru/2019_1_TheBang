@@ -1,4 +1,4 @@
-import AuthorsContent from "../components/AuthorsContent";
+import AuthorsContent from "../components/AuthorsContent/AuthorsContent";
 import IndexController from "./section/IndexController";
 
 
