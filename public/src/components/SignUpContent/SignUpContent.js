@@ -22,7 +22,7 @@ class SignUpContent {
                     ${this.login('Логин', 'text')}
                     ${this.nickname('Никнейм', 'text')}
                     ${this.password('Пароль', 'password')}
-                    ${this.repeatPassword('Повторите пароль', 'password')}
+                    ${this.repeatPassword('Повторите пароль', 'password-repeat')}
                     ${this.button('Зарегистрироваться')}
                 </form>
                 ${this.link('Войти', 'auth')} 

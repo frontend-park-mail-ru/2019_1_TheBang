@@ -1,10 +1,14 @@
 import ProfileContent from "../components/ProfileContent/ProfileContent";
-import IndexController from "./section/IndexController";
+import FormController from "./section/FormController";
 
 
-class ProfilePage extends IndexController{
+class ProfilePage extends FormController {
     constructor() {
         super(ProfileContent);
+    }
+
+    makeRequest() {
+        // поживем подождем)
     }
 
 }

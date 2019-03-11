@@ -9,13 +9,14 @@
 Веб-страницы: Регистрация, Аутентификация, Игровое меню(Начать, играть с другом и т.д.) — минимум, остальное опционально.
 
 <h2>Команда</h2>
-* Команда фронта(<a href="https://github.com/AntonOcean">Антон</a>, <a href="https://github.com/Liza-Shch">Лиза</a>)
+* Команда фронта(<a href="https://github.com/AntonOcean">Антон</a>, <a href="https://github.com/Liza-Shch">Лиза</a>) <br>
 * Команда бекенда(<a href="https://github.com/Ruslan2702">Руслан</a>, <a href="https://github.com/Surfingbird">Андрей</a>)
 
 <h2>Как реализуем</h2>
 Делаем SPA на фронт, API Go на backend.
 
 <h2>Команды</h2>
-1. Запуск ```npm i && npm start``` => http://127.0.0.1:3000/
-3. Сборка ```npm run build```
+1. Запуск ```npm i && npm start``` => http://127.0.0.1:3000/ <br>
+2. Сборка ```npm run build``` <br>
+3. Деплой на now ```now```<br>
 

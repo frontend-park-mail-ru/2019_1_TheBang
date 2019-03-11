@@ -13,12 +13,24 @@ const formItem = (name, itemType) => {
             return (
                 `
                     <div class="form-item">
-                    <input type="password" class="form-item__input" placeholder=${name}>
-                    <i class="fas fa-unlock form-item__icon"></i>
-                    <div class="form-item__eye">
-                        <i class="fa fa-eye form-item__eye-icon"></i>
+                        <input type="password" class="form-item__input form-item__input_pass" placeholder="Пароль">
+                        <i class="fas fa-unlock form-item__icon"></i>
+                        <div class="form-item__eye">
+                            <i class="fa fa-eye form-item__eye-icon"></i>
+                        </div>
                     </div>
-                </div>
+                `
+            )
+        case 'password-repeat':
+            return (
+                `
+                    <div class="form-item">
+                        <input type="password" class="form-item__input form-item__input_pass_repeat" placeholder="Повторите пароль">
+                        <i class="fas fa-unlock form-item__icon"></i>
+                        <div class="form-item__eye">
+                            <i class="fa fa-eye form-item__eye-icon"></i>
+                        </div>
+                    </div>
                 `
             )
     }

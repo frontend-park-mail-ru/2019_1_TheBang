@@ -47,11 +47,15 @@ module.exports = {
             {
                 test: /\.ttf$/,
                 use: [
+                    // {
+                        
+                    //     loader: 'ttf-loader',
+                    //     options: {
+                    //         name: './font/[name].[ext]',
+                    //     },
+                    // },
                     {
-                        loader: 'ttf-loader',
-                        options: {
-                            name: './font/[name].[ext]',
-                        },
+                        loader: 'file-loader?name=./assets/fonts/webfonts/[name].[ext]'
                     },
                 ]
             },
