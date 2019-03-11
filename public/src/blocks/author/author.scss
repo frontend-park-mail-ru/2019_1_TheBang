@@ -1,0 +1,7 @@
+.author {
+    color: white;
+    
+    &:hover, &:focus {
+        text-decoration: underline;
+    }
+}
