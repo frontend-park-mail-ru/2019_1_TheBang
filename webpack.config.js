@@ -45,19 +45,13 @@ module.exports = {
                 ],
             },
             {
-                test: /\.ttf$/,
-                use: [
-                    // {
-                        
-                    //     loader: 'ttf-loader',
-                    //     options: {
-                    //         name: './font/[name].[ext]',
-                    //     },
-                    // },
-                    {
-                        loader: 'file-loader?name=./assets/fonts/webfonts/[name].[ext]'
-                    },
-                ]
+                test: /\.(woff(2)?|ttf)(\?v=\d+\.\d+\.\d+)?$/,
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]',
+                    }
+                }]
             },
             {
                 test: /\.pug$/,
