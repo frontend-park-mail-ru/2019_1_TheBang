@@ -1,3 +1,5 @@
+import './checkbox.scss';
+
 const checkbox = () => 
     `
         <label class="checkbox">

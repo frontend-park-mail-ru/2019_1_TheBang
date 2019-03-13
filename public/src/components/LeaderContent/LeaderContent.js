@@ -1,5 +1,6 @@
 import title from "../../blocks/title/title";
 import leaderboard from "../../blocks/leaderboard/leaderboard";
+import './leader.scss';
 
 class LeaderContent {
     constructor () {

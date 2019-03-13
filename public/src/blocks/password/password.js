@@ -1,4 +1,5 @@
 import checkbox from "../checkbox/checkbox";
+import './password.scss'
 
 class Password {
     constructor () {

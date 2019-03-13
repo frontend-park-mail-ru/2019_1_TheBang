@@ -3,6 +3,8 @@ import formItem from "../../blocks/form-item/form-item";
 import password from "../../blocks/password/password";
 import button from "../../blocks/button/button";
 import link from "../../blocks/link/link";
+import '../../blocks/form/form.scss';
+import '../../blocks/form-container/form-container.scss';
 
 class AuthContent {
     constructor () {

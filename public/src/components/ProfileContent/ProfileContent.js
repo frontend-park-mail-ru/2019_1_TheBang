@@ -1,6 +1,8 @@
 import title from "../../blocks/title/title";
 import avatar from "../../blocks/grid/img/avatar.svg";
 import button from "../../blocks/button/button";
+import '../../blocks/grid/grid.scss';
+import '../../blocks/form-container/form-container.scss';
 
 // переделать профиль
 
