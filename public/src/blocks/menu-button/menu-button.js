@@ -1,3 +1,5 @@
+import './menu-button.scss';
+
 const btn = (title, path) =>
     `
         <a class="menu-button" href="#${path}"> 

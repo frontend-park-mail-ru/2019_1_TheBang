@@ -1,4 +1,5 @@
 import title from "../../blocks/title/title";
+import './notfound.scss';
 
 class NotFoundContent {
     constructor () {

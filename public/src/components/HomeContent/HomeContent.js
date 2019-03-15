@@ -1,4 +1,5 @@
 import title from "../../blocks/title/title";
+import './home.scss'
 
 class HomeContent {
     constructor () {

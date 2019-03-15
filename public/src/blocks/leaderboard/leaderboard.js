@@ -1,3 +1,5 @@
+import './leaderboard.scss'
+
 const leaderboard = () =>
     `
     <table class="leaderboard">

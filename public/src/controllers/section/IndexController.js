@@ -1,5 +1,8 @@
 import MenuContent from "../../components/MenuContent/MenuContent";
 import app from "../../app";
+import '../../blocks/content/content.scss';
+import '../../blocks/mobile-burger/mobile-burger.scss';
+import '../../blocks/mobile-input/mobile-input.scss';
 
 class IndexController {
     constructor(content) {

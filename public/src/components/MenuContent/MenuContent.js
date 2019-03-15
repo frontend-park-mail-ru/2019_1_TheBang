@@ -1,4 +1,5 @@
 import btn from "../../blocks/menu-button/menu-button";
+import './menu.scss';
 
 class MenuContent {
     constructor () {

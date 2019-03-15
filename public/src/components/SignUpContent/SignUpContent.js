@@ -2,6 +2,8 @@ import title from "../../blocks/title/title";
 import formItem from "../../blocks/form-item/form-item";
 import button from "../../blocks/button/button";
 import link from "../../blocks/link/link";
+import '../../blocks/form/form.scss';
+import '../../blocks/form-container/form-container.scss';
 
 class SignUpContent {
     constructor () {

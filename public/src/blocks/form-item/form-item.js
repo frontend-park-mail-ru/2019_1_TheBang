@@ -1,3 +1,5 @@
+import './form-item.scss';
+
 const formItem = (name, itemType) => {
     switch (itemType) { 
         case 'text':
