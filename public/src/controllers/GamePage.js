@@ -1,14 +1,10 @@
 import GameContent from "../components/GameContent/GameContent";
-import app from "../app";
+import AuthController from "./section/AuthController";
 
-class GamePage {
+class GamePage extends AuthController{
     constructor() {
-        this.targetRender = app;
+        super();
         this.content = new GameContent();
-    }
-
-    getTargetRender() {
-        return this.targetRender;
     }
 
     render()  {
@@ -16,7 +12,6 @@ class GamePage {
             ${this.content.render()}
         `
     }
-
 }
 
 export default GamePage;

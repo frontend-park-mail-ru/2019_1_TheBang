@@ -1,9 +1,12 @@
-import IndexController from "./IndexController";
+import HomeController from "./HomeController";
 
-class FormController extends IndexController{
+// отрисовка форм на домашней странице
+class HomeFormController extends HomeController{
     constructor(content) {
         super(content);
-        this.form = ""
+        this.form = "";
+        this.successMessageClass = "form-item__success-message";
+        this.errorMessageClass = "form-item__error-message";
     }
 
     afterRender() {
@@ -39,7 +42,8 @@ class FormController extends IndexController{
             let originalPassowrd = hasEqualPassword();
 
             [].forEach.call(formInputs, (input) => {
-                if (hasUnRequired(input)) {
+                // console.log(input.disabled)
+                if (!input.disabled && hasUnRequired(input)) {
                     error = true
                 }
             });
@@ -48,37 +52,19 @@ class FormController extends IndexController{
                 return
             }
 
-            if (this.makeRequest) {
-                this.makeRequest()
+            if (this.SubmitRequest) {
+                this.SubmitRequest()
             }
 
         })
     }
 
-    createError(msg) {
-        let err = document.createElement("span");
-        err.innerText = msg;
-        err.className = "form-item__error-message";
-        this.form.append(err);
+    createMsg(message, className) {
+        let msg = document.createElement("span");
+        msg.innerText = message;
+        msg.className = className;
+        this.form.append(msg);
     }
-
-    createSuccess(msg) {
-        let ok = document.createElement("span");
-        ok.innerText = msg;
-        ok.className = "form-item__success-message";
-        this.form.append(ok);
-    }
-
-    getRequest(data) {
-        return {
-            mode: 'cors',
-            method: "POST",
-            body: JSON.stringify(data),
-            credentials: 'include'
-        }
-    }
-
-
 }
 
 function cancelError() {
@@ -145,4 +131,4 @@ function createErrorMessage(field, msg) {
 }
 
 
-export default FormController;
+export default HomeFormController;

@@ -1,8 +1,8 @@
 import HomeContent from "../components/HomeContent/HomeContent";
-import IndexController from "./section/IndexController";
+import HomeController from "./section/HomeController";
 
 
-class HomePage extends IndexController{
+class HomePage extends HomeController{
     constructor() {
         super(HomeContent);
     }

@@ -1,11 +1,10 @@
 import HomeErrorController from "./section/HomeErrorController";
 import ErrorContent from "../components/ErrorContent/ErrorContent";
 
-
-class NotFoundPage extends HomeErrorController{
+class UnAuthorizedPage extends HomeErrorController{
     constructor() {
-        super(ErrorContent, '404 Not Found');
+        super(ErrorContent, '401 UnAuthorized')
     }
 }
 
-export default NotFoundPage;
+export default UnAuthorizedPage;

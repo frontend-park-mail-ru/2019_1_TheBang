@@ -4,43 +4,74 @@ import AuthPage from "./controllers/AuthPage";
 import ProfilePage from "./controllers/ProfilePage";
 import HomePage from "./controllers/HomePage";
 import NotFoundPage from "./controllers/NotFoundPage";
+import UnAuthorizedPage from "./controllers/UnAuthorizedPage";
 import SignUpPage from "./controllers/SignUpPage";
 import AuthorsPage from "./controllers/AuthorsPage";
 import GamePage from "./controllers/GamePage";
 import LeadersPage from "./controllers/LeadersPage";
+
 import Router from "./Router";
+import Store from "./Store";
+import Constant from "./constant";
 
+// Порядок инициализации приложения важен!
+// Потому что все растягивают константы :((
+// JSDoc нужен тут
+const app = {
+    page: document.getElementById('root'),
+    isFirstLoad: true, // флаг перерендеринга страницы целиком
+    constant: new Constant(),
+};
 
-const app = document.getElementById('root');
+app['store'] = new Store();
 
 let router = new Router();
 
 router.addUrl('/', HomePage, 'index');
-router.addUrl('/profile', ProfilePage, 'profile');
-router.addUrl('/auth', AuthPage, 'auth');
-router.addUrl('/signup', SignUpPage, 'signup');
+router.addUrl('/profile', ProfilePage, 'profile', app.constant.authUser);
+router.addUrl('/auth', AuthPage, 'auth', app.constant.unauthUser);
+router.addUrl('/signup', SignUpPage, 'signup', app.constant.unauthUser);
 router.addUrl('/authors', AuthorsPage, 'authors');
-router.addUrl('/game', GamePage, 'game');
-router.addUrl('/leaders', LeadersPage, 'leaders');
+router.addUrl('/game', GamePage, 'game', app.constant.authUser);
+router.addUrl('/leaders', LeadersPage, 'leaders', app.constant.authUser);
 
-router.addUrl('404', NotFoundPage, 'not_found');
+router.addUrl('/not_found', NotFoundPage, 'not_found');
+router.addUrl('/unauthorized', UnAuthorizedPage, 'unauthorized');
 
-function pageLoader () {
+function pageLoader() {
     let url = location.hash.slice(1) || '/';
     let controller = router.getController(url);
 
     controller = new controller();
-    let element = controller.getTargetRender();
+
+    if (controller.err) {
+        return
+    }
+
+    let element = controller.targetRender || app.page;
 
     element.innerHTML = controller.render();
 
+    // Дорисовываем активацию кнопочек, разные eventListener на формы, logout
     if (controller.afterRender) {
         controller.afterRender()
     }
-
 }
 
-window.addEventListener('hashchange', pageLoader);
-window.addEventListener('load', pageLoader);
+function pageHandler (e) {
+    // Перед тем как рендерить мы дожидаемся инфу о пользовательских данных
+    if (app.isFirstLoad) {
+        console.log('i get data again');
+        app.store.getUser().finally( () => {
+            pageLoader();
+            app.isFirstLoad = false;
+        });
+    } else {
+        pageLoader()
+    }
+}
+
+window.addEventListener('hashchange', pageHandler);
+window.addEventListener('load', pageHandler);
 
 export default app;

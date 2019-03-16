@@ -6,6 +6,7 @@ class HomeContent {
         this.title = title;
     }
     render() {
+        console.log('draw home content');
         return `
             <div class="home">
                 ${this.title('Название игры')}

@@ -1,16 +1,20 @@
+import app from "./app";
+
 class Router {
     constructor() {
         this.routes = {};
     }
 
-    addUrl(url, controller, name) {
+    addUrl(url, controller, name, constraint) {
         this.routes[url] = {controller: controller};
         controller.prototype.pageName = name;
+        controller.prototype.constraint = constraint || "All";
     }
 
     getController(path) {
         let route = this.routes[path];
-        return route ? route.controller : this.routes['404'].controller
+
+        return route ? route.controller : this.routes['/not_found'].controller
     }
 }
 

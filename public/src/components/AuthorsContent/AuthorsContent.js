@@ -10,6 +10,7 @@ class AuthorsContent {
         }
     }
     render() {
+        console.log('draw author content');
         return `
             ${this.title('Авторы')}
             ${this.author[0]('Цитульский Антон', 'https://github.com/AntonOcean')}
