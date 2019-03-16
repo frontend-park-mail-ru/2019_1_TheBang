@@ -17,7 +17,6 @@ class SignUpContent {
     }
 
     render() {
-        console.log('draw signup content');
         return `
             <div class="form-container">
                 ${this.title('Регистрация')}

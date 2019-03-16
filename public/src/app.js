@@ -19,7 +19,6 @@ import Constant from "./constant";
 // JSDoc нужен тут
 const app = {
     page: document.getElementById('root'),
-    isFirstLoad: true, // флаг перерендеринга страницы целиком
     constant: new Constant(),
 };
 
@@ -59,12 +58,9 @@ function pageLoader() {
 }
 
 function pageHandler (e) {
-    // Перед тем как рендерить мы дожидаемся инфу о пользовательских данных
-    if (app.isFirstLoad) {
-        console.log('i get data again');
+    if (e.type === "load") {
         app.store.getUser().finally( () => {
             pageLoader();
-            app.isFirstLoad = false;
         });
     } else {
         pageLoader()

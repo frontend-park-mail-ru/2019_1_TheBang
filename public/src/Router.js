@@ -1,5 +1,3 @@
-import app from "./app";
-
 class Router {
     constructor() {
         this.routes = {};
@@ -8,7 +6,7 @@ class Router {
     addUrl(url, controller, name, constraint) {
         this.routes[url] = {controller: controller};
         controller.prototype.pageName = name;
-        controller.prototype.constraint = constraint || "All";
+        controller.prototype.constraint = constraint;
     }
 
     getController(path) {

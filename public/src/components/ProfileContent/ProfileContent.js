@@ -18,7 +18,6 @@ class ProfileContent {
 
     // TODO нужно доверстать профиль :)
     render() {
-        console.log('draw profile', app.store.nickname);
         return `
             <div class="form-container">
                 ${this.title('Профиль')}

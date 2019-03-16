@@ -62,8 +62,11 @@ class LeaderContent {
                     table.appendChild(tr);
                 })
             })
-            .catch( (err) => {
-
+            .catch( () => {
+                let table = document.querySelector('table tbody');
+                table.innerHTML = "";
+                let tr = document.createElement('tr');
+                tr.innerText = 'Не удалось загрузить данные, попробуйте позже'
             })
     }
 }

@@ -31,7 +31,8 @@ class AuthPage extends HomeFormController {
                 return res.json()
             })
             .then((data) => {
-                app.isFirstLoad = true; // что бы перерендерить меню и получить данные
+                app.store.setUser(data);
+                this.baseRender();
                 window.location.replace("#/profile");
             })
             .catch( (err) => {

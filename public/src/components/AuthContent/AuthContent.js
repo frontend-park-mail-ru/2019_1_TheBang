@@ -16,7 +16,6 @@ class AuthContent {
     }
 
     render() {
-        console.log('draw auth content');
         return `
             <div class="form-container">
                 ${this.title('Вход')}

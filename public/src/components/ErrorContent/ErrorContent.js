@@ -8,7 +8,6 @@ class ErrorContent {
     }
 
     render() {
-        console.log('draw error content');
         return `
             ${this.title('Oooooooooooops')}
             ${this.title(this.message)}
