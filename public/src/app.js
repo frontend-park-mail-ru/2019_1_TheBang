@@ -22,7 +22,7 @@ const app = {
     constant: new Constant(),
 };
 
-app['store'] = new Store();
+app.store = new Store();
 
 let router = new Router();
 
