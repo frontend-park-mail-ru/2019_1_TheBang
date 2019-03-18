@@ -1,35 +1,43 @@
 import SignUpContent from "../components/SignUpContent/SignUpContent";
-import FormController from "./section/FormController";
+import HomeFormController from "./section/HomeFormController";
+import app from "../app";
 
 
-class SignUpPage extends FormController{
+class SignUpPage extends HomeFormController{
     constructor() {
         super(SignUpContent);
     }
 
-    makeRequest() {
+    SubmitRequest() {
         let data = {
             name: this.form[0].value,
             nickname: this.form[1].value,
             passwd: this.form[1].value
         };
 
-        let request = this.getRequest(data);
+        let request = {
+            mode: 'cors',
+            method: "POST",
+            body: JSON.stringify(data),
+            credentials: 'include'
+        };
 
-        fetch('http://127.0.0.1:8080/signup', request)
+        let url = [app.constant.backend, 'user'].join("");
+
+        fetch(url, request)
             .then( (res) => {
                 if (res.status > 299) {
                     throw res.status;
                 }
-                return res.json()
-            })
-            .then(() => {
-                this.createSuccess("Вы зарегистрированы!");
+                this.createMsg("Вы зарегистрированы!", this.successMessageClass);
             })
             .catch( (err) => {
                 switch (err) {
+                    case 409:
+                        this.createMsg("Такой пользователь уже существует", this.errorMessageClass);
+                        break;
                     default:
-                        this.createError("Произошла ошибка");
+                        this.createMsg(`Произошла ошибка, попробуйте позже`, this.errorMessageClass);
                 }
             })
     }

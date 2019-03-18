@@ -1,12 +1,29 @@
 import btn from "../../blocks/menu-button/menu-button";
 import './menu.scss';
+import app from "../../app";
+
 
 class MenuContent {
     constructor () {
         this.btn = btn;
+
+        this.authPack = [
+            this.btn('Профиль', '/profile'),
+            this.btn('Авторы', '/authors'),
+            this.btn('Играть', '/game'),
+            this.btn('Таблица лидеров', '/leaders'),
+            this.btn('Выход', '/logout'),
+        ];
+        this.anonPack = [
+            this.btn('Авторизация', '/auth'),
+            this.btn('Регистрация', '/signup'),
+            this.btn('Авторы', '/authors')
+        ];
+        this.currentPack = app.store.isAuth() ? this.authPack : this.anonPack
     }
 
     render() {
+        let buttons = this.currentPack.join("");
         return `
             <a href="#" class="menu__header">
                     <div class="menu__logo">
@@ -14,12 +31,7 @@ class MenuContent {
             </a>
 
             <nav class="menu__nav">
-                    ${this.btn('Профиль', '/profile')}
-                    ${this.btn('Авторизация', '/auth')}
-                    ${this.btn('Регистрация', '/signup')}
-                    ${this.btn('Авторы', '/authors')}
-                    ${this.btn('Играть', '/game')}
-                    ${this.btn('Таблица лидеров', '/leaders')}
+                    ${buttons}
             </nav>
         `
     }
@@ -50,6 +62,7 @@ class MenuContent {
             });
         }
     }
+
 }
 
 export default MenuContent;

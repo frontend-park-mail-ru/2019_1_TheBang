@@ -1,18 +1,19 @@
 import title from "../../blocks/title/title";
 import './notfound.scss';
 
-class NotFoundContent {
-    constructor () {
+class ErrorContent {
+    constructor (message) {
         this.title = title;
+        this.message = message
     }
 
     render() {
         return `
             ${this.title('Oooooooooooops')}
-            ${this.title('404 NOT FOUND')}
+            ${this.title(this.message)}
             <div class="notfound"></div>
         `
     }
 }
 
-export default NotFoundContent;
+export default ErrorContent;

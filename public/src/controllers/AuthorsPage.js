@@ -1,9 +1,9 @@
 import AuthorsContent from "../components/AuthorsContent/AuthorsContent";
-import IndexController from "./section/IndexController";
+import HomeController from "./section/HomeController";
 
 
 
-class AuthorsPage extends IndexController{
+class AuthorsPage extends HomeController{
     constructor() {
         super(AuthorsContent);
     }
