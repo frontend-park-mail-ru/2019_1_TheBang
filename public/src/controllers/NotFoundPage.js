@@ -1,8 +1,8 @@
-import HomeErrorController from "./section/HomeErrorController";
+import ErrorController from "./section/ErrorController";
 import ErrorContent from "../components/ErrorContent/ErrorContent";
 
 
-class NotFoundPage extends HomeErrorController{
+class NotFoundPage extends ErrorController{
     constructor() {
         super(ErrorContent, '404 Not Found');
     }

@@ -1,84 +1,37 @@
 import ProfileContent from "../components/ProfileContent/ProfileContent";
-import HomeFormController from "./section/HomeFormController";
-import app from "../app";
+import FormController from "./section/FormController";
+
+import NetworkEvents from "../events/NetworkEvents";
+import EventBus from "../events/EventBus";
 
 
-class ProfilePage extends HomeFormController {
+class ProfilePage extends FormController {
     constructor() {
         super(ProfileContent);
     }
 
-    SubmitRequest() {
-        let file = this.form[3].files[0];
+    SubmitRequest(form) {
+        let file = form[3].files[0];
 
         let data = {
-            "name": this.form[2].value
+            "name": form[2].value
         };
-
-        let request = {
-            mode: 'cors',
-            method: "PUT",
-            body: JSON.stringify(data),
-            credentials: 'include'
-        };
-
-        let url = [app.constant.backend, 'user'].join("");
 
         if (file) {
-            this.updatePhoto(file)
-                .then( () => {
-                    return fetch(url, request)
-                })
-                .then( (res) => {
-                    if (res.status > 299) {
-                        throw res.status;
-                    }
-                    return res.json()
-                })
-                .then( (data) => {
-                    app.store.setUser(data);
-                    this.createMsg("Изменения успешны!", this.successMessageClass);
-                })
-                .catch( () => {
-                    this.createMsg(`Произошла ошибка, попробуйте позже`, this.errorMessageClass);
-            });
-        } else {
-
-            fetch(url, request)
-                .then((res) => {
-                    if (res.status > 299) {
-                        throw res.status;
-                    }
-                    return res.json()
-                })
-                .then((data) => {
-                    app.store.setUser(data);
-                    this.createMsg("Изменения успешны!", this.successMessageClass);
-                })
-                .catch(() => {
-                    this.createMsg(`Произошла ошибка, попробуйте позже`, this.errorMessageClass);
-                });
+            let formData = new FormData();
+            formData.append('photo', file);
+            data.formData = formData
         }
+
+        EventBus.emit(NetworkEvents.UpdateUser, data);
     }
 
-    updatePhoto(file) {
-        let formData = new FormData();
-        formData.append('photo', file);
+    static Success() {
+        FormController.SuccessMessage("Изменения успешны!");
+    }
 
-        let request = {
-            mode: 'cors',
-            method: "POST",
-            body: formData,
-            credentials: 'include'
-        };
-        let url = [app.constant.backend, 'user/avatar'].join("");
-
-        return fetch(url, request)
-            .then( (res) => {
-            if (res && res.status > 299) {
-                throw res.status;
-            }
-        })
+    static Error() {
+        FormController.ErrorMessage(`Произошла ошибка, попробуйте позже`);
     }
 
     afterRender() {

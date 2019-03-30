@@ -1,47 +1,38 @@
 import SignUpContent from "../components/SignUpContent/SignUpContent";
-import HomeFormController from "./section/HomeFormController";
-import app from "../app";
+import FormController from "./section/FormController";
+
+import EventBus from "../events/EventBus";
+import NetworkEvents from "../events/NetworkEvents";
 
 
-class SignUpPage extends HomeFormController{
+class SignUpPage extends FormController{
     constructor() {
         super(SignUpContent);
     }
 
-    SubmitRequest() {
+    static SubmitRequest(form) {
         let data = {
-            name: this.form[0].value,
-            nickname: this.form[1].value,
-            passwd: this.form[1].value
+            name: form[0].value,
+            nickname: form[1].value,
+            passwd: form[1].value
         };
 
-        let request = {
-            mode: 'cors',
-            method: "POST",
-            body: JSON.stringify(data),
-            credentials: 'include'
-        };
-
-        let url = [app.constant.backend, 'user'].join("");
-
-        fetch(url, request)
-            .then( (res) => {
-                if (res.status > 299) {
-                    throw res.status;
-                }
-                this.createMsg("Вы зарегистрированы!", this.successMessageClass);
-            })
-            .catch( (err) => {
-                switch (err) {
-                    case 409:
-                        this.createMsg("Такой пользователь уже существует", this.errorMessageClass);
-                        break;
-                    default:
-                        this.createMsg(`Произошла ошибка, попробуйте позже`, this.errorMessageClass);
-                }
-            })
+        EventBus.emit(NetworkEvents.SignUpUser, data);
     }
 
+    static Success() {
+        FormController.SuccessMessage("Вы зарегистрированы!");
+    }
+
+    static Error(status) {
+        switch (status) {
+            case 409:
+                FormController.ErrorMessage("Такой пользователь уже существует");
+                break;
+            default:
+                FormController.ErrorMessage(`Произошла ошибка, попробуйте позже`);
+        }
+    }
 }
 
 export default SignUpPage;

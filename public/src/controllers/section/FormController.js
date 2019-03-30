@@ -1,12 +1,11 @@
 import HomeController from "./HomeController";
+import Message from "./Message";
 
-// отрисовка форм на домашней странице
-class HomeFormController extends HomeController{
+
+class FormController extends HomeController{
     constructor(content) {
         super(content);
         this.form = "";
-        this.successMessageClass = "form-item__success-message";
-        this.errorMessageClass = "form-item__error-message";
     }
 
     afterRender() {
@@ -42,7 +41,6 @@ class HomeFormController extends HomeController{
             let originalPassowrd = hasEqualPassword();
 
             [].forEach.call(formInputs, (input) => {
-                // console.log(input.disabled)
                 if (!input.disabled && hasUnRequired(input)) {
                     error = true
                 }
@@ -53,17 +51,27 @@ class HomeFormController extends HomeController{
             }
 
             if (this.SubmitRequest) {
-                this.SubmitRequest()
+                this.SubmitRequest(this.form)
             }
 
         })
     }
 
-    createMsg(message, className) {
+    static ErrorMessage(message) {
+        FormController.createMsg(message, Message.error)
+    }
+
+    static SuccessMessage(message) {
+        FormController.createMsg(message, Message.success)
+    }
+
+    static createMsg(message, className) {
         let msg = document.createElement("span");
+        let form = document.querySelector('form');
+
         msg.innerText = message;
         msg.className = className;
-        this.form.append(msg);
+        form.append(msg);
     }
 }
 
@@ -131,4 +139,4 @@ function createErrorMessage(field, msg) {
 }
 
 
-export default HomeFormController;
+export default FormController;

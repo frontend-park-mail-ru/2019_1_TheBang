@@ -1,43 +1,24 @@
-import app from "./app";
+import Request from "./network/Request";
 
 class Store {
-    constructor() {
-        this.setAnonymous()
-    }
-
     isAuth() {
-        return this.nickname !== "anonymous";
+        return this.nickname;
     }
 
-    getUser() {
-        let request = {
-            mode: 'cors',
-            method: "GET",
-            credentials: 'include'
-        };
-
-        let url = [app.constant.backend, 'user'].join("");
-
-        return fetch(url, request).then( (res) => {
-            if (res.status > 299) {
-                throw res.status;
-            }
-            return res.json()
-        })
-            .then((data) => {
-                this.setUser(data)
-            })
-            .catch( () => {
-                this.setAnonymous();
-            });
+    updateUser(data) {
+        if (data) {
+            this.setUser(data)
+        } else {
+            this.setAnonymous();
+        }
     }
 
     setAnonymous() {
-        this.nickname = "anonymous";
-        this.name = "anonymous";
-        this.photo = "";
-        this.score = 0;
-        this.photoUrl = "";
+        this.nickname = undefined;
+        this.name = undefined;
+        this.photo = undefined;
+        this.score = undefined;
+        this.photoUrl = undefined;
     }
 
     setUser(data) {
@@ -45,9 +26,9 @@ class Store {
         this.name = data.name;
         this.score = data.score;
         this.photo = data.photo;
-        this.photoUrl = [app.constant.backend, 'icon/', this.photo || "default_img"].join("")
+        this.photoUrl = Request.image(this.photo)
     }
 
 }
 
-export default Store;
+export default new Store();

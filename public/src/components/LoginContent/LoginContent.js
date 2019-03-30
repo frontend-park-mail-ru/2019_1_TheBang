@@ -5,7 +5,7 @@ import link from "../../blocks/link/link";
 import '../../blocks/form/form.scss';
 import '../../blocks/form-container/form-container.scss';
 
-class AuthContent {
+class LoginContent {
     constructor () {
         this.title = title;
         this.login = formItem;
@@ -30,4 +30,4 @@ class AuthContent {
     }
 }
 
-export default AuthContent;
+export default LoginContent;

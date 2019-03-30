@@ -1,6 +1,6 @@
 import '../css/style.scss';
 
-import AuthPage from "./controllers/AuthPage";
+import LoginPage from "./controllers/LoginPage";
 import ProfilePage from "./controllers/ProfilePage";
 import HomePage from "./controllers/HomePage";
 import NotFoundPage from "./controllers/NotFoundPage";
@@ -13,22 +13,53 @@ import LeadersPage from "./controllers/LeadersPage";
 import Router from "./Router";
 import Store from "./Store";
 import Constant from "./constant";
+import EventBus from "./events/EventBus";
+import NetworkEvents from "./events/NetworkEvents";
+import Network from "./network/Network";
+import PageEvents from "./events/PageEvents";
+import HomeController from "./controllers/section/HomeController";
 
-// Порядок инициализации приложения важен!
-// Потому что все растягивают константы :((
+
 // JSDoc нужен тут
 const app = {
-    page: document.getElementById('root'),
+    baseContainer: document.getElementById('root'),
     constant: new Constant(),
+    store: Store
 };
 
-app.store = new Store();
+EventBus.on(NetworkEvents.GetUser, Network.getUser);
+EventBus.on(PageEvents.GetUser, app.store.updateUser.bind(app.store));
+EventBus.on(PageEvents.GetUser, pageLoader);
+
+EventBus.on(NetworkEvents.SignUpUser, Network.signUpUser);
+EventBus.on(PageEvents.SignUpUserSuccess, SignUpPage.Success);
+EventBus.on(PageEvents.SignUpUserError, SignUpPage.Error);
+
+EventBus.on(NetworkEvents.LoginUser, Network.loginUser);
+EventBus.on(PageEvents.LoginUserSuccess, app.store.updateUser.bind(app.store));
+EventBus.on(PageEvents.LoginUserSuccess, HomeController.baseRender);
+EventBus.on(PageEvents.LoginUserSuccess, LoginPage.Success);
+EventBus.on(PageEvents.LoginUserError, LoginPage.Error);
+
+EventBus.on(NetworkEvents.UpdateUser, Network.updateUser);
+EventBus.on(PageEvents.UpdateUserSuccess, app.store.updateUser.bind(app.store));
+EventBus.on(PageEvents.UpdateUserSuccess, ProfilePage.Success);
+EventBus.on(PageEvents.UpdateUserError, ProfilePage.Error);
+
+EventBus.on(NetworkEvents.LogoutUser, Network.logoutUser);
+EventBus.on(PageEvents.LogoutUserSuccess, app.store.updateUser.bind(app.store));
+EventBus.on(PageEvents.LogoutUserSuccess, HomeController.baseRender);
+EventBus.on(PageEvents.LogoutUserSuccess, HomePage.Success);
+
+EventBus.on(NetworkEvents.GetLeaderboard, Network.getLeaderboard);
+EventBus.on(PageEvents.GetLeaderboardSuccess, LeadersPage.Success);
+EventBus.on(PageEvents.GetLeaderboardError, LeadersPage.Error);
 
 let router = new Router();
 
 router.addUrl('/', HomePage, 'index');
 router.addUrl('/profile', ProfilePage, 'profile', app.constant.authUser);
-router.addUrl('/auth', AuthPage, 'auth', app.constant.unauthUser);
+router.addUrl('/auth', LoginPage, 'auth', app.constant.unauthUser);
 router.addUrl('/signup', SignUpPage, 'signup', app.constant.unauthUser);
 router.addUrl('/authors', AuthorsPage, 'authors');
 router.addUrl('/game', GamePage, 'game', app.constant.authUser);
@@ -47,7 +78,7 @@ function pageLoader() {
         return
     }
 
-    let element = controller.targetRender || app.page;
+    let element = controller.targetRender || app.baseContainer;
 
     element.innerHTML = controller.render();
 
@@ -57,17 +88,11 @@ function pageLoader() {
     }
 }
 
-function pageHandler (e) {
-    if (e.type === "load") {
-        app.store.getUser().finally( () => {
-            pageLoader();
-        });
-    } else {
-        pageLoader()
-    }
+function firstLoad() {
+    EventBus.emit(NetworkEvents.GetUser);
 }
 
-window.addEventListener('hashchange', pageHandler);
-window.addEventListener('load', pageHandler);
+window.addEventListener('hashchange', pageLoader);
+window.addEventListener('load', firstLoad);
 
 export default app;

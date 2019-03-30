@@ -1,7 +1,7 @@
-import HomeErrorController from "./section/HomeErrorController";
+import ErrorController from "./section/ErrorController";
 import ErrorContent from "../components/ErrorContent/ErrorContent";
 
-class UnAuthorizedPage extends HomeErrorController{
+class UnAuthorizedPage extends ErrorController{
     constructor() {
         super(ErrorContent, '401 UnAuthorized')
     }

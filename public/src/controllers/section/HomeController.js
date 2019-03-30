@@ -4,12 +4,14 @@ import '../../blocks/mobile-burger/mobile-burger.scss';
 import '../../blocks/mobile-input/mobile-input.scss';
 import MenuContent from "../../components/MenuContent/MenuContent";
 import AuthController from "./AuthController";
+import EventBus from "../../events/EventBus";
+import NetworkEvents from "../../events/NetworkEvents";
 
 // отрисовка домашней страницы с меню
 class HomeController extends AuthController{
     constructor(content, ...args) {
         super();
-        this.targetRender = this.getTargetRender();
+        this.targetRender = HomeController.getTargetRender();
         this.content = new content(args);
     }
 
@@ -19,36 +21,36 @@ class HomeController extends AuthController{
             `
     }
 
-    getTargetRender() {
+    static getTargetRender() {
         let target = document.getElementsByClassName('content')[0];
 
         if (!target) {
-            this.baseRender()
+            HomeController.baseRender()
         }
 
         return document.getElementsByClassName('content')[0]
     }
 
-    baseRender() {
-        this.menu = new MenuContent();
-        let target = app.page;
+    static baseRender() {
+        let menu = new MenuContent();
+        let target = app.baseContainer;
         target.innerHTML = `
                 <input type="checkbox" class="mobile-input">
                 <i class="mobile-burger fa fa-bars fa-2x"></i>
                 <div class="menu">
-                ${this.menu.render()}
+                ${menu.render()}
                 </div>
                 <div class="content">
                 </div>
         `;
-        this.addEventHandlers()
+        HomeController.addEventHandlers()
     }
 
     afterRender() {
         MenuContent.activateButton(this.pageName);
     }
 
-    addEventHandlers() {
+    static addEventHandlers() {
         let menuButtons = document.getElementsByClassName('menu-button');
 
         let name = "logout";
@@ -61,23 +63,7 @@ class HomeController extends AuthController{
             button.addEventListener('click', (e) => {
                 e.preventDefault();
 
-                let request = {
-                    mode: 'cors',
-                    method: "DELETE",
-                    credentials: 'include'
-                };
-
-                let url = [app.constant.backend, 'auth'].join("");
-
-                fetch(url, request)
-                    .then( (res) => {
-                        if (res.status > 299) {
-                            throw res.status;
-                        }
-                        app.store.setAnonymous();
-                        this.baseRender();
-                        window.location.replace("#/");
-                    })
+                EventBus.emit(NetworkEvents.LogoutUser);
             })
         }
     }
