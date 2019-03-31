@@ -20,7 +20,6 @@ class LoginPage extends FormSection {
     }
 
     static Success() {
-        console.log("success login");
         window.location.replace("#/profile");
     }
 

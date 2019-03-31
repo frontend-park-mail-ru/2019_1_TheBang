@@ -1,5 +1,5 @@
 const PageEvents = {
-    GetUser: 'page:get-user',
+    LoadPage: 'page:load-page',
 
     SignUpUserSuccess: 'page:signup-user-success',
     SignUpUserError: 'page:signup-user-error',
@@ -16,7 +16,7 @@ const PageEvents = {
     GetLeaderboardError: 'page:get-leaderboard-error',
 
     BaseRender: 'page:render-base-component',
-    BaseRenderDone: 'page:render-base-component-done'
+    UpdateStore: 'page:update-user-store',
 };
 
 export default PageEvents

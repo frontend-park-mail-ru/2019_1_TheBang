@@ -17,16 +17,16 @@ class Network {
             return res.json()
         })
             .then((data) => {
-                EventBus.emit(PageEvents.GetUser, data)
+                EventBus.emit(PageEvents.LoadPage);
+                EventBus.emit(PageEvents.UpdateStore, data);
             })
             .catch(() => {
-                EventBus.emit(PageEvents.GetUser)
+                EventBus.emit(PageEvents.LoadPage);
             });
     }
 
     static signUpUser(data) {
         let response = Request.post('user', data);
-
         response.then((res) => {
             if (res.status > 299) {
                 throw res.status;
@@ -55,7 +55,8 @@ class Network {
                 return res.json()
             })
                 .then((data) => {
-                    EventBus.emit(PageEvents.UpdateUserSuccess, data)
+                    EventBus.emit(PageEvents.UpdateUserSuccess, data);
+                    EventBus.emit(PageEvents.UpdateStore, data);
                 })
                 .catch((err) => {
                     EventBus.emit(PageEvents.UpdateUserError, err);
@@ -70,7 +71,8 @@ class Network {
                 return res.json()
             })
                 .then((data) => {
-                    EventBus.emit(PageEvents.UpdateUserSuccess, data)
+                    EventBus.emit(PageEvents.UpdateUserSuccess, data);
+                    EventBus.emit(PageEvents.UpdateStore, data);
                 })
                 .catch((err) => {
                     EventBus.emit(PageEvents.UpdateUserError, err);
@@ -93,7 +95,9 @@ class Network {
             return res.json()
         })
             .then((data) => {
-                EventBus.emit(PageEvents.LoginUserSuccess, data)
+                EventBus.emit(PageEvents.LoginUserSuccess, data);
+                EventBus.emit(PageEvents.UpdateStore, data);
+                EventBus.emit(PageEvents.BaseRender)
             })
             .catch((err) => {
                 EventBus.emit(PageEvents.LoginUserError, err);
@@ -108,6 +112,8 @@ class Network {
                 throw res.status;
             }
             EventBus.emit(PageEvents.LogoutUserSuccess);
+            EventBus.emit(PageEvents.UpdateStore);
+            EventBus.emit(PageEvents.BaseRender);
         })
     }
 

@@ -10,7 +10,7 @@ class SignUpPage extends FormSection{
         super(SignUpContent);
     }
 
-    static SubmitRequest(form) {
+    SubmitRequest(form) {
         let data = {
             name: form[0].value,
             nickname: form[1].value,

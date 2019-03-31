@@ -21,36 +21,31 @@ import PermissionController from "./permission/PermissionController";
 import Permission from "./permission/Permission";
 import BasePage from "./views/BasePage";
 
+EventBus.on(PageEvents.UpdateStore, Store.updateUser.bind(Store));
+EventBus.on(PageEvents.BaseRender, BasePage.render);
 
 EventBus.on(NetworkEvents.GetUser, Network.getUser);
-EventBus.on(PageEvents.GetUser, Store.updateUser.bind(Store));
-EventBus.on(PageEvents.GetUser, pageLoader);
+EventBus.on(PageEvents.LoadPage, pageLoader);
 
 EventBus.on(NetworkEvents.SignUpUser, Network.signUpUser);
 EventBus.on(PageEvents.SignUpUserSuccess, SignUpPage.Success);
 EventBus.on(PageEvents.SignUpUserError, SignUpPage.Error);
 
 EventBus.on(NetworkEvents.LoginUser, Network.loginUser);
-EventBus.on(PageEvents.LoginUserSuccess, Store.updateUser.bind(Store));
-EventBus.on(PageEvents.LoginUserSuccess, BasePage.render);
 EventBus.on(PageEvents.LoginUserSuccess, LoginPage.Success);
 EventBus.on(PageEvents.LoginUserError, LoginPage.Error);
 
 EventBus.on(NetworkEvents.UpdateUser, Network.updateUser);
-EventBus.on(PageEvents.UpdateUserSuccess, Store.updateUser.bind(Store));
 EventBus.on(PageEvents.UpdateUserSuccess, ProfilePage.Success);
 EventBus.on(PageEvents.UpdateUserError, ProfilePage.Error);
 
 EventBus.on(NetworkEvents.LogoutUser, Network.logoutUser);
-EventBus.on(PageEvents.LogoutUserSuccess, Store.updateUser.bind(Store));
-EventBus.on(PageEvents.LogoutUserSuccess, BasePage.render);
 EventBus.on(PageEvents.LogoutUserSuccess, HomePage.Success);
 
 EventBus.on(NetworkEvents.GetLeaderboard, Network.getLeaderboard);
 EventBus.on(PageEvents.GetLeaderboardSuccess, LeadersPage.Success);
 EventBus.on(PageEvents.GetLeaderboardError, LeadersPage.Error);
 
-EventBus.on(PageEvents.BaseRender, BasePage.render);
 
 let router = new Router();
 
