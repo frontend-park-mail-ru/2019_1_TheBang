@@ -1,9 +1,7 @@
 import GameContent from "../components/GameContent/GameContent";
-import AuthController from "./section/AuthController";
 
-class GamePage extends AuthController{
+class GamePage{
     constructor() {
-        super();
         this.content = new GameContent();
     }
 
@@ -11,6 +9,13 @@ class GamePage extends AuthController{
         return `
             ${this.content.render()}
         `
+    }
+
+    getTargetRender() {
+        return document.getElementById('root')
+    }
+
+    afterRender() {
     }
 }
 

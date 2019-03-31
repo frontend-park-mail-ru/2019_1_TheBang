@@ -1,10 +1,9 @@
 import btn from "../../blocks/menu-button/menu-button";
 import './menu.scss';
-import app from "../../app";
 
 
 class MenuContent {
-    constructor () {
+    constructor (isAuth) {
         this.btn = btn;
 
         this.authPack = [
@@ -19,7 +18,7 @@ class MenuContent {
             this.btn('Регистрация', '/signup'),
             this.btn('Авторы', '/authors')
         ];
-        this.currentPack = app.store.isAuth() ? this.authPack : this.anonPack
+        this.currentPack = isAuth ? this.authPack : this.anonPack
     }
 
     render() {

@@ -1,11 +1,11 @@
 import SignUpContent from "../components/SignUpContent/SignUpContent";
-import FormController from "./section/FormController";
+import FormSection from "./section/FormSection";
 
 import EventBus from "../events/EventBus";
 import NetworkEvents from "../events/NetworkEvents";
 
 
-class SignUpPage extends FormController{
+class SignUpPage extends FormSection{
     constructor() {
         super(SignUpContent);
     }
@@ -21,16 +21,16 @@ class SignUpPage extends FormController{
     }
 
     static Success() {
-        FormController.SuccessMessage("Вы зарегистрированы!");
+        FormSection.SuccessMessage("Вы зарегистрированы!");
     }
 
     static Error(status) {
         switch (status) {
             case 409:
-                FormController.ErrorMessage("Такой пользователь уже существует");
+                FormSection.ErrorMessage("Такой пользователь уже существует");
                 break;
             default:
-                FormController.ErrorMessage(`Произошла ошибка, попробуйте позже`);
+                FormSection.ErrorMessage(`Произошла ошибка, попробуйте позже`);
         }
     }
 }

@@ -14,6 +14,9 @@ const PageEvents = {
 
     GetLeaderboardSuccess: 'page:get-leaderboard-success',
     GetLeaderboardError: 'page:get-leaderboard-error',
+
+    BaseRender: 'page:render-base-component',
+    BaseRenderDone: 'page:render-base-component-done'
 };
 
 export default PageEvents

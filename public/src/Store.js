@@ -29,6 +29,16 @@ class Store {
         this.photoUrl = Request.image(this.photo)
     }
 
+    getUser() {
+        return {
+            nickname: this.nickname,
+            name: this.name,
+            score: this.score,
+            photo: this.photo,
+            photoUrl: Request.image(this.photo)
+        }
+    }
+
 }
 
 export default new Store();

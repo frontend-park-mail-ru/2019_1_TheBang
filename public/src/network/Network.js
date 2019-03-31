@@ -107,7 +107,7 @@ class Network {
             if (res.status > 299) {
                 throw res.status;
             }
-            EventBus.emit(PageEvents.LoginUserSuccess);
+            EventBus.emit(PageEvents.LogoutUserSuccess);
         })
     }
 

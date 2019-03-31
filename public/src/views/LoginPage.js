@@ -1,11 +1,11 @@
 import LoginContent from "../components/LoginContent/LoginContent";
-import FormController from "./section/FormController";
+import FormSection from "./section/FormSection";
 
 import EventBus from "../events/EventBus";
 import NetworkEvents from "../events/NetworkEvents";
 
 
-class LoginPage extends FormController {
+class LoginPage extends FormSection {
     constructor() {
         super(LoginContent);
     }
@@ -20,16 +20,17 @@ class LoginPage extends FormController {
     }
 
     static Success() {
+        console.log("success login");
         window.location.replace("#/profile");
     }
 
     static Error(status) {
         switch (status) {
             case 401:
-                FormController.ErrorMessage("Не верный логин/пароль");
+                FormSection.ErrorMessage("Не верный логин/пароль");
                 break;
             default:
-                FormController.ErrorMessage(`Произошла ошибка, попробуйте позже`);
+                FormSection.ErrorMessage(`Произошла ошибка, попробуйте позже`);
         }
     }
 

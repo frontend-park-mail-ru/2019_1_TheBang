@@ -1,13 +1,14 @@
 import ProfileContent from "../components/ProfileContent/ProfileContent";
-import FormController from "./section/FormController";
+import FormSection from "./section/FormSection";
 
 import NetworkEvents from "../events/NetworkEvents";
 import EventBus from "../events/EventBus";
+import Store from "../Store";
 
 
-class ProfilePage extends FormController {
+class ProfilePage extends FormSection {
     constructor() {
-        super(ProfileContent);
+        super(ProfileContent, Store.getUser());
     }
 
     SubmitRequest(form) {
@@ -27,11 +28,11 @@ class ProfilePage extends FormController {
     }
 
     static Success() {
-        FormController.SuccessMessage("Изменения успешны!");
+        FormSection.SuccessMessage("Изменения успешны!");
     }
 
     static Error() {
-        FormController.ErrorMessage(`Произошла ошибка, попробуйте позже`);
+        FormSection.ErrorMessage(`Произошла ошибка, попробуйте позже`);
     }
 
     afterRender() {

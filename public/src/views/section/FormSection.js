@@ -1,18 +1,14 @@
-import HomeController from "./HomeController";
+import ContentSection from "./ContentSection";
 import Message from "./Message";
 
 
-class FormController extends HomeController{
-    constructor(content) {
-        super(content);
-        this.form = "";
-    }
+class FormSection extends ContentSection{
 
     afterRender() {
         super.afterRender();
-        this.form = document.querySelector('form');
+        let form = document.querySelector('form');
 
-        let passInput = [].filter.call(this.form.elements, (item) => {
+        let passInput = [].filter.call(form.elements, (item) => {
             return item.type && (Boolean(~item.type.indexOf("password")))
         });
 
@@ -29,10 +25,10 @@ class FormController extends HomeController{
             })
         }
 
-        this.form.addEventListener('submit', (e) => {
+        form.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            let formInputs = this.form.getElementsByClassName("form-item__input");
+            let formInputs = form.getElementsByClassName("form-item__input");
             let error = false;
 
 
@@ -51,18 +47,18 @@ class FormController extends HomeController{
             }
 
             if (this.SubmitRequest) {
-                this.SubmitRequest(this.form)
+                this.SubmitRequest(form)
             }
 
         })
     }
 
     static ErrorMessage(message) {
-        FormController.createMsg(message, Message.error)
+        FormSection.createMsg(message, Message.error)
     }
 
     static SuccessMessage(message) {
-        FormController.createMsg(message, Message.success)
+        FormSection.createMsg(message, Message.success)
     }
 
     static createMsg(message, className) {
@@ -139,4 +135,4 @@ function createErrorMessage(field, msg) {
 }
 
 
-export default FormController;
+export default FormSection;

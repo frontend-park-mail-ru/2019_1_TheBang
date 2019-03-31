@@ -1,11 +1,11 @@
 import LeaderContent from "../components/LeaderContent/LeaderContent";
-import HomeController from "./section/HomeController";
+import ContentSection from "./section/ContentSection";
 
 import EventBus from "../events/EventBus";
 import NetworkEvents from "../events/NetworkEvents";
 
 
-class LeadersPage extends HomeController {
+class LeadersPage extends ContentSection {
     constructor() {
         super(LeaderContent);
     }

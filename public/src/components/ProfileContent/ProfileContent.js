@@ -3,17 +3,16 @@ import avatar from "../../blocks/grid/img/avatar.svg";
 import button from "../../blocks/button/button";
 import '../../blocks/grid/grid.scss';
 import '../../blocks/form-container/form-container.scss';
-import app from "../../app";
 
 
 class ProfileContent {
-    constructor () {
+    constructor (data) {
         this.title = title;
         this.button = button;
-        this.nickname = app.store.nickname;
-        this.name = app.store.name;
-        this.score = app.store.score;
-        this.avatar = app.store.photoUrl || `dist/${avatar}`;
+        this.nickname = data[0].nickname;
+        this.name = data[0].name;
+        this.score = data[0].score;
+        this.avatar = data[0].photoUrl || `dist/${avatar}`;
     }
 
     // TODO нужно доверстать профиль :)
