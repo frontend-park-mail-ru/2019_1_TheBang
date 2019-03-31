@@ -20,7 +20,7 @@ class SignUpContent {
         return `
             <div class="form-container">
                 ${this.title('Регистрация')}
-                <form class="form">
+                <form class="form" autocomplete="off">
                     ${this.login('Логин', 'text')}
                     ${this.nickname('Никнейм', 'text')}
                     ${this.password('Пароль', 'password')}

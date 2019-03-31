@@ -31,7 +31,7 @@ class FormSection extends ContentSection{
             let formInputs = form.getElementsByClassName("form-item__input");
             let error = false;
 
-
+            FormSection.clearMessage();
             cancelError();
 
             let originalPassowrd = hasEqualPassword();
@@ -51,6 +51,18 @@ class FormSection extends ContentSection{
             }
 
         })
+    }
+
+    static clearMessage() {
+        let successMsg = document.getElementsByClassName(Message.success);
+        [].forEach.call(successMsg, (item) => {
+           item.remove()
+        });
+
+        let errorMsg = document.getElementsByClassName(Message.error);
+        [].forEach.call(errorMsg, (item) => {
+            item.remove()
+        });
     }
 
     static ErrorMessage(message) {

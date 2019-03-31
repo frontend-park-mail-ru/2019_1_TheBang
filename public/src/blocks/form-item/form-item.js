@@ -10,7 +10,7 @@ const formItem = (name, itemType) => {
                         <i class="fas fa-user form-item__icon"></i>
                     </div>
                 `
-            )
+            );
         case 'password':
             return (
                 `
@@ -22,7 +22,7 @@ const formItem = (name, itemType) => {
                         </div>
                     </div>
                 `
-            )
+            );
         case 'password-repeat':
             return (
                 `
@@ -36,6 +36,6 @@ const formItem = (name, itemType) => {
                 `
             )
     }
-}
+};
 
 export default formItem;

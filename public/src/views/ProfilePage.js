@@ -13,9 +13,14 @@ class ProfilePage extends FormSection {
 
     SubmitRequest(form) {
         let file = form[3].files[0];
+        let name = form[2].value;
+
+        if (name===Store.name && !file) {
+            return
+        }
 
         let data = {
-            "name": form[2].value
+            "name": name
         };
 
         if (file) {
