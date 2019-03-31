@@ -17,8 +17,8 @@ class Network {
             return res.json()
         })
             .then((data) => {
-                EventBus.emit(PageEvents.LoadPage);
                 EventBus.emit(PageEvents.UpdateStore, data);
+                EventBus.emit(PageEvents.LoadPage);
             })
             .catch(() => {
                 EventBus.emit(PageEvents.LoadPage);
@@ -55,8 +55,8 @@ class Network {
                 return res.json()
             })
                 .then((data) => {
-                    EventBus.emit(PageEvents.UpdateUserSuccess, data);
                     EventBus.emit(PageEvents.UpdateStore, data);
+                    EventBus.emit(PageEvents.UpdateUserSuccess, data);
                 })
                 .catch((err) => {
                     EventBus.emit(PageEvents.UpdateUserError, err);
@@ -71,8 +71,8 @@ class Network {
                 return res.json()
             })
                 .then((data) => {
-                    EventBus.emit(PageEvents.UpdateUserSuccess, data);
                     EventBus.emit(PageEvents.UpdateStore, data);
+                    EventBus.emit(PageEvents.UpdateUserSuccess, data);
                 })
                 .catch((err) => {
                     EventBus.emit(PageEvents.UpdateUserError, err);
@@ -95,8 +95,8 @@ class Network {
             return res.json()
         })
             .then((data) => {
-                EventBus.emit(PageEvents.LoginUserSuccess, data);
                 EventBus.emit(PageEvents.UpdateStore, data);
+                EventBus.emit(PageEvents.LoginUserSuccess, data);
                 EventBus.emit(PageEvents.BaseRender)
             })
             .catch((err) => {
@@ -111,8 +111,8 @@ class Network {
             if (res.status > 299) {
                 throw res.status;
             }
-            EventBus.emit(PageEvents.LogoutUserSuccess);
             EventBus.emit(PageEvents.UpdateStore);
+            EventBus.emit(PageEvents.LogoutUserSuccess);
             EventBus.emit(PageEvents.BaseRender);
         })
     }
