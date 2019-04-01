@@ -1,4 +1,5 @@
-const backend = "http://127.0.0.1:8090/";
+const backend = "https://stormy-fjord-97392.herokuapp.com";
+// const backend = "http://127.0.0.1:8090/";
 //this.backend = "https://stormy-fjord-97392.herokuapp.com/";
 
 class Request {
