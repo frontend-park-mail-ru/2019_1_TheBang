@@ -1,38 +1,32 @@
-import btn from "../../blocks/menu-button/menu-button";
+import "../../pug-mixins/menu-button/menu-button.scss";
 import './menu.scss';
+import menuComponent from "./menu.pug";
 
 
 class MenuContent {
     constructor (isAuth) {
-        this.btn = btn;
-
-        this.authPack = [
-            this.btn('Профиль', '/profile'),
-            this.btn('Авторы', '/authors'),
-            this.btn('Играть', '/game'),
-            this.btn('Таблица лидеров', '/leaders'),
-            this.btn('Выход', '/logout'),
-        ];
-        this.anonPack = [
-            this.btn('Авторизация', '/auth'),
-            this.btn('Регистрация', '/signup'),
-            this.btn('Авторы', '/authors')
-        ];
-        this.currentPack = isAuth ? this.authPack : this.anonPack
+        this.isAuth = isAuth;
+        // this.btn = btn;
+        //
+        // this.authPack = [
+        //     this.btn('Профиль', '/profile'),
+        //     this.btn('Авторы', '/authors'),
+        //     this.btn('Играть', '/game'),
+        //     this.btn('Таблица лидеров', '/leaders'),
+        //     this.btn('Выход', '/logout'),
+        // ];
+        // this.anonPack = [
+        //     this.btn('Авторизация', '/auth'),
+        //     this.btn('Регистрация', '/signup'),
+        //     this.btn('Авторы', '/authors')
+        // ];
+        // this.currentPack = isAuth ? this.authPack : this.anonPack
     }
 
     render() {
-        let buttons = this.currentPack.join("");
-        return `
-            <a href="#" class="menu__header">
-                    <div class="menu__logo">
-                    </div><h1>TheBang!</h1>
-            </a>
-
-            <nav class="menu__nav">
-                    ${buttons}
-            </nav>
-        `
+        let is_auth = Boolean(this.isAuth);
+        // console.log(is_auth);
+        return menuComponent.call({}, {is_auth})
     }
 
     static activateButton(name) {

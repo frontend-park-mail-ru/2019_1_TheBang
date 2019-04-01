@@ -1,32 +1,18 @@
-import title from "../../blocks/title/title";
-import formItem from "../../blocks/form-item/form-item";
-import button from "../../blocks/button/button";
-import link from "../../blocks/link/link";
-import '../../blocks/form/form.scss';
-import '../../blocks/form-container/form-container.scss';
+import "../../pug-mixins/title/title.scss";
+import "../../pug-mixins/form-item/form-item.scss";
+import "../../pug-mixins/button/button.scss";
+import "../../pug-mixins/link/link.scss";
+import '../../pug-mixins/form/form.scss';
+import '../../pug-mixins/form-container/form-container.scss';
+import loginComponent from "./login.pug";
 
 class LoginContent {
     constructor () {
-        this.title = title;
-        this.login = formItem;
-        this.password = formItem;
-        // this.passwordBlock = new password();
-        this.button = button;
-        this.link = link;
     }
 
     render() {
-        return `
-            <div class="form-container">
-                ${this.title('Вход')}
-                <form class="form">
-                    ${this.login('Логин', 'text')}
-                    ${this.password('Пароль', 'password')}                   
-                    ${this.button('Войти')}
-                </form>
-                ${this.link('Зарегистрироваться', 'signup')}
-            </div>
-        `
+        let title = 'Вход';
+        return loginComponent.call({}, {title})
     }
 }
 

@@ -1,18 +1,15 @@
-import title from "../../blocks/title/title";
+import "../../pug-mixins/title/title.scss";
 import './notfound.scss';
+import errorComponent from "./error.pug";
 
 class ErrorContent {
     constructor (message) {
-        this.title = title;
         this.message = message
     }
 
     render() {
-        return `
-            ${this.title('Oooooooooooops')}
-            ${this.title(this.message)}
-            <div class="notfound"></div>
-        `
+        let message = this.message;
+        return errorComponent.call({}, {message})
     }
 }
 

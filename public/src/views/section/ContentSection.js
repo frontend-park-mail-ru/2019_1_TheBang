@@ -1,6 +1,6 @@
-import '../../blocks/content/content.scss';
-import '../../blocks/mobile-burger/mobile-burger.scss';
-import '../../blocks/mobile-input/mobile-input.scss';
+import '../../pug-mixins/content/content.scss';
+import '../../pug-mixins/mobile-burger/mobile-burger.scss';
+import '../../pug-mixins/mobile-input/mobile-input.scss';
 import MenuContent from "../../components/MenuContent/MenuContent";
 
 

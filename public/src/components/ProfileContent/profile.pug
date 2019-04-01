@@ -1,0 +1,17 @@
+.form-container
+    include ../../pug-mixins/title/title.pug
+    +title(title)
+    form.grid
+        img.grid__avatar(src=avatar, alt='Avatar')
+        .form-item.grid__login
+            input.form-item__input(type='input', disabled='', value=nickname, placeholder='Логин')
+            i.fas.fa-user.form-item__icon
+        .form-item.grid__nickname
+            input.form-item__input(type='text', disabled='', value=`Score: ${score}`)
+            .form-item__eye
+        .form-item.grid__password
+            input.form-item__input(type='input', value=name, placeholder='Никнейм')
+            i.fab.fa-suse.form-item__icon
+        input.grid__upload(type='file')
+        i.fa.fa-upload.fa-3x.grid__upload-icon(aria-hidden='true')
+        button.button.grid__button Сохранить

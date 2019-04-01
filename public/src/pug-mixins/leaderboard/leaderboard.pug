@@ -1,0 +1,14 @@
+mixin leaderboard()
+    style.
+        tbody tr:hover {
+            background-color: #415A97;
+        }
+    table.leaderboard(style='width: 500px')
+        thead
+            th(style='border: 1px solid black')
+                b.title Позиция
+            th(style='border: 1px solid black')
+                b.title Никнейм
+            th(style='border: 1px solid black')
+                b.title Очки
+        tbody
