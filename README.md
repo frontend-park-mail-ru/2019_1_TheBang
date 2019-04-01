@@ -13,6 +13,8 @@
 * Команда бекенда(<a href="https://github.com/Ruslan2702">Руслан</a>, <a href="https://github.com/Surfingbird">Андрей</a>)
 
 <h2>Как реализуем</h2>
+<a href="https://the-bang.herokuapp.com/">Деплой</a>
+
 Делаем SPA на фронт, API Go на backend.
 
 ![alt text](https://github.com/frontend-park-mail-ru/2019_1_TheBang/blob/T38/BangFrontend.png)
