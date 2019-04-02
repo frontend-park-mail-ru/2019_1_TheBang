@@ -1,19 +1,14 @@
-import "../../pug-mixins/title/title.scss";
-import "../../pug-mixins/form-item/form-item.scss";
-import "../../pug-mixins/button/button.scss";
-import "../../pug-mixins/link/link.scss";
-import '../../pug-mixins/form/form.scss';
-import '../../pug-mixins/form-container/form-container.scss';
-import signupComponent from "./signup.pug";
+import 'src/components/SignUpContent/style.scss';
+import signupComponent from 'src/components/SignUpContent/template.pug';
+
 
 class SignUpContent {
-    constructor () {
-    }
-
-    render() {
-        let title = 'Регистрация';
-        return signupComponent.call({}, {title});
-    }
+	render() {
+		const renderData = {
+			title: 'Регистрация',
+		};
+		return signupComponent.call({}, renderData);
+	}
 }
 
 export default SignUpContent;

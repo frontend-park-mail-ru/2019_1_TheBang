@@ -1,10 +1,10 @@
-import AuthorsContent from "../components/AuthorsContent/AuthorsContent";
-import ContentSection from "./section/ContentSection";
+import AuthorsContent from 'src/components/AuthorsContent/AuthorsContent';
+import ContentMixin from 'src/views/mixins/ContentMixin';
 
-class AuthorsPage extends ContentSection{
-    constructor() {
-        super(AuthorsContent);
-    }
+class AuthorsPage extends ContentMixin{
+	constructor() {
+		super(AuthorsContent);
+	}
 }
 
 export default AuthorsPage;

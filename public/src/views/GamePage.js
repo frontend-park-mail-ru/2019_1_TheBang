@@ -1,22 +1,22 @@
-import GameContent from "../components/GameContent/GameContent";
+import GameContent from 'src/components/GameContent/GameContent';
 
 class GamePage{
-    constructor() {
-        this.content = new GameContent();
-    }
+	constructor() {
+		this.content = new GameContent();
+	}
 
-    render()  {
-        return `
+	render()  {
+		return `
             ${this.content.render()}
         `
-    }
+	}
 
-    getTargetRender() {
-        return document.getElementById('root')
-    }
+	getTargetRender() {
+		return document.getElementById('root')
+	}
 
-    afterRender() {
-    }
+	afterRender() {
+	}
 }
 
 export default GamePage;

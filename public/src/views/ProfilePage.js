@@ -1,54 +1,54 @@
-import ProfileContent from "../components/ProfileContent/ProfileContent";
-import FormSection from "./section/FormSection";
+import ProfileContent from 'src/components/ProfileContent/ProfileContent';
+import FormMixin from 'src/views/mixins/FormMixin';
 
-import NetworkEvents from "../events/NetworkEvents";
-import EventBus from "../events/EventBus";
-import Store from "../Store";
+import NetworkEvents from 'src/events/NetworkEvents';
+import EventBus from 'src/events/EventBus';
+import Store from 'src/Store';
 
 
-class ProfilePage extends FormSection {
-    constructor() {
-        super(ProfileContent, Store.getUser());
-    }
+class ProfilePage extends FormMixin {
+	constructor() {
+		super(ProfileContent, Store.getUser());
+	}
 
-    SubmitRequest(form) {
-        let file = form[3].files[0];
-        let name = form[2].value;
+	SubmitRequest(form) {
+		const file = form[3].files[0];
+		const name = form[2].value;
 
-        if (name===Store.name && !file) {
-            return
-        }
+		if (name===Store.name && !file) {
+			return
+		}
 
-        let data = {
-            "name": name
-        };
+		const data = {
+			'name': name
+		};
 
-        if (file) {
-            let formData = new FormData();
-            formData.append('photo', file);
-            data.formData = formData
-        }
+		if (file) {
+			const formData = new FormData();
+			formData.append('photo', file);
+			data.formData = formData
+		}
 
-        EventBus.emit(NetworkEvents.UpdateUser, data);
-    }
+		EventBus.emit(NetworkEvents.UPDATE_PROFILE, data);
+	}
 
-    static Success() {
-        FormSection.SuccessMessage("Изменения успешны!");
-    }
+	static Success() {
+		FormMixin.SuccessMessage('Изменения успешны!');
+	}
 
-    static Error() {
-        FormSection.ErrorMessage(`Произошла ошибка, попробуйте позже`);
-    }
+	static Error() {
+		FormMixin.ErrorMessage('Произошла ошибка, попробуйте позже');
+	}
 
-    afterRender() {
-        super.afterRender();
-        let uploadInput = document.querySelector('form')[3];
+	afterRender() {
+		super.afterRender();
+		const uploadInput = document.querySelector('form')[3];
 
-        uploadInput.addEventListener('change', (e) => {
-            let avatar = document.querySelector('form img');
-            avatar.src = window.URL.createObjectURL(e.target.files[0]);
-        })
-    }
+		uploadInput.addEventListener('change', (e) => {
+			const avatar = document.querySelector('form img');
+			avatar.src = window.URL.createObjectURL(e.target.files[0]);
+		})
+	}
 
 }
 

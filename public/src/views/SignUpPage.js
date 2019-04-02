@@ -1,38 +1,39 @@
-import SignUpContent from "../components/SignUpContent/SignUpContent";
-import FormSection from "./section/FormSection";
+import SignUpContent from 'src/components/SignUpContent/SignUpContent';
+import FormMixin from 'src/views/mixins/FormMixin';
 
-import EventBus from "../events/EventBus";
-import NetworkEvents from "../events/NetworkEvents";
+import EventBus from 'src/events/EventBus';
+import NetworkEvents from 'src/events/NetworkEvents';
 
 
-class SignUpPage extends FormSection{
-    constructor() {
-        super(SignUpContent);
-    }
+class SignUpPage extends FormMixin{
+	constructor() {
+		super(SignUpContent);
+	}
 
-    SubmitRequest(form) {
-        let data = {
-            name: form[0].value,
-            nickname: form[1].value,
-            passwd: form[1].value
-        };
+	SubmitRequest(form) {
+		//TODO here fix
+		const data = {
+			name: form[0].value,
+			nickname: form[1].value,
+			passwd: form[1].value
+		};
 
-        EventBus.emit(NetworkEvents.SignUpUser, data);
-    }
+		EventBus.emit(NetworkEvents.SIGNUP, data);
+	}
 
-    static Success() {
-        FormSection.SuccessMessage("Вы зарегистрированы!");
-    }
+	static Success() {
+		FormMixin.SuccessMessage('Вы зарегистрированы!');
+	}
 
-    static Error(status) {
-        switch (status) {
-            case 409:
-                FormSection.ErrorMessage("Такой пользователь уже существует");
-                break;
-            default:
-                FormSection.ErrorMessage(`Произошла ошибка, попробуйте позже`);
-        }
-    }
+	static Error(status) {
+		switch (status) {
+		case 409:
+			FormMixin.ErrorMessage('Такой пользователь уже существует');
+			break;
+		default:
+			FormMixin.ErrorMessage('Произошла ошибка, попробуйте позже');
+		}
+	}
 }
 
 export default SignUpPage;

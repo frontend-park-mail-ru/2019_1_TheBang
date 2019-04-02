@@ -1,18 +1,16 @@
-import "../../pug-mixins/title/title.scss";
-import "../../pug-mixins/leaderboard/leaderboard.scss";
-import './leader.scss';
-import "../../pug-mixins/button/button.scss";
-import leaderComponent from "./leader.pug";
+import 'src/components/LeaderContent/style.scss';
+import leaderComponent from 'src/components/LeaderContent/template.pug';
+
 
 class LeaderContent {
-    constructor () {
-    }
 
-    // TODO нужно переверстать таблицу
-    render() {
-        let title = 'Таблица лидеров';
-        return leaderComponent.call({}, {title})
-    }
+	// TODO нужно переверстать таблицу
+	render() {
+		const renderData = {
+			title: 'Таблица лидеров',
+		};
+		return leaderComponent.call({}, renderData)
+	}
 }
 
 export default LeaderContent;

@@ -1,16 +1,14 @@
-import "../../pug-mixins/title/title.scss";
-import './home.scss'
-import homeComponent from './home.pug'
+import 'src/components/HomeContent/style.scss'
+import homeComponent from 'src/components/HomeContent/template.pug'
 
 
 class HomeContent {
-    constructor () {
-    }
-
-    render() {
-        let title = 'Название игры';
-        return homeComponent.call({}, {title});
-    }
+	render() {
+		const renderData = {
+			title: 'Название игры',
+		};
+		return homeComponent.call({}, renderData);
+	}
 }
 
 export default HomeContent;

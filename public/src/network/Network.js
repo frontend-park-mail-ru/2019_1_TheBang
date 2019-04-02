@@ -1,138 +1,142 @@
-import EventBus from "../events/EventBus";
-import PageEvents from "../events/PageEvents";
-import Request from "./Request";
+import EventBus from 'src/events/EventBus';
+import PageEvents from 'src/events/PageEvents';
+import Request from 'src/network/Request';
 
 
 /**
  * Связь запросов на бекенд и событий на фронте
  */
 class Network {
-    static getUser() {
-        let response = Request.get('user');
+	static getUser() {
+		const response = Request.get('user');
 
-        response.then((res) => {
-            if (res.status > 299) {
-                throw res.status;
-            }
-            return res.json()
-        })
-            .then((data) => {
-                EventBus.emit(PageEvents.UpdateStore, data);
-                EventBus.emit(PageEvents.LoadPage);
-            })
-            .catch(() => {
-                EventBus.emit(PageEvents.LoadPage);
-            });
-    }
+		response.then((res) => {
+			if (res.status > 299) {
+				throw res.status;
+			}
+			return res.json()
+		})
+			.then((data) => {
+				EventBus.emit(PageEvents.UPDATE_STORE, data);
+				EventBus.emit(PageEvents.LOAD_PAGE);
+			})
+			.catch(() => {
+				EventBus.emit(PageEvents.LOAD_PAGE);
+			});
+	}
 
-    static signUpUser(data) {
-        let response = Request.post('user', data);
-        response.then((res) => {
-            if (res.status > 299) {
-                throw res.status;
-            }
-            EventBus.emit(PageEvents.SignUpUserSuccess);
-        })
-            .catch((err) => {
-                EventBus.emit(PageEvents.SignUpUserError, err)
-            });
-    }
+	static signUpUser(data) {
+		const response = Request.post('user', data);
+		response.then((res) => {
+			if (res.status > 299) {
+				throw res.status;
+			}
+			EventBus.emit(PageEvents.SIGNUP_SUCCESS);
+		})
+			.catch((err) => {
+				EventBus.emit(PageEvents.SIGNUP_ERROR, err)
+			});
+	}
 
-    static updateUser(data) {
-        let response;
-        if (data.formData) {
-            response = Network.updateUserPhoto(data.formData);
-            response.then((res) => {
-                if (res && res.status > 299) {
-                    throw res.status;
-                }
-                data.formData = undefined;
-                return Request.put('user', data);
-            }).then((res) => {
-                if (res.status > 299) {
-                    throw res.status;
-                }
-                return res.json()
-            })
-                .then((data) => {
-                    EventBus.emit(PageEvents.UpdateStore, data);
-                    EventBus.emit(PageEvents.UpdateUserSuccess, data);
-                })
-                .catch((err) => {
-                    EventBus.emit(PageEvents.UpdateUserError, err);
-                });
-        } else {
-            response = Request.put('user', data);
+	static updateUser(data) {
+		let response;
+		if (data.formData) {
+			response = Network.updateUserPhoto(data.formData);
+			response.then((res) => {
+				if (res && res.status > 299) {
+					throw res.status;
+				}
+				data.formData = undefined;
+				return Request.put('user', data);
+			}).then((res) => {
+				if (res.status > 299) {
+					throw res.status;
+				}
+				return res.json()
+			})
+				.then((data) => {
+					EventBus.emit(PageEvents.UPDATE_STORE, data);
+					EventBus.emit(PageEvents.UPDATE_PROFILE_SUCCESS, data);
+				})
+				.catch((err) => {
+					EventBus.emit(PageEvents.UPDATE_PROFILE_ERROR, err);
+				});
+		} else {
+			response = Request.put('user', data);
 
-            response.then((res) => {
-                if (res.status > 299) {
-                    throw res.status;
-                }
-                return res.json()
-            })
-                .then((data) => {
-                    EventBus.emit(PageEvents.UpdateStore, data);
-                    EventBus.emit(PageEvents.UpdateUserSuccess, data);
-                })
-                .catch((err) => {
-                    EventBus.emit(PageEvents.UpdateUserError, err);
-                })
-        }
+			response.then((res) => {
+				if (res.status > 299) {
+					throw res.status;
+				}
+				return res.json()
+			})
+				.then((data) => {
+					EventBus.emit(PageEvents.UPDATE_STORE, data);
+					EventBus.emit(PageEvents.UPDATE_PROFILE_SUCCESS, data);
+				})
+				.catch((err) => {
+					EventBus.emit(PageEvents.UPDATE_PROFILE_ERROR, err);
+				})
+		}
 
-    }
+	}
 
-    static updateUserPhoto(data) {
-        return Request.postForm('user/avatar', data)
-    }
+	static updateUserPhoto(data) {
+		return Request.postForm('user/avatar', data)
+	}
 
-    static loginUser(data) {
-        let response = Request.post('auth', data);
+	static loginUser(data) {
+		const response = Request.post('auth', data);
 
-        response.then((res) => {
-            if (res.status > 299) {
-                throw res.status;
-            }
-            return res.json()
-        })
-            .then((data) => {
-                EventBus.emit(PageEvents.UpdateStore, data);
-                EventBus.emit(PageEvents.LoginUserSuccess, data);
-                EventBus.emit(PageEvents.BaseRender)
-            })
-            .catch((err) => {
-                EventBus.emit(PageEvents.LoginUserError, err);
-            })
-    }
+		response.then((res) => {
+			if (res.status > 299) {
+				throw res.status;
+			}
+			return res.json()
+		})
+			.then((data) => {
+				EventBus.emit(PageEvents.UPDATE_STORE, data);
+				EventBus.emit(PageEvents.LOGIN_SUCCESS, data);
+				EventBus.emit(PageEvents.BASE_COMPONENTS_RENDER)
+			})
+			.catch((err) => {
+				EventBus.emit(PageEvents.LOGIN_ERROR, err);
+			})
+	}
 
-    static logoutUser(data) {
-        let response = Request.delete('auth', data);
+	static logoutUser(data) {
+		const response = Request.delete('auth', data);
 
-        response.then((res) => {
-            if (res.status > 299) {
-                throw res.status;
-            }
-            EventBus.emit(PageEvents.UpdateStore);
-            EventBus.emit(PageEvents.LogoutUserSuccess);
-            EventBus.emit(PageEvents.BaseRender);
-        })
-    }
+		response.then((res) => {
+			if (res.status > 299) {
+				throw res.status;
+			}
+			EventBus.emit(PageEvents.UPDATE_STORE);
+			EventBus.emit(PageEvents.LOGOUT_SUCCESS);
+			EventBus.emit(PageEvents.BASE_COMPONENTS_RENDER);
+		})
+	}
 
-    static getLeaderboard(pageNumber) {
-        let response = Request.get(`leaderbord/${pageNumber}`);
+	/**
+	 *
+	 * @param pageNumber - номер страницы
+	 */
+	static getLeaderboard(pageNumber) {
+		const response = Request.get(`leaderbord/${pageNumber}`);
 
-        response.then((res) => {
-            if (res.status > 299) {
-                throw res.status;
-            }
-            return res.json()
-        })
-            .then((data) => {
-                EventBus.emit(PageEvents.GetLeaderboardSuccess, data)
-            })
-            .catch(() => {
-                EventBus.emit(PageEvents.GetLeaderboardError)
-            })
-    }
+		response.then((res) => {
+			if (res.status > 299) {
+				throw res.status;
+			}
+			return res.json()
+		})
+			.then((data) => {
+				EventBus.emit(PageEvents.GET_LEADERBOARD_SUCCESS, data)
+			})
+			.catch(() => {
+				EventBus.emit(PageEvents.GET_LEADERBOARD_ERROR)
+			})
+	}
 }
 
 export default Network;

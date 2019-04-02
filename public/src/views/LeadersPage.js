@@ -1,58 +1,58 @@
-import LeaderContent from "../components/LeaderContent/LeaderContent";
-import ContentSection from "./section/ContentSection";
+import LeaderContent from 'src/components/LeaderContent/LeaderContent';
+import ContentMixin from 'src/views/mixins/ContentMixin';
 
-import EventBus from "../events/EventBus";
-import NetworkEvents from "../events/NetworkEvents";
-
-
-class LeadersPage extends ContentSection {
-    constructor() {
-        super(LeaderContent);
-    }
-
-    afterRender() {
-        super.afterRender();
-        EventBus.emit(NetworkEvents.GetLeaderboard, 1);
-
-        let pages = document.getElementsByClassName('paginator')[0].children;
-
-        [].forEach.call(pages, (page) => {
-            page.addEventListener('click', () => {
-                let pageNumber = page.innerText;
-                EventBus.emit(NetworkEvents.GetLeaderboard, pageNumber);
-            })
+import EventBus from 'src/events/EventBus';
+import NetworkEvents from 'src/events/NetworkEvents';
 
 
-        })
+class LeadersPage extends ContentMixin {
+	constructor() {
+		super(LeaderContent);
+	}
 
-    }
+	afterRender() {
+		super.afterRender();
+		EventBus.emit(NetworkEvents.GET_LEADERBOARD, 1);
 
-    static Success(data) {
-        let table = document.querySelector('table tbody');
-        table.innerHTML = "";
+		const pages = document.getElementsByClassName('paginator')[0].children;
 
-        [].forEach.call(data, (item) => {
-            let tr = document.createElement('tr');
-            let tdPos = document.createElement('td');
-            let tdNickname = document.createElement('td');
-            let tdScore = document.createElement('td');
-            tdPos.innerText = item.posintion;
-            tr.appendChild(tdPos);
-            tdNickname.innerText = item.nickname;
-            tr.appendChild(tdNickname);
-            tdScore.innerText = item.score;
-            tr.appendChild(tdScore);
+		[].forEach.call(pages, (page) => {
+			page.addEventListener('click', () => {
+				const pageNumber = page.innerText;
+				EventBus.emit(NetworkEvents.GET_LEADERBOARD, pageNumber);
+			})
 
-            table.appendChild(tr);
-        })
-    }
 
-    static Error() {
-        let table = document.querySelector('table tbody');
-        table.innerHTML = "";
-        let tr = document.createElement('tr');
-        tr.innerText = 'Не удалось загрузить данные, попробуйте позже'
-    }
+		})
+
+	}
+
+	static Success(data) {
+		const table = document.querySelector('table tbody');
+		table.innerHTML = '';
+
+		[].forEach.call(data, (item) => {
+			const tr = document.createElement('tr');
+			const tdPos = document.createElement('td');
+			const tdNickname = document.createElement('td');
+			const tdScore = document.createElement('td');
+			tdPos.innerText = item.posintion;
+			tr.appendChild(tdPos);
+			tdNickname.innerText = item.nickname;
+			tr.appendChild(tdNickname);
+			tdScore.innerText = item.score;
+			tr.appendChild(tdScore);
+
+			table.appendChild(tr);
+		})
+	}
+
+	static Error() {
+		const table = document.querySelector('table tbody');
+		table.innerHTML = '';
+		const tr = document.createElement('tr');
+		tr.innerText = 'Не удалось загрузить данные, попробуйте позже'
+	}
 }
 
 export default LeadersPage;

@@ -1,16 +1,16 @@
-import MenuContent from "../components/MenuContent/MenuContent";
-import Store from "../Store";
-import EventBus from "../events/EventBus";
-import NetworkEvents from "../events/NetworkEvents";
+import MenuContent from 'src/components/MenuContent/MenuContent';
+import Store from 'src/Store';
+import EventBus from 'src/events/EventBus';
+import NetworkEvents from 'src/events/NetworkEvents';
 
 
 class BasePage {
-    static render() {
-        let menu = new MenuContent(Store.isAuth());
+	static render() {
+		const menu = new MenuContent(Store.isAuth());
 
-        let target = document.getElementById('root');
+		const target = document.getElementById('root');
 
-        target.innerHTML = `
+		target.innerHTML = `
                 <input type="checkbox" class="mobile-input">
                 <i class="mobile-burger fa fa-bars fa-2x"></i>
                 <div class="menu">
@@ -19,26 +19,26 @@ class BasePage {
                 <div class="content">
                 </div>
         `;
-        BasePage.afterRender();
-    }
+		BasePage.afterRender();
+	}
 
-    static afterRender() {
-        let menuButtons = document.getElementsByClassName('menu-button');
+	static afterRender() {
+		const menuButtons = document.getElementsByClassName('menu-button');
 
-        let name = "logout";
+		const name = 'logout';
 
-        let button = [].filter.call(menuButtons, (item) => {
-            return item.hash && ~item.hash.indexOf(name)
-        })[0];
+		const button = [].filter.call(menuButtons, (item) => {
+			return item.hash && ~item.hash.indexOf(name)
+		})[0];
 
-        if (button) {
-            button.addEventListener('click', (e) => {
-                e.preventDefault();
+		if (button) {
+			button.addEventListener('click', (e) => {
+				e.preventDefault();
 
-                EventBus.emit(NetworkEvents.LogoutUser);
-            })
-        }
-    }
+				EventBus.emit(NetworkEvents.LOGOUT);
+			})
+		}
+	}
 }
 
 export default BasePage;

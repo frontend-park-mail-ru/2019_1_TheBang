@@ -1,6 +1,6 @@
 const Permission = {
-    Anonymous: "Anonymous",
-    LoginRequired: "LoginRequired"
+	ANONYMOUS: 'ANONYMOUS',
+	LOGIN_REQUIRED: 'LOGIN_REQUIRED'
 };
 
 export default Permission

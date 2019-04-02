@@ -1,9 +1,10 @@
-import gameComponent from "./game.pug"
+import gameComponent from 'src/components/GameContent/template.pug'
+
 
 class GameContent {
-    render() {
-        return gameComponent.call({}, {})
-    }
+	render() {
+		return gameComponent.call({}, {});
+	}
 }
 
 export default GameContent;

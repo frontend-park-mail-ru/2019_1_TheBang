@@ -1,10 +1,10 @@
-import ErrorContent from "../components/ErrorContent/ErrorContent";
-import ContentSection from "./section/ContentSection";
+import ErrorContent from 'src/components/ErrorContent/ErrorContent';
+import ContentMixin from 'src/views/mixins/ContentMixin';
 
-class UnAuthorizedPage extends ContentSection{
-    constructor() {
-        super(ErrorContent, '401 UnAuthorized')
-    }
+class UnAuthorizedPage extends ContentMixin{
+	constructor() {
+		super(ErrorContent, '401 UnAuthorized')
+	}
 }
 
 export default UnAuthorizedPage;

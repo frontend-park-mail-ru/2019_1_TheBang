@@ -1,11 +1,11 @@
-import ErrorContent from "../components/ErrorContent/ErrorContent";
-import ContentSection from "./section/ContentSection";
+import ErrorContent from 'src/components/ErrorContent/ErrorContent';
+import ContentMixin from 'src/views/mixins/ContentMixin';
 
 
-class NotFoundPage extends ContentSection{
-    constructor() {
-        super(ErrorContent, '404 Not Found');
-    }
+class NotFoundPage extends ContentMixin{
+	constructor() {
+		super(ErrorContent, '404 Not Found');
+	}
 }
 
 export default NotFoundPage;
