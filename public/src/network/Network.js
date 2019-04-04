@@ -8,14 +8,7 @@ import Request from 'src/network/Request';
  */
 class Network {
 	static getUser() {
-		const response = Request.get('user');
-
-		response.then((res) => {
-			if (res.status > 299) {
-				throw res.status;
-			}
-			return res.json()
-		})
+		Request.request('user', 'GET')
 			.then((data) => {
 				EventBus.emit(PageEvents.UPDATE_STORE, data);
 				EventBus.emit(PageEvents.LOAD_PAGE);
@@ -26,34 +19,22 @@ class Network {
 	}
 
 	static signUpUser(data) {
-		const response = Request.post('user', data);
-		response.then((res) => {
-			if (res.status > 299) {
-				throw res.status;
-			}
-			EventBus.emit(PageEvents.SIGNUP_SUCCESS);
-		})
+		Request.request('user', 'POST', JSON.stringify(data))
+			.then(() => {
+				EventBus.emit(PageEvents.SIGNUP_SUCCESS);
+			})
 			.catch((err) => {
 				EventBus.emit(PageEvents.SIGNUP_ERROR, err)
 			});
 	}
 
 	static updateUser(data) {
-		let response;
 		if (data.formData) {
-			response = Network.updateUserPhoto(data.formData);
-			response.then((res) => {
-				if (res && res.status > 299) {
-					throw res.status;
-				}
-				data.formData = undefined;
-				return Request.put('user', data);
-			}).then((res) => {
-				if (res.status > 299) {
-					throw res.status;
-				}
-				return res.json()
-			})
+			Network.updateUserPhoto(data.formData)
+				.then(() => {
+					data.formData = undefined;
+					return Request.request('user', 'PUT', JSON.stringify(data));
+				})
 				.then((data) => {
 					EventBus.emit(PageEvents.UPDATE_STORE, data);
 					EventBus.emit(PageEvents.UPDATE_PROFILE_SUCCESS, data);
@@ -61,39 +42,25 @@ class Network {
 				.catch((err) => {
 					EventBus.emit(PageEvents.UPDATE_PROFILE_ERROR, err);
 				});
-		} else {
-			response = Request.put('user', data);
-
-			response.then((res) => {
-				if (res.status > 299) {
-					throw res.status;
-				}
-				return res.json()
-			})
-				.then((data) => {
-					EventBus.emit(PageEvents.UPDATE_STORE, data);
-					EventBus.emit(PageEvents.UPDATE_PROFILE_SUCCESS, data);
-				})
-				.catch((err) => {
-					EventBus.emit(PageEvents.UPDATE_PROFILE_ERROR, err);
-				})
+			return
 		}
 
+		Request.request('user', 'PUT', JSON.stringify(data))
+			.then((data) => {
+				EventBus.emit(PageEvents.UPDATE_STORE, data);
+				EventBus.emit(PageEvents.UPDATE_PROFILE_SUCCESS, data);
+			})
+			.catch((err) => {
+				EventBus.emit(PageEvents.UPDATE_PROFILE_ERROR, err);
+			})
 	}
 
 	static updateUserPhoto(data) {
-		return Request.postForm('user/avatar', data)
+		return Request.request('user/avatar', 'POST', data)
 	}
 
 	static loginUser(data) {
-		const response = Request.post('auth', data);
-
-		response.then((res) => {
-			if (res.status > 299) {
-				throw res.status;
-			}
-			return res.json()
-		})
+		Request.request('auth', 'POST', JSON.stringify(data))
 			.then((data) => {
 				EventBus.emit(PageEvents.UPDATE_STORE, data);
 				EventBus.emit(PageEvents.LOGIN_SUCCESS, data);
@@ -104,17 +71,13 @@ class Network {
 			})
 	}
 
-	static logoutUser(data) {
-		const response = Request.delete('auth', data);
-
-		response.then((res) => {
-			if (res.status > 299) {
-				throw res.status;
-			}
-			EventBus.emit(PageEvents.UPDATE_STORE);
-			EventBus.emit(PageEvents.LOGOUT_SUCCESS);
-			EventBus.emit(PageEvents.BASE_COMPONENTS_RENDER);
-		})
+	static logoutUser() {
+		Request.request('auth', 'DELETE')
+			.then(() => {
+				EventBus.emit(PageEvents.UPDATE_STORE);
+				EventBus.emit(PageEvents.LOGOUT_SUCCESS);
+				EventBus.emit(PageEvents.BASE_COMPONENTS_RENDER);
+			})
 	}
 
 	/**
@@ -122,14 +85,7 @@ class Network {
 	 * @param pageNumber - номер страницы
 	 */
 	static getLeaderboard(pageNumber) {
-		const response = Request.get(`leaderbord/${pageNumber}`);
-
-		response.then((res) => {
-			if (res.status > 299) {
-				throw res.status;
-			}
-			return res.json()
-		})
+		Request.request(`leaderbord/${pageNumber}`, 'GET')
 			.then((data) => {
 				EventBus.emit(PageEvents.GET_LEADERBOARD_SUCCESS, data)
 			})
