@@ -4,14 +4,14 @@ a.menu__header(href='#')
 nav.menu__nav
     case is_auth
         when true
-            include ../../pug-mixins/menu-button/menu-button.pug
+            include /pug-mixins/menu-button/menu-button.pug
             +menu-button('Профиль', '/profile')
             +menu-button('Авторы', '/authors')
             +menu-button('Играть', '/game')
             +menu-button('Таблица лидеров', '/leaders')
             +menu-button('Выход', '/logout')
         when false
-            include ../../pug-mixins/menu-button/menu-button.pug
+            include /pug-mixins/menu-button/menu-button.pug
             +menu-button('Авторизация', '/auth')
             +menu-button('Регистрация', '/signup')
             +menu-button('Авторы', '/authors')

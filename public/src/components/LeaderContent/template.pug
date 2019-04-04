@@ -1,12 +1,12 @@
 .leader
-    include ../../pug-mixins/title/title.pug
+    include /pug-mixins/title/title.pug
     +title(title)
-    include ../../pug-mixins/leaderboard/leaderboard.pug
+    include /pug-mixins/leaderboard/leaderboard.pug
     +leaderboard()
     .paginator(style='display: flex')
         div(style='margin-right: 5px')
-            include ../../pug-mixins/button/button.pug
+            include /pug-mixins/button/button.pug
             +button('1')
         div
-            include ../../pug-mixins/button/button.pug
+            include /pug-mixins/button/button.pug
             +button('2')

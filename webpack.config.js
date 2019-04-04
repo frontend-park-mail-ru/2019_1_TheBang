@@ -74,6 +74,8 @@ module.exports = {
 				test: /\.pug$/,
 				loader: 'pug-loader',
 				options:{
+					root: src,
+					basedir: '/',
 					pretty: true
 				}
 			},
