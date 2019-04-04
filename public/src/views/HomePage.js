@@ -7,7 +7,7 @@ class HomePage extends ContentMixin{
 		super(HomeContent);
 	}
 
-	static Success() {
+	static onSuccess() {
 		window.location.replace('#/');
 	}
 }

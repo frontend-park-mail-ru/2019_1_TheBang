@@ -27,7 +27,7 @@ class LeadersPage extends ContentMixin {
 
 	}
 
-	static Success(data) {
+	static onSuccess(data) {
 		const table = document.querySelector('table tbody');
 		table.innerHTML = '';
 
@@ -47,7 +47,7 @@ class LeadersPage extends ContentMixin {
 		})
 	}
 
-	static Error() {
+	static onError() {
 		const table = document.querySelector('table tbody');
 		table.innerHTML = '';
 		const tr = document.createElement('tr');

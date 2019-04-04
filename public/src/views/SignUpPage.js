@@ -21,11 +21,11 @@ class SignUpPage extends FormMixin{
 		EventBus.emit(NetworkEvents.SIGNUP, data);
 	}
 
-	static Success() {
+	static onSuccess() {
 		FormMixin.SuccessMessage('Вы зарегистрированы!');
 	}
 
-	static Error(status) {
+	static onError(status) {
 		switch (status) {
 		case 409:
 			FormMixin.ErrorMessage('Такой пользователь уже существует');

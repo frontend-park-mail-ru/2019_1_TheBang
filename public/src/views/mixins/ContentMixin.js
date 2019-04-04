@@ -21,6 +21,9 @@ class ContentMixin {
 		return document.querySelector('.content')
 	}
 
+	/**
+	 * Дорисовываем активацию кнопочек, разные eventListener на формы, logout
+	 */
 	afterRender() {
 		MenuContent.activateButton(this.pageName);
 	}

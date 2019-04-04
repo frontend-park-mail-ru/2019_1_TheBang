@@ -6,7 +6,7 @@ class Store {
 		return this.nickname;
 	}
 
-	updateUser(data) {
+	onUpdateUser(data) {
 		this.nickname = data && data.nickname;
 		this.name = data && data.name;
 		this.score = data && data.score;

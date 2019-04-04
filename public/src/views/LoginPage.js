@@ -19,11 +19,11 @@ class LoginPage extends FormMixin {
 		EventBus.emit(NetworkEvents.LOGIN, data);
 	}
 
-	static Success() {
+	static onSuccess() {
 		window.location.replace('#/profile');
 	}
 
-	static Error(status) {
+	static onError(status) {
 		switch (status) {
 		case 401:
 			FormMixin.ErrorMessage('Не верный логин/пароль');

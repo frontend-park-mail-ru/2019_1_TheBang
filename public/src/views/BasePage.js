@@ -5,7 +5,7 @@ import NetworkEvents from 'src/events/NetworkEvents';
 
 
 class BasePage {
-	static render() {
+	static onRender() {
 		const menu = new MenuContent(Store.isAuth());
 
 		const target = document.getElementById('root');

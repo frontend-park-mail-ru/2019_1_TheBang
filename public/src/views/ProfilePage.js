@@ -32,11 +32,11 @@ class ProfilePage extends FormMixin {
 		EventBus.emit(NetworkEvents.UPDATE_PROFILE, data);
 	}
 
-	static Success() {
+	static onSuccess() {
 		FormMixin.SuccessMessage('Изменения успешны!');
 	}
 
-	static Error() {
+	static onError() {
 		FormMixin.ErrorMessage('Произошла ошибка, попробуйте позже');
 	}
 

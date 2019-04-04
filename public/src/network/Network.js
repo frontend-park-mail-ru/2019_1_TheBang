@@ -7,7 +7,7 @@ import Request from 'src/network/Request';
  * Связь запросов на бекенд и событий на фронте
  */
 class Network {
-	static getUser() {
+	static onGetUser() {
 		Request.request('user', 'GET')
 			.then((data) => {
 				EventBus.emit(PageEvents.UPDATE_STORE, data);
@@ -18,7 +18,7 @@ class Network {
 			});
 	}
 
-	static signUpUser(data) {
+	static onSignUpUser(data) {
 		Request.request('user', 'POST', JSON.stringify(data))
 			.then(() => {
 				EventBus.emit(PageEvents.SIGNUP_SUCCESS);
@@ -28,7 +28,7 @@ class Network {
 			});
 	}
 
-	static updateUser(data) {
+	static onUpdateUser(data) {
 		if (data.formData) {
 			Network.updateUserPhoto(data.formData)
 				.then(() => {
@@ -59,7 +59,7 @@ class Network {
 		return Request.request('user/avatar', 'POST', data)
 	}
 
-	static loginUser(data) {
+	static onLoginUser(data) {
 		Request.request('auth', 'POST', JSON.stringify(data))
 			.then((data) => {
 				EventBus.emit(PageEvents.UPDATE_STORE, data);
@@ -71,7 +71,7 @@ class Network {
 			})
 	}
 
-	static logoutUser() {
+	static onLogoutUser() {
 		Request.request('auth', 'DELETE')
 			.then(() => {
 				EventBus.emit(PageEvents.UPDATE_STORE);
@@ -84,7 +84,7 @@ class Network {
 	 *
 	 * @param pageNumber - номер страницы
 	 */
-	static getLeaderboard(pageNumber) {
+	static onGetLeaderboard(pageNumber) {
 		Request.request(`leaderbord/${pageNumber}`, 'GET')
 			.then((data) => {
 				EventBus.emit(PageEvents.GET_LEADERBOARD_SUCCESS, data)
