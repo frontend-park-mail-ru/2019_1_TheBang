@@ -9,6 +9,6 @@ cache:
     # we also need to cache folder with Cypress binary
     - ~/.cache
 install:
-  - npm i
+  - npm i && npm build && npm start
 script:
-  - $(npm bin)/cypress run --record
+  - cypress run
