@@ -85,4 +85,5 @@ function firstLoad() {
 
 
 window.addEventListener('hashchange', onPageLoad);
-window.addEventListener('load', firstLoad);
+window.addEventListener('DOMContentLoaded', firstLoad);
+
