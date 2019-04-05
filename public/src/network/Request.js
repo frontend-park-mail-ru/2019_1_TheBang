@@ -4,6 +4,16 @@ const backend = 'https://stormy-fjord-97392.herokuapp.com/';
 /**
  * Запросы на бекенд
  */
+
+function fetchWithTimeout(url, request, timeout = 3000) {
+	return Promise.race([
+		fetch(url, request),
+		new Promise((_, reject) =>
+			setTimeout(() => reject(new Error('timeout')), timeout)
+		)
+	]);
+}
+
 class Request {
 	static request(path, method, data) {
 		const request = {
@@ -15,7 +25,7 @@ class Request {
 
 		const url = [backend, path].join('');
 
-		return fetch(url, request).then((res) => {
+		return fetchWithTimeout(url, request).then((res) => {
 			if (res && res.status > 299) {
 				throw res.status;
 			}

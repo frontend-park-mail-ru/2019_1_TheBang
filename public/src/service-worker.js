@@ -14,14 +14,3 @@ if ('serviceWorker' in navigator) {
 	console.log('service worker is not supported');
 }
 
-// this.addEventListener('install', function (event) {
-// 	console.log('Service worker установлен');
-// 	event.waitUntil(
-// 		// находим Cache-объект с нашим именем
-// 		caches.open('MY_CACHE')
-// 			.then(function (cache) {
-// 				// загружаем в наш cache необходимые файлы
-// 				return cache.addAll(['/index.html']);
-// 			})
-// 	)
-// });
