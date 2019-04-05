@@ -4,13 +4,13 @@
   "description": "The best team 🤟",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack/webpack.dev.js",
     "start": "node server",
     "heroku-postbuild": "webpack --config webpack/webpack.prod.js",
     "watch": "webpack -w",
     "now-build": "webpack --config webpack/webpack.prod.js",
-    "cy:run": "cypress run"
+    "cy:run": "cypress run",
+    "test": "start-server-and-test start http://localhost:8080 cy:run"
   },
   "repository": {
     "type": "git",
@@ -47,6 +47,7 @@
     "pug-loader": "^2.4.0",
     "sass-loader": "^7.1.0",
     "sass-resources-loader": "^2.0.0",
+    "start-server-and-test": "^1.7.13",
     "style-loader": "^0.23.1",
     "sw-cache-plugin": "^1.0.1",
     "uglify-js": "^3.5.3",
