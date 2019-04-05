@@ -6,6 +6,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const merge = require('webpack-merge');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const common = require('./webpack.common.js');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 
 module.exports = merge(common, {
 	mode: 'production',
@@ -67,6 +68,8 @@ module.exports = merge(common, {
 		new webpack.LoaderOptionsPlugin({
 			minimize: true,
 		}),
+
+		new WorkboxPlugin.GenerateSW()
 	],
 
 	optimization: {

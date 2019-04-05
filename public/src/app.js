@@ -1,4 +1,5 @@
 import 'css/style.scss';
+import 'src/service-worker';
 
 import * as View from 'src/views';
 
