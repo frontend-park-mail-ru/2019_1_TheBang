@@ -19,6 +19,9 @@ class Request {
 			if (res && res.status > 299) {
 				throw res.status;
 			}
+			if (method === 'DELETE') {
+				return
+			}
 			return res.json()
 		})
 	}

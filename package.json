@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
+    "build": "webpack --config webpack/webpack.dev.js",
     "start": "node server",
-    "heroku-postbuild": "webpack -p",
+    "heroku-postbuild": "webpack --config webpack/webpack.prod.js",
     "watch": "webpack -w",
-    "now-build": "webpack"
+    "now-build": "webpack --config webpack/webpack.prod.js"
   },
   "repository": {
     "type": "git",
@@ -23,7 +23,9 @@
   },
   "homepage": "https://github.com/frontend-park-mail-ru/2019_1_TheBang#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "uglify-js": "^3.5.3",
+    "webpack-merge": "^4.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",
@@ -46,6 +48,7 @@
     "sass-loader": "^7.1.0",
     "sass-resources-loader": "^2.0.0",
     "style-loader": "^0.23.1",
+    "uglifyjs-webpack-plugin": "^2.1.2",
     "url-loader": "^1.1.2",
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3"

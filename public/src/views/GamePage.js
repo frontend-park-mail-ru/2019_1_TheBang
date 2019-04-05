@@ -6,9 +6,7 @@ class GamePage{
 	}
 
 	render()  {
-		return `
-            ${this.content.render()}
-        `
+		return this.content.render()
 	}
 
 	getTargetRender() {
