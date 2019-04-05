@@ -10,7 +10,6 @@
     "heroku-postbuild": "webpack --config webpack/webpack.prod.js",
     "watch": "webpack -w",
     "now-build": "webpack --config webpack/webpack.prod.js",
-    "cy:run": "cypress run"
   },
   "repository": {
     "type": "git",
@@ -35,7 +34,6 @@
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
     "css-loader": "^2.1.1",
-    "cypress": "^3.2.0",
     "eslint": "^5.14.1",
     "eslint-loader": "^2.1.2",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
