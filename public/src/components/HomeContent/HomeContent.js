@@ -1,19 +1,14 @@
-import title from "../../blocks/title/title";
-import './home.scss'
+import 'src/components/HomeContent/style.scss'
+import homeComponent from 'src/components/HomeContent/template.pug'
+
 
 class HomeContent {
-    constructor () {
-        this.title = title;
-    }
-    render() {
-        return `
-            <div class="home">
-                ${this.title('Название игры')}
-                <div class="home__img"></div>
-                <a href="#/game"><div class="home__button"></div></a>
-            </div>
-        `
-    }
+	render() {
+		const renderData = {
+			title: 'Название игры',
+		};
+		return homeComponent.call({}, renderData);
+	}
 }
 
 export default HomeContent;

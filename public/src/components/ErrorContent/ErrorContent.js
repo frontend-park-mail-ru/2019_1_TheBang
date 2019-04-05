@@ -1,19 +1,18 @@
-import title from "../../blocks/title/title";
-import './notfound.scss';
+import 'src/components/ErrorContent/style.scss';
+import errorComponent from 'src/components/ErrorContent/template.pug';
+
 
 class ErrorContent {
-    constructor (message) {
-        this.title = title;
-        this.message = message
-    }
+	constructor (message) {
+		this.message = message
+	}
 
-    render() {
-        return `
-            ${this.title('Oooooooooooops')}
-            ${this.title(this.message)}
-            <div class="notfound"></div>
-        `
-    }
+	render() {
+		const renderData = {
+			message: this.message,
+		};
+		return errorComponent.call({}, renderData)
+	}
 }
 
 export default ErrorContent;

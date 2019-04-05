@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "start": "webpack && node server",
+    "start": "node server",
+    "heroku-postbuild": "webpack -p",
     "watch": "webpack -w",
     "now-build": "webpack"
   },

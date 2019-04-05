@@ -1,67 +1,45 @@
-import btn from "../../blocks/menu-button/menu-button";
-import './menu.scss';
-import app from "../../app";
+import 'src/components/MenuContent/style.scss';
+import menuComponent from 'src/components/MenuContent/template.pug';
 
 
 class MenuContent {
-    constructor () {
-        this.btn = btn;
+	constructor (isAuth) {
+		this.isAuth = isAuth;
+	}
 
-        this.authPack = [
-            this.btn('Профиль', '/profile'),
-            this.btn('Авторы', '/authors'),
-            this.btn('Играть', '/game'),
-            this.btn('Таблица лидеров', '/leaders'),
-            this.btn('Выход', '/logout'),
-        ];
-        this.anonPack = [
-            this.btn('Авторизация', '/auth'),
-            this.btn('Регистрация', '/signup'),
-            this.btn('Авторы', '/authors')
-        ];
-        this.currentPack = app.store.isAuth() ? this.authPack : this.anonPack
-    }
+	render() {
+		const renderData = {
+			is_auth: Boolean(this.isAuth),
+		};
+		return menuComponent.call({}, renderData)
+	}
 
-    render() {
-        let buttons = this.currentPack.join("");
-        return `
-            <a href="#" class="menu__header">
-                    <div class="menu__logo">
-                    </div><h1>TheBang!</h1>
-            </a>
+	static activateButton(name) {
+		if (!name) {
+			return
+		}
+		const menuButtons = document.getElementsByClassName('menu-button');
 
-            <nav class="menu__nav">
-                    ${buttons}
-            </nav>
-        `
-    }
+		this.disactivateButtons();
 
-    static activateButton(name) {
-        if (!name) {
-            return
-        }
-        let menuButtons = document.getElementsByClassName('menu-button');
+		const button = [].filter.call(menuButtons, (item) => {
+			return item.hash && ~item.hash.indexOf(name)
+		})[0];
 
-        this.disactivateButtons();
+		if (button) {
+			button.classList.add('menu-button_selected');
+		}
+	}
 
-        let button = [].filter.call(menuButtons, (item) => {
-            return item.hash && ~item.hash.indexOf(name)
-        })[0];
+	static disactivateButtons() {
+		const menuButtons = document.getElementsByClassName('menu-button');
 
-        if (button) {
-            button.classList.add("menu-button_selected");
-        }
-    }
-
-    static disactivateButtons() {
-        let menuButtons = document.getElementsByClassName('menu-button');
-
-        if (menuButtons) {
-            [].forEach.call(menuButtons, (item) => {
-                item.classList.remove("menu-button_selected");
-            });
-        }
-    }
+		if (menuButtons) {
+			[].forEach.call(menuButtons, (item) => {
+				item.classList.remove('menu-button_selected');
+			});
+		}
+	}
 
 }
 

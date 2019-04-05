@@ -1,0 +1,11 @@
+.form-container
+    include /pug-mixins/title/title.pug
+    +title(title)
+    form.form
+        include /pug-mixins/form-item/form-item.pug
+        +form-item('Логин', 'text')
+        +form-item('Пароль', 'password')
+        include /pug-mixins/button/button.pug
+        +button('Войти')
+    include /pug-mixins/link/link.pug
+    +link('Зарегистрироваться', 'signup')
