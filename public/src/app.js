@@ -1,6 +1,6 @@
 import 'css/style.scss';
 
-import * as View from 'src/views/index';
+import * as View from 'src/views';
 
 import Router from 'src/Router';
 import Store from 'src/Store';
