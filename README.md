@@ -1,5 +1,7 @@
 # 2019_1_TheBang
 
+[![Build Status](https://travis-ci.org/frontend-park-mail-ru/2019_1_TheBang.svg?branch=T15)](https://travis-ci.org/frontend-park-mail-ru/2019_1_TheBang)
+
 <h2>О нашем проекте.</h2> 
 Мы бы хотели сделать web-приложение, основной функционал это 2D игра в жанре бродилки (https://goeatbomb.io/) — пример.
 
