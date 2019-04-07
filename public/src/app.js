@@ -1,4 +1,5 @@
 import 'css/style.scss';
+import 'src/service-worker';
 
 import * as View from 'src/views';
 
@@ -85,4 +86,5 @@ function firstLoad() {
 
 
 window.addEventListener('hashchange', onPageLoad);
-window.addEventListener('load', firstLoad);
+window.addEventListener('DOMContentLoaded', firstLoad);
+

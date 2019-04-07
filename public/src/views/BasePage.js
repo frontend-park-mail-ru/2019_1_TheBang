@@ -10,15 +10,14 @@ class BasePage {
 
 		const target = document.getElementById('root');
 
-		target.innerHTML = `
-                <input type="checkbox" class="mobile-input">
-                <i class="mobile-burger fa fa-bars fa-2x"></i>
-                <div class="menu">
-                ${menu.render()}
-                </div>
-                <div class="content">
-                </div>
-        `;
+		target.innerHTML =
+                '<input type="checkbox" class="mobile-input">' +
+                '<i class="mobile-burger fa fa-bars fa-2x"></i>' +
+                '<div class="menu">' +
+                menu.render() +
+                '</div>' +
+                '<div class="content">' +
+                '</div>';
 		BasePage.afterRender();
 	}
 

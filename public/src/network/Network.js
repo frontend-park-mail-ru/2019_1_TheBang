@@ -9,6 +9,9 @@ import Request from 'src/network/Request';
 class Network {
 	static onGetUser() {
 		Request.request('user', 'GET')
+			.then((res) => {
+				return res.json()
+			})
 			.then((data) => {
 				EventBus.emit(PageEvents.UPDATE_STORE, data);
 				EventBus.emit(PageEvents.LOAD_PAGE);
@@ -35,6 +38,9 @@ class Network {
 					data.formData = undefined;
 					return Request.request('user', 'PUT', JSON.stringify(data));
 				})
+				.then((res) => {
+					return res.json()
+				})
 				.then((data) => {
 					EventBus.emit(PageEvents.UPDATE_STORE, data);
 					EventBus.emit(PageEvents.UPDATE_PROFILE_SUCCESS, data);
@@ -46,6 +52,9 @@ class Network {
 		}
 
 		Request.request('user', 'PUT', JSON.stringify(data))
+			.then((res) => {
+				return res.json()
+			})
 			.then((data) => {
 				EventBus.emit(PageEvents.UPDATE_STORE, data);
 				EventBus.emit(PageEvents.UPDATE_PROFILE_SUCCESS, data);
@@ -61,6 +70,9 @@ class Network {
 
 	static onLoginUser(data) {
 		Request.request('auth', 'POST', JSON.stringify(data))
+			.then((res) => {
+				return res.json()
+			})
 			.then((data) => {
 				EventBus.emit(PageEvents.UPDATE_STORE, data);
 				EventBus.emit(PageEvents.LOGIN_SUCCESS, data);
@@ -85,7 +97,10 @@ class Network {
 	 * @param pageNumber - номер страницы
 	 */
 	static onGetLeaderboard(pageNumber) {
-		Request.request(`leaderbord/${pageNumber}`, 'GET')
+		Request.request('leaderbord/'+pageNumber, 'GET')
+			.then((res) => {
+				return res.json()
+			})
 			.then((data) => {
 				EventBus.emit(PageEvents.GET_LEADERBOARD_SUCCESS, data)
 			})
