@@ -1,0 +1,41 @@
+.chat {
+  background-color: white;
+  min-width: 400px;
+  min-height: 300px;
+  max-height: 300px;
+  width: 80%;
+  overflow: auto;
+  transform: rotate(180deg);
+  direction: rtl;
+
+  &__input {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__block {
+    padding: 5px;
+    border: 1px solid darkgrey;
+    margin-bottom: 1px;
+    margin-top: 1px;
+    transform: rotate(180deg);
+    direction: ltr;
+
+    &__author {
+      font-weight: bold;
+      margin-bottom: 1px;
+    }
+
+  }
+
+  &__block:hover {
+    background-color: darkgrey;
+  }
+
+  &__messages {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+}
