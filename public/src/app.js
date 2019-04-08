@@ -1,5 +1,4 @@
 import 'css/style.scss';
-import 'src/service-worker';
 
 import * as View from 'src/views';
 
@@ -49,6 +48,7 @@ router.addUrl('/signup', View.SignUpPage, 'signup', Permission.ANONYMOUS);
 router.addUrl('/authors', View.AuthorsPage, 'authors');
 router.addUrl('/game', View.GamePage, 'game', Permission.LOGIN_REQUIRED);
 router.addUrl('/leaders', View.LeadersPage, 'leaders', Permission.LOGIN_REQUIRED);
+router.addUrl('/chat', View.ChatPage, 'chat', Permission.LOGIN_REQUIRED);
 
 router.addUrl('/not_found', View.NotFoundPage, 'not_found');
 router.addUrl('/unauthorized', View.UnAuthorizedPage, 'unauthorized');
@@ -88,3 +88,8 @@ function firstLoad() {
 window.addEventListener('hashchange', onPageLoad);
 window.addEventListener('DOMContentLoaded', firstLoad);
 
+if ('serviceWorker' in navigator) {
+	window.addEventListener('load', () => {
+		navigator.serviceWorker.register('/service-worker.js')
+	});
+}
