@@ -71,7 +71,12 @@ module.exports = merge(common, {
 
 		new WorkboxPlugin.GenerateSW({
 			clientsClaim: true,
-			skipWaiting: true
+			skipWaiting: true,
+			runtimeCaching: [{
+				urlPattern: new RegExp('https://use.fontawesome.com/releases/v5.7.2/css/all.css'),
+				handler: 'StaleWhileRevalidate'
+			}]
+
 		})
 	],
 
