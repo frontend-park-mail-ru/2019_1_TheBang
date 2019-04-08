@@ -69,7 +69,10 @@ module.exports = merge(common, {
 			minimize: true,
 		}),
 
-		new WorkboxPlugin.GenerateSW()
+		new WorkboxPlugin.GenerateSW({
+			clientsClaim: true,
+			skipWaiting: true
+		})
 	],
 
 	optimization: {

@@ -19,6 +19,7 @@ module.exports = {
             "destructuring": "any",
             "ignoreReadBeforeAssign": false
         }],
-        "indent": ["error", "tab"]
+        "indent": ["error", "tab"],
+        "space-infix-ops": ["error", {"int32Hint": false}]
     }
 };

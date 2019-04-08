@@ -15,7 +15,7 @@ class ProfilePage extends FormMixin {
 		const file = form[3].files[0];
 		const name = form[2].value;
 
-		if (name===Store.name && !file) {
+		if (name === Store.name && !file) {
 			return
 		}
 

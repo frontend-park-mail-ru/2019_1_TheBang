@@ -97,7 +97,7 @@ class Network {
 	 * @param pageNumber - номер страницы
 	 */
 	static onGetLeaderboard(pageNumber) {
-		Request.request('leaderbord/'+pageNumber, 'GET')
+		Request.request('leaderbord/' + pageNumber, 'GET')
 			.then((res) => {
 				return res.json()
 			})
