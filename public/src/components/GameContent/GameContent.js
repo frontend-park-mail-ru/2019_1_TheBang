@@ -1,3 +1,4 @@
+import 'src/components/GameContent/style.scss'
 import gameComponent from 'src/components/GameContent/template.pug'
 
 

@@ -1,4 +1,5 @@
 import 'css/style.scss';
+import 'src/service-worker';
 
 import * as View from 'src/views';
 
@@ -12,6 +13,13 @@ import PageEvents from 'src/events/PageEvents';
 import PermissionController from 'src/permission/PermissionController';
 import Permission from 'src/permission/Permission';
 
+import GameEvents from 'src/events/GameEvents';
+import Game from 'src/game/Game';
+import Singleplayer from 'src/game/game-modes/Singleplayer';
+
+const GameModes = {
+	SINGLEPLAYER: Singleplayer,
+}
 
 EventBus.on(PageEvents.UPDATE_STORE, Store.onUpdateUser.bind(Store));
 EventBus.on(PageEvents.BASE_COMPONENTS_RENDER, View.BasePage.onRender);
@@ -38,6 +46,7 @@ EventBus.on(NetworkEvents.GET_LEADERBOARD, Network.onGetLeaderboard);
 EventBus.on(PageEvents.GET_LEADERBOARD_SUCCESS, View.LeadersPage.onSuccess);
 EventBus.on(PageEvents.GET_LEADERBOARD_ERROR, View.LeadersPage.onError);
 
+EventBus.on(GameEvents.CHOOSE_GAME_MODE, onChooseGameMode);
 
 const router = new Router();
 
@@ -46,9 +55,8 @@ router.addUrl('/profile', View.ProfilePage, 'profile', Permission.LOGIN_REQUIRED
 router.addUrl('/auth', View.LoginPage, 'auth', Permission.ANONYMOUS);
 router.addUrl('/signup', View.SignUpPage, 'signup', Permission.ANONYMOUS);
 router.addUrl('/authors', View.AuthorsPage, 'authors');
-router.addUrl('/game', View.GamePage, 'game', Permission.LOGIN_REQUIRED);
+router.addUrl('/game', View.GamePage, 'game', Permission.ANONYMOUS);
 router.addUrl('/leaders', View.LeadersPage, 'leaders', Permission.LOGIN_REQUIRED);
-router.addUrl('/chat', View.ChatPage, 'chat', Permission.LOGIN_REQUIRED);
 
 router.addUrl('/not_found', View.NotFoundPage, 'not_found');
 router.addUrl('/unauthorized', View.UnAuthorizedPage, 'unauthorized');
@@ -75,6 +83,18 @@ function onPageLoad() {
 	element.innerHTML = controller.render();
 
 	controller.afterRender()
+};
+
+// какашка
+let game = null;
+
+function onChooseGameMode(gamemode) {
+	console.log(gamemode);
+	if (GameModes[gamemode]) {
+		game = new Game(GameModes[gamemode]);
+	}
+
+	EventBus.on(GameEvents.INIT_GAME, game.onInit.bind(game));
 }
 
 /**
@@ -88,8 +108,3 @@ function firstLoad() {
 window.addEventListener('hashchange', onPageLoad);
 window.addEventListener('DOMContentLoaded', firstLoad);
 
-if ('serviceWorker' in navigator) {
-	window.addEventListener('load', () => {
-		navigator.serviceWorker.register('/service-worker.js')
-	});
-}

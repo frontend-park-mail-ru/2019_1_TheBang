@@ -1,5 +1,8 @@
 import GameContent from 'src/components/GameContent/GameContent';
 
+import EventBus from 'src/events/EventBus';
+import GameEvents from 'src/events/GameEvents';
+
 class GamePage{
 	constructor() {
 		this.content = new GameContent();
@@ -14,6 +17,8 @@ class GamePage{
 	}
 
 	afterRender() {
+		const canvas = document.querySelector("canvas");
+		EventBus.emit(GameEvents.INIT_GAME, canvas);
 	}
 }
 
