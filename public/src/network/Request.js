@@ -1,7 +1,7 @@
 const backend = 'https://stormy-fjord-97392.herokuapp.com/';
 // const backend = 'http://127.0.0.1:8090/';
 
-const game_backend = 'https://the-bang-game-server.herokuapp.com/room';
+const game_backend = 'https://the-bang-game-server.herokuapp.com/';
 // const game_backend = 'http://127.0.0.1:8081/';
 /**
  * Запросы на бекенд
