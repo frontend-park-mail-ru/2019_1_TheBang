@@ -1,4 +1,6 @@
 import 'src/components/MenuContent/style.scss';
+import 'src/pug-mixins/animation/rotate.scss';
+import 'src/pug-mixins/button/button.scss';
 import menuComponent from 'src/components/MenuContent/template.pug';
 
 
@@ -18,7 +20,7 @@ class MenuContent {
 		if (!name) {
 			return
 		}
-		const menuButtons = document.getElementsByClassName('menu-button');
+		const menuButtons = document.getElementsByClassName('button-menu');
 
 		this.disactivateButtons();
 
@@ -27,16 +29,16 @@ class MenuContent {
 		})[0];
 
 		if (button) {
-			button.classList.add('menu-button_selected');
+			button.classList.add('button-menu-selected');
 		}
 	}
 
 	static disactivateButtons() {
-		const menuButtons = document.getElementsByClassName('menu-button');
+		const menuButtons = document.getElementsByClassName('button-menu');
 
 		if (menuButtons) {
 			[].forEach.call(menuButtons, (item) => {
-				item.classList.remove('menu-button_selected');
+				item.classList.remove('button-menu-selected');
 			});
 		}
 	}

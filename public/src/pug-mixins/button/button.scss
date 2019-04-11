@@ -1,15 +1,62 @@
 .button {
-    padding: 10px 30px 10px 30px;
-    border: 1px solid $title_color_border;             
+    width: $button_width;
+    height: $button_height;           
     border-radius: $border-radius;
     font-size: 100%;
-    background-color: $title-color;
     color: white;
-    margin-top: 20px;
-    margin-bottom: 20px;
     font-family: $title_font-family;
 
-    &:hover, &:focus {
-        box-shadow: 0 0 10px 0 $title_color inset, 0 0 10px 4px $title_color;
+    &-primary {
+        background-color: $primary_button_color;
+
+        &:hover, &:focus {
+            box-shadow: 0 0 10px 0 $primary_button_color inset, 0 0 10px 4px $primary_button_color;
+        }
+    }
+
+    &-secondary {
+        border: $border-width solid $secondary_button_color;
+
+        &:hover, &:focus {
+            box-shadow: 0 0 10px 0 $secondary_button_color inset, 0 0 10px 4px $secondary_button_color;
+        }
+    }
+
+    &-menu {
+        background-color: $menu_button_color;
+
+        &:hover, &:focus {
+            box-shadow: 0 0 10px 0 $menu-item_color_hover inset, 0 0 10px 4px $menu-item_color_hover;
+            border: none;
+        }
+
+        &-selected {
+            width: 300px;
+            background-color: $content-color;
+            box-shadow: none;
+            border: none;
+            border-radius: 0;
+        }
+    }
+
+    &-upload {
+        position: relative;
+        width: 70px;
+        height: 70px;
+
+        &__input {
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            z-index: 1;
+        }
+
+        &__icon {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("../../../src/pug-mixins/button/img/upload-to-cloud.svg");
+        }
     }
 }

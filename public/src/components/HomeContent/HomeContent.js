@@ -1,11 +1,12 @@
 import 'src/components/HomeContent/style.scss'
+import 'src/pug-mixins/animation/rotate.scss'
 import homeComponent from 'src/components/HomeContent/template.pug'
 
 
 class HomeContent {
 	render() {
 		const renderData = {
-			title: 'Название игры',
+			title: 'TheBang!',
 		};
 		return homeComponent.call({}, renderData);
 	}

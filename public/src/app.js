@@ -42,13 +42,13 @@ EventBus.on(PageEvents.GET_LEADERBOARD_ERROR, View.LeadersPage.onError);
 const router = new Router();
 
 router.addUrl('/', View.HomePage, 'index');
-router.addUrl('/profile', View.ProfilePage, 'profile', Permission.LOGIN_REQUIRED);
+router.addUrl('/profile', View.ProfilePage, 'profile', Permission.ANONYMOUS/*Permission.LOGIN_REQUIRED*/);
 router.addUrl('/auth', View.LoginPage, 'auth', Permission.ANONYMOUS);
 router.addUrl('/signup', View.SignUpPage, 'signup', Permission.ANONYMOUS);
 router.addUrl('/authors', View.AuthorsPage, 'authors');
-router.addUrl('/game', View.GamePage, 'game', Permission.LOGIN_REQUIRED);
-router.addUrl('/leaders', View.LeadersPage, 'leaders', Permission.LOGIN_REQUIRED);
-router.addUrl('/chat', View.ChatPage, 'chat', Permission.LOGIN_REQUIRED);
+router.addUrl('/game', View.GamePage, 'game', Permission.ANONYMOUS/*Permission.LOGIN_REQUIRED*/);
+router.addUrl('/leaders', View.LeadersPage, 'leaders', Permission.ANONYMOUS/*Permission.LOGIN_REQUIRED*/);
+router.addUrl('/chat', View.ChatPage, 'chat', Permission.ANONYMOUS/*Permission.LOGIN_REQUIRED*/);
 
 router.addUrl('/not_found', View.NotFoundPage, 'not_found');
 router.addUrl('/unauthorized', View.UnAuthorizedPage, 'unauthorized');
