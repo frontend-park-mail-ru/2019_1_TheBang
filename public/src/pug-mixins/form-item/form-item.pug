@@ -3,18 +3,16 @@ mixin form-item(name_input, itemType)
         when 'text'
             .form-item
                 input.form-item__input(type='text', placeholder=name_input)
-                i.fas.fa-user.form-item__icon
+                span.form-item__icon.form-item__icon-left.form-item__icon-person
 
         when 'password'
             .form-item
                 input.form-item__input.form-item__input_pass(type='password', placeholder='Пароль')
-                i.fas.fa-unlock.form-item__icon
-                .form-item__eye
-                    i.fa.fa-eye.form-item__eye-icon
+                span.form-item__icon.form-item__icon-left.form-item__icon-password
+                button(type='button').form-item__eye.form-item__icon.form-item__icon-eye
 
         when 'password-repeat'
             .form-item
                 input.form-item__input.form-item__input_pass_repeat(type='password', placeholder='Повторите пароль')
-                i.fas.fa-unlock.form-item__icon
-                .form-item__eye
-                    i.fa.fa-eye.form-item__eye-icon
+                span.form-item__icon.form-item__icon-left.form-item__icon-password
+                button(type='button').form-item__eye.form-item__icon.form-item__icon-eye

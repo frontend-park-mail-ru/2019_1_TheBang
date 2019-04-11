@@ -1,2 +1,14 @@
-mixin link(title, path_target)
-    a.link(href='#/' + path_target)= title
+mixin link(title, path_target, type)
+    case type
+        when 'primary'
+            a.link(href='#/' + path_target).button.button-primary
+                b= title
+
+        
+        when 'secondary'
+            a.link(href='#/' + path_target).button.button-secondary
+                b= title
+
+        when 'menu'
+            a.link(href='#/' + path_target).button.button-menu
+                b= title

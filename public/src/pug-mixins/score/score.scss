@@ -1,0 +1,24 @@
+.score {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100px;
+    height: 40px;
+    border: $border-width solid $border-color;
+    border-radius: $border-radius;
+    background-color: $menu-button_color;
+
+    &__input {
+        width: 50px;
+        background-color: inherit;
+        border: none;
+        color: white;
+        font-size: 100%;
+    }
+
+    &__icon {
+        background: url("../../../src/pug-mixins/score/img/star.svg");
+        width: 20px;
+        height: 20px;
+    }
+}

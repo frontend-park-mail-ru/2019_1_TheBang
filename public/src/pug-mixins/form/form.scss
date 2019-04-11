@@ -1,6 +1,8 @@
 .form {
-    display: flex;
-    flex-direction: column;
+    position: relative;
+    display: grid;
+    grid-gap: 25px;
     align-items: center;
     justify-content: center;
+    justify-items: center;
 }
