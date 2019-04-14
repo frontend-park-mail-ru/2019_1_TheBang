@@ -1,5 +1,10 @@
 import GameContent from 'src/components/GameContent/GameContent';
+import EventBus from 'src/events/EventBus';
+import GameEvents from 'src/events/GameEvents';
 
+/**
+ * Синглплеер как база
+ */
 class GamePage{
 	constructor() {
 		this.content = new GameContent();
@@ -14,6 +19,7 @@ class GamePage{
 	}
 
 	afterRender() {
+		EventBus.emit(GameEvents.GAME_START);
 	}
 }
 

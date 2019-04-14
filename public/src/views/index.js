@@ -9,3 +9,4 @@ export {default as GamePage} from 'src/views/GamePage';
 export {default as LeadersPage} from 'src/views/LeadersPage';
 export {default as BasePage} from 'src/views/BasePage';
 export {default as ChatPage} from 'src/views/ChatPage';
+export {default as GameLobbyPage} from 'src/views/GameLobbyPage';
