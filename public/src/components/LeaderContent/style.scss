@@ -1,10 +1,4 @@
 @import "src/pug-mixins/title/title.scss";
 @import "src/pug-mixins/leaderboard/leaderboard.scss";
 @import "src/pug-mixins/button/button.scss";
-
-.leader {
-    display: flex;
-    flex-direction: column;
-    width: 90%;
-    padding: 20px;
-}
+@import "src/pug-mixins/paginator/paginator.scss";
