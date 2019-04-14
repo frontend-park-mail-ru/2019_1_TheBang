@@ -1,5 +1,6 @@
 .leaderboard {
     width: 90%;
+    height: 420px;
 
     &__row {
         color: white;
@@ -10,6 +11,12 @@
         justify-items: center;
         height: 60px;
         width: 100%;
+
+        &:hover, &:focus {
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 0 10px 0 $menu-item_color_hover inset, 0 0 10px 4px $menu-item_color_hover;
+        }
     }
     
     &__header {
@@ -19,4 +26,6 @@
     &__cell {
         background-color: $menu-button_color;
     }
+
+    &-js {}
 }
