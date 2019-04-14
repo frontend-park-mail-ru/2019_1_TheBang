@@ -8,7 +8,7 @@ class Game {
 	static start(roomID) {
 
 		if (roomID) {
-			const url = [BackendResource.GAME, 'room/', roomID].join('');
+			const url = [BackendResource.GAME_WSS, 'room/', roomID].join('');
 			const connection = new WebSocket(url);
 
 			connection.onmessage = (e) => {

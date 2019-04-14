@@ -10,7 +10,7 @@ class ChatPage extends ContentMixin {
 
 	afterRender() {
 		super.afterRender();
-		const url = [BackendResource.CHAT, 'ws'].join('');
+		const url = [BackendResource.CHAT_WSS, 'ws'].join('');
 		const connection = new WebSocket(url);
 		const user = Store.getUser();
 		const author = user.nickname;
