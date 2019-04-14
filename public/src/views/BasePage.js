@@ -31,7 +31,6 @@ class BasePage {
 		})[0];
 
 		if (button) {
-			alert(button);
 			button.addEventListener('click', (e) => {
 				e.preventDefault();
 

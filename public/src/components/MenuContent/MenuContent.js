@@ -1,6 +1,7 @@
 import 'src/components/MenuContent/style.scss';
 import 'src/pug-mixins/animation/rotate.scss';
 import 'src/pug-mixins/button/button.scss';
+import 'src/pug-mixins/mobile-input/mobile-input.scss';
 import menuComponent from 'src/components/MenuContent/template.pug';
 
 
@@ -30,6 +31,9 @@ class MenuContent {
 
 		if (button) {
 			button.classList.add('button-menu-selected');
+			
+			const menuCheck = document.querySelector('.mobile-input');
+			menuCheck.checked = false;
 		}
 	}
 
