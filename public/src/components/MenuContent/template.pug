@@ -5,16 +5,16 @@ nav.menu__nav
     case is_auth
         when true
             include /pug-mixins/link/link.pug
-            +link('Профиль', '/profile')
-            +link('Сингплеер', '/game')
-            +link('Мультиплеер', '/lobby')
-            +link('Таблица лидеров', '/leaders')
-            +link('Чат', '/chat')
-            +link('Авторы', '/authors')
-            +link('Выход', '/logout')
+            +link('Профиль', 'profile', 'menu')
+            +link('Сингплеер', 'game', 'menu')
+            +link('Мультиплеер', 'lobby', 'menu')
+            +link('Таблица лидеров', 'leaders', 'menu')
+            +link('Чат', 'chat', 'menu')
+            +link('Авторы', 'authors', 'menu')
+            +link('Выход', 'logout', 'secondary')
         when false
             include /pug-mixins/link/link.pug
-            +link('Авторизация', '/auth')
-            +link('Регистрация', '/signup')
-            +link('Сингплеер', '/game')
-            +link('Авторы', '/authors')
+            +link('Авторизация', 'auth', 'menu')
+            +link('Регистрация', 'signup', 'menu')
+            +link('Сингплеер', 'game', 'menu')
+            +link('Авторы', 'authors', 'menu')
