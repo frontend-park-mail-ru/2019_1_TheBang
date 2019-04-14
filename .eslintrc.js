@@ -22,6 +22,5 @@ module.exports = {
         "indent": ["error", "tab"],
         "space-infix-ops": ["error", {"int32Hint": false}],
         "no-console": "off",
-        "no-mixed-spaces-and-tabs": "off"
     }
 };

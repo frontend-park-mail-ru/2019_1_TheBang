@@ -1,8 +1,5 @@
-const backend = 'https://stormy-fjord-97392.herokuapp.com/';
-// const backend = 'http://127.0.0.1:8090/';
+import BackendResource from 'src/network/BackendResource';
 
-const game_backend = 'https://the-bang-game-server.herokuapp.com/';
-// const game_backend = 'http://127.0.0.1:8081/';
 /**
  * Запросы на бекенд
  */
@@ -17,7 +14,7 @@ function fetchWithTimeout(url, request, timeout = 3000) {
 }
 
 class Request {
-	static request(path, method, data) {
+	static request(path, method, data, url = [BackendResource.BASE, path].join('')) {
 		const request = {
 			mode: 'cors',
 			method: method,
@@ -25,37 +22,22 @@ class Request {
 			credentials: 'include'
 		};
 
-		const url = [backend, path].join('');
-
-		return fetchWithTimeout(url, request).then((res) => {
+		return fetchWithTimeout(url, request).then(res => {
 			if (res && res.status > 299) {
 				throw res.status;
 			}
-			return res
-		})
+			return res;
+		});
 	}
 
 	static gameRequest(path, method, data) {
-		const request = {
-			mode: 'cors',
-			method: method,
-			body: data,
-			credentials: 'include'
-		};
+		const url = [BackendResource.GAME, path].join('');
 
-		const url = [game_backend, path].join('');
-
-		return fetchWithTimeout(url, request).then((res) => {
-			if (res && res.status > 299) {
-				throw res.status;
-			}
-			return res
-		})
+		return Request.request(path, method, data, url)
 	}
 
-
 	static image(name) {
-		return [backend, 'icon/', name || 'default_img'].join('')
+		return [BackendResource.BASE, 'icon/', name || 'default_img'].join('');
 	}
 }
 

@@ -1,3 +1,5 @@
+import BackendResource from 'src/network/BackendResource';
+
 class Game {
 	/**
      *
@@ -5,8 +7,8 @@ class Game {
      */
 	static start(roomID) {
 
-	    if (roomID) {
-			const url = 'wss://the-bang-game-server.herokuapp.com/room/' + roomID;
+		if (roomID) {
+			const url = [BackendResource.GAME, 'room/', roomID].join('');
 			const connection = new WebSocket(url);
 
 			connection.onmessage = (e) => {
@@ -36,6 +38,9 @@ class Game {
 
 		const ROWS = 12;
 		const COLS = 12;
+
+		const EXIT_COL = 11;
+		const EXIT_ROW = 11;
 
 		const EMPTY = 0;
 		const WALL = 1;
@@ -72,7 +77,7 @@ class Game {
 			for (let row = 0; row < ROWS; row++) {
 				for (let col = 0; col < COLS; col++) {
 					const block = document.createElement('div');
-					block.id = 'id-' + col + '-' + row;
+					block.id = ['id-', col, '-', row].join('');
 					document.querySelector('.board').appendChild(block);
 				}
 			}
@@ -103,13 +108,13 @@ class Game {
 					default:
 						itemClass = 'empty'
 					}
-					const id = '#id-' + col + '-' + row;
+					const id = ['#id-', col, '-', row].join('');
 
 					document.querySelector(id).className = 'block ' + itemClass
 				}
 			}
-			const id = '#id-' + player[1] + '-' + player[0];
-			if (!(bag === DIAMOND_COUNT && player[1] === COLS - 1 && player[0] === ROWS - 1)) {
+			const id = ['#id-', player[1], '-', player[0]].join('');
+			if (!(bag === DIAMOND_COUNT && player[1] === EXIT_COL && player[0] === EXIT_ROW)) {
 				document.querySelector(id).className = 'block player'
 			}
 			else {
@@ -118,7 +123,7 @@ class Game {
 			}
 
 
-			document.querySelector('.diamond-count').textContent = `${bag} / ${DIAMOND_COUNT}`
+			document.querySelector('.diamond-count').textContent = bag + '/' + DIAMOND_COUNT
 		};
 
 		generateDiamond();
