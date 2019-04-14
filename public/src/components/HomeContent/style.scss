@@ -9,6 +9,7 @@
     height: 100%;
 
     &__img1 {
+        position: relative;
         width: 250px;
         height: 250px;
         background-image: url("../../../src/components/HomeContent/img/logo1.svg");

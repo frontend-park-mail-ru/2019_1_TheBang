@@ -3,7 +3,7 @@ a.menu__header(href='#')
     h1 TheBang!
 nav.menu__nav
     case is_auth
-        when false
+        when true
             include /pug-mixins/link/link.pug
             +link('Играть', '', 'menu')
             +link('Профиль', 'profile', 'menu')
@@ -12,7 +12,7 @@ nav.menu__nav
             +link('Чат', 'chat', 'menu')
             +link('Выход', 'logout', 'secondary')
 
-        when true
+        when false
             include /pug-mixins/link/link.pug
             +link('Авторизация', 'auth', 'menu')
             +link('Регистрация', 'signup', 'menu')
