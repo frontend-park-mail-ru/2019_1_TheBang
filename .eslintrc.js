@@ -20,6 +20,7 @@ module.exports = {
             "ignoreReadBeforeAssign": false
         }],
         "indent": ["error", "tab"],
-        "space-infix-ops": ["error", {"int32Hint": false}]
+        "space-infix-ops": ["error", {"int32Hint": false}],
+        "no-console": "off",
     }
 };

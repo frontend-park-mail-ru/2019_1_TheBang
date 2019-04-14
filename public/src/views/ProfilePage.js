@@ -14,7 +14,7 @@ class ProfilePage extends FormMixin {
 
 	SubmitRequest(form) {
 		const file = form[1].files[0];
-		const name = form[3].value;
+		const name = form[2].value;
 
 		if (name === Store.name && !file) {
 			return

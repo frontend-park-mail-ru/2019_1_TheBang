@@ -1,6 +1,7 @@
 import ChatContent from 'src/components/ChatContent/ChatContent';
 import ContentMixin from 'src/views/mixins/ContentMixin';
 import Store from 'src/Store';
+import BackendResource from 'src/network/BackendResource';
 
 class ChatPage extends ContentMixin {
 	constructor() {
@@ -9,7 +10,7 @@ class ChatPage extends ContentMixin {
 
 	afterRender() {
 		super.afterRender();
-		const url = 'wss://the-bang-chat.herokuapp.com/ws';
+		const url = [BackendResource.CHAT_WSS, 'ws'].join('');
 		const connection = new WebSocket(url);
 		const user = Store.getUser();
 		const author = user.nickname;
