@@ -1,5 +1,6 @@
 import ProfileContent from 'src/components/ProfileContent/ProfileContent';
 import FormMixin from 'src/views/mixins/FormMixin';
+import 'src/pug-mixins/button/button.scss';
 
 import NetworkEvents from 'src/events/NetworkEvents';
 import EventBus from 'src/events/EventBus';
@@ -12,8 +13,8 @@ class ProfilePage extends FormMixin {
 	}
 
 	SubmitRequest(form) {
-		const file = form[3].files[0];
-		const name = form[2].value;
+		const file = form[1].files[0];
+		const name = form[3].value;
 
 		if (name === Store.name && !file) {
 			return
@@ -42,10 +43,10 @@ class ProfilePage extends FormMixin {
 
 	afterRender() {
 		super.afterRender();
-		const uploadInput = document.querySelector('form')[3];
+		const uploadInput = document.querySelector('.button-upload');
 
 		uploadInput.addEventListener('change', (e) => {
-			const avatar = document.querySelector('form img');
+			const avatar = document.querySelector('.profile__avatar');
 			avatar.src = window.URL.createObjectURL(e.target.files[0]);
 		})
 	}
