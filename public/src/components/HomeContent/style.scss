@@ -1,0 +1,69 @@
+@import "src/pug-mixins/title/title.scss";
+
+.home {
+    display: grid;
+    grid-template-rows: 80px auto 250px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    &__img1 {
+        position: relative;
+        width: 250px;
+        height: 250px;
+        background-image: url("../../../src/components/HomeContent/img/logo1.svg");
+        background-size: cover;
+        margin: 20px;
+        z-index: 1;
+
+        @media all and (max-width: $screen-md) {
+            width: 125px;
+            height: 125px;
+        }
+    }
+
+    &__img2 {
+        position: absolute;
+        left: 40%;
+        top: 18%;
+        width: 200px;
+        height: 200px;
+        background-image: url("../../../src/components/HomeContent/img/jupiter.svg");
+        background-size: cover;
+        margin: 20px;
+
+        @media all and (max-width: $screen-md) {
+            width: 100px;
+            height: 100px;
+            left: 10%;
+        }
+    }
+
+    &__img3 {
+        position: absolute;
+        left: 60%;
+        top: 25%;
+        width: 220px;
+        height: 220px;
+        background-image: url("../../../src/components/HomeContent/img/planet3.png");
+        background-size: cover;
+        margin: 20px;
+
+        @media all and (max-width: $screen-md) {
+            width: 110px;
+            height: 110px;
+            left: 50%;
+        }
+    }
+
+    &__button-container {
+        display: grid;
+        grid-gap: 25px;
+        margin-top: 30px;
+
+        @media all and (max-width: $screen-md) {
+            margin-top: 0;
+        }
+    }
+}

@@ -1,46 +1,52 @@
-import '../css/style.scss';
+import 'css/style.scss';
 
-import AuthPage from "./controllers/AuthPage";
-import ProfilePage from "./controllers/ProfilePage";
-import HomePage from "./controllers/HomePage";
-import NotFoundPage from "./controllers/NotFoundPage";
-import SignUpPage from "./controllers/SignUpPage";
-import AuthorsPage from "./controllers/AuthorsPage";
-import GamePage from "./controllers/GamePage";
-import LeadersPage from "./controllers/LeadersPage";
-import Router from "./Router";
+import Router from 'src/Router';
+import 'src/Events';
+import EventBus from 'src/events/EventBus';
+import NetworkEvents from 'src/events/NetworkEvents';
+import PageEvents from 'src/events/PageEvents';
+import PermissionController from 'src/permission/PermissionController';
 
 
-const app = document.getElementById('root');
+EventBus.on(PageEvents.LOAD_PAGE, onPageLoad);
 
-let router = new Router();
+/**
+ * Подгрузка view для каждой страницы при переходе по url
+ */
+function onPageLoad() {
+	const url = location.hash.slice(1) || '/';
+	let controller = Router.getController(url);
 
-router.addUrl('/', HomePage, 'index');
-router.addUrl('/profile', ProfilePage, 'profile');
-router.addUrl('/auth', AuthPage, 'auth');
-router.addUrl('/signup', SignUpPage, 'signup');
-router.addUrl('/authors', AuthorsPage, 'authors');
-router.addUrl('/game', GamePage, 'game');
-router.addUrl('/leaders', LeadersPage, 'leaders');
+	controller = new controller();
 
-router.addUrl('404', NotFoundPage, 'not_found');
+	if (!PermissionController.checkConstraint(controller)) {
+		return
+	}
 
-function pageLoader () {
-    let url = location.hash.slice(1) || '/';
-    let controller = router.getController(url);
+	if (!controller.getTargetRender()) {
+		EventBus.emit(PageEvents.BASE_COMPONENTS_RENDER);
+	}
 
-    controller = new controller();
-    let element = controller.getTargetRender();
+	const element = controller.getTargetRender();
 
-    element.innerHTML = controller.render();
+	element.innerHTML = controller.render();
 
-    if (controller.afterRender) {
-        controller.afterRender()
-    }
-
+	controller.afterRender()
 }
 
-window.addEventListener('hashchange', pageLoader);
-window.addEventListener('load', pageLoader);
+/**
+ * Первичная загрузка страницы, получаение данных о пользователе
+ */
+function firstLoad() {
+	EventBus.emit(NetworkEvents.GET_USER);
+}
 
-export default app;
+
+window.addEventListener('hashchange', onPageLoad);
+window.addEventListener('DOMContentLoaded', firstLoad);
+
+if ('serviceWorker' in navigator) {
+	window.addEventListener('load', () => {
+		navigator.serviceWorker.register('/service-worker.js')
+	});
+}

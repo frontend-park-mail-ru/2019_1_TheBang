@@ -1,0 +1,13 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    padding: 80px 40px 40px 40px;
+    align-items: center;
+    width: 100%;
+    background-color: $content-color;
+    overflow-y: auto;
+
+    @media all and (max-width: $screen-md) {
+        padding: 0;
+    }
+}

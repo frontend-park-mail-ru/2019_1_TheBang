@@ -1,0 +1,18 @@
+mixin form-item(name_input, itemType)
+    case itemType
+        when 'text'
+            .form-item
+                input.form-item__input(type='text', placeholder=name_input)
+                span.form-item__icon.form-item__icon-left.form-item__icon-person
+
+        when 'password'
+            .form-item
+                input.form-item__input.form-item__input_pass(type='password', placeholder='Пароль')
+                span.form-item__icon.form-item__icon-left.form-item__icon-password
+                button(type='button').form-item__eye.form-item__icon.form-item__icon-eye
+
+        when 'password-repeat'
+            .form-item
+                input.form-item__input.form-item__input_pass_repeat(type='password', placeholder='Повторите пароль')
+                span.form-item__icon.form-item__icon-left.form-item__icon-password
+                button(type='button').form-item__eye.form-item__icon.form-item__icon-eye

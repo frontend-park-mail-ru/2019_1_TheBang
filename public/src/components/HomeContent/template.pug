@@ -1,0 +1,11 @@
+.home
+    include /pug-mixins/title/title.pug
+    +title(title)
+    div
+        .home__img1.rotate__fast-clockwise
+        .home__img2.rotate__middle-no-clockwise
+        .home__img3.rotate__slow-clockwise
+    div.home__button-container
+        include /pug-mixins/link/link.pug
+        +link('Синглплеер', 'game', 'primary')
+        +link('Мультиплеер', 'game', 'primary')
