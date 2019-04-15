@@ -1,0 +1,12 @@
+export {default as LoginPage} from 'src/views/LoginPage';
+export {default as ProfilePage} from 'src/views/ProfilePage';
+export {default as HomePage} from 'src/views/HomePage';
+export {default as NotFoundPage} from 'src/views/NotFoundPage';
+export {default as UnAuthorizedPage} from 'src/views/UnAuthorizedPage';
+export {default as SignUpPage} from 'src/views/SignUpPage';
+export {default as AuthorsPage} from 'src/views/AuthorsPage';
+export {default as GamePage} from 'src/views/GamePage';
+export {default as LeadersPage} from 'src/views/LeadersPage';
+export {default as BasePage} from 'src/views/BasePage';
+export {default as ChatPage} from 'src/views/ChatPage';
+export {default as GameLobbyPage} from 'src/views/GameLobbyPage';

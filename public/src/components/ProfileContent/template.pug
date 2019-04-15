@@ -1,0 +1,17 @@
+.form-container
+    include /pug-mixins/title/title.pug
+    +title(title)
+    form.form(autocomplete='off')
+        .profile__score
+            include /pug-mixins/score/score.pug
+            +score(score)
+        img.profile__avatar(src=avatar, alt='Avatar')
+        div.button-upload
+            .button-upload__icon
+            input.button-upload__input(type='file')
+        .form-item-container
+            .form-item
+                input.form-item__input(type='input', value=name)
+                span.form-item__icon.form-item__icon-left.form-item__icon-person
+        include /pug-mixins/button/button.pug
+        +button('Сохранить', 'primary')

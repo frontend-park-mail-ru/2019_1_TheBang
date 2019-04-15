@@ -1,20 +1,16 @@
-import title from "../../blocks/title/title";
-import leaderboard from "../../blocks/leaderboard/leaderboard";
+import 'src/components/LeaderContent/style.scss';
+import leaderComponent from 'src/components/LeaderContent/template.pug';
+
 
 class LeaderContent {
-    constructor () {
-        this.title = title;
-        this.leaderboard = leaderboard;
-    }
 
-    render() {
-        return `
-                <div class="leader">
-                    ${this.title('Таблица лидеров')}
-                    ${this.leaderboard()}
-                </div>
-        `
-    }
+	// TODO нужно переверстать таблицу
+	render() {
+		const renderData = {
+			title: 'Таблица лидеров',
+		};
+		return leaderComponent.call({}, renderData)
+	}
 }
 
 export default LeaderContent;
