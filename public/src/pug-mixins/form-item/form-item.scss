@@ -1,25 +1,28 @@
 .form-item {
     display: flex;
     align-items: center;
-    width: 100%;
+    width: $form-item_width;
+    height: $form-item_height;
     position:  relative;
-    margin: 10px 0px 10px 0px;
 
     &__input {
         font-size: 100%;
-        padding: 10px 10px 10px 50px;
-        border: 1px solid rgb(33, 48, 119);
+        width: 100%;
+        height: 100%;
+        padding: 0px 50px;
         border-radius: $border-radius;
-        background-color: $content_color;
         color: white;
         font-family: $title_font-family;
 
-        &_error {
-            border: 2px solid red;
+        background: rgb(26, 42, 67);
+        border: $border-width solid $border-color;
+
+        &-error {
+            border: $border-width solid red;
         }
 
-        &_success {
-            border: 2px solid green;
+        &-success {
+            border: $border-width solid green;
         }
 
         &::-webkit-input-placeholder {
@@ -38,8 +41,25 @@
 
     &__icon {
         position: absolute;
-        margin-left: 20px;
+        width: 20px;
+        height: 20px;
         color: white;
+
+        &-left {
+            margin-left: 20px;
+        }
+
+        &-person {
+            background: url("../../../src/pug-mixins/form-item/img/profile.svg");
+        }
+
+        &-password {
+            background: url("../../../src/pug-mixins/form-item/img/lock.svg");
+        }
+
+        &-eye {
+            background: url("../../../src/pug-mixins/form-item/img/eye.svg");
+        }
     }
 
     &__eye {
@@ -49,7 +69,6 @@
         height: 20px;
         
         &:focus {
-            border: 1px $menu-item_color_hover solid;
             box-shadow: 0 0 10px 0 $menu-item_color_hover inset, 0 0 10px 4px $menu-item_color_hover;
         }
     }
@@ -58,12 +77,13 @@
         color: white;
     }
 
-
     &__error-message {
-        color: red;
+        position: absolute;
+        top: 46px;
+        color: white;
     }
 
-    &__success-message {
+    &-success-message {
         color: green;
     }
 }

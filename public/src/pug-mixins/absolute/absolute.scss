@@ -1,0 +1,8 @@
+.absolute {
+    position: absolute;
+
+    &-top {
+        left: 10px;
+        top: 10px;
+    }
+}

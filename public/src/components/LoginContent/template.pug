@@ -2,10 +2,10 @@
     include /pug-mixins/title/title.pug
     +title(title)
     form.form
-        include /pug-mixins/form-item/form-item.pug
-        +form-item('Логин', 'text')
-        +form-item('Пароль', 'password')
+        include /pug-mixins/form-item-container/form-item-container.pug
+        +form-item-container('Логин', 'text')
+        +form-item-container('Пароль', 'password')
         include /pug-mixins/button/button.pug
-        +button('Войти')
+        +button('Войти', 'primary')
     include /pug-mixins/link/link.pug
-    +link('Зарегистрироваться', 'signup')
+    +link('Зарегистрироваться', 'signup', 'secondary')

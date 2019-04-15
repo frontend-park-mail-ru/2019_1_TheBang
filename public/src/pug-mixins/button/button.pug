@@ -1,2 +1,7 @@
-mixin button(title)
-    button.button= title
+mixin button(title, type)
+    case type
+        when 'primary'
+            button.button.button-primary= title
+
+        when 'secondary'
+            button.button.button-secondary= title

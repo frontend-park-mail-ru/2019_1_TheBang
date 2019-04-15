@@ -15,9 +15,10 @@ class ChatPage extends ContentMixin {
 		const user = Store.getUser();
 		const author = user.nickname;
 
-		const btn = document.querySelector('.button');
+		const btn = document.querySelector('.chat__button');
+		const input = document.querySelector('.chat__input');
 
-		btn.addEventListener('click', () => {
+		function sendMsg() {
 			const messageDOM = document.getElementsByName('chat-message')[0];
 			const message = messageDOM.value;
 
@@ -33,15 +34,21 @@ class ChatPage extends ContentMixin {
 			connection.send(JSON.stringify(data));
 
 			messageDOM.value = '';
+		}
+
+		btn.addEventListener('click', () => {
+			sendMsg();
 		});
 
+		input.addEventListener('keydown', (e) => {
+			if (e.keyCode == 13) {
+				sendMsg();
+			}
+		});
 
 		connection.onmessage = e => {
 			ChatContent.createMsg(JSON.parse(e.data))
 		};
-
-
-
 	}
 }
 

@@ -1,4 +1,5 @@
 import 'src/components/GameLobbyContent/style.scss'
+import 'src/pug-mixins/absolute/absolute.scss';
 import gameLobbyComponent from 'src/components/GameLobbyContent/template.pug'
 import EventBus from 'src/events/EventBus';
 import GameEvents from 'src/events/GameEvents';
@@ -21,7 +22,7 @@ class GameLobbyContent {
 
 		const btn = document.createElement('div');
 		btn.classList.add('game-container__game-block__btn');
-		btn.innerText = 'join';
+		btn.innerText = 'Присоединиться';
 		btn.dataset.id = data.id;
 
 		btn.addEventListener('click', (event) => {

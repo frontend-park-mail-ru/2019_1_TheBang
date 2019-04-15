@@ -1,4 +1,22 @@
 @import "src/pug-mixins/title/title.scss";
 @import "src/pug-mixins/button/button.scss";
-@import "src/pug-mixins/grid/grid.scss";
+// @import "src/pug-mixins/grid/grid.scss";
 @import "src/pug-mixins/form-container/form-container.scss";
+@import "src/pug-mixins/form/form.scss";
+@import "src/pug-mixins/form-item/form-item.scss";
+
+.profile {
+    &__avatar {
+        border: $border-width $border_color solid;
+        border-radius: $border-radius;
+        width: 250px;
+        height: 250px;
+        object-fit: cover;
+    }
+
+    &__score {
+        position: absolute;
+        top: -20px;
+        left: calc(100% - 60px);
+    }
+}

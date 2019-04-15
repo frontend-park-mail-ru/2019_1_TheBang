@@ -1,20 +1,20 @@
 a.menu__header(href='#')
-    .menu__logo
+    .menu__logo.rotate__slow-clockwise
     h1 TheBang!
 nav.menu__nav
     case is_auth
         when true
-            include /pug-mixins/menu-button/menu-button.pug
-            +menu-button('Профиль', '/profile')
-            +menu-button('Сингплеер', '/game')
-            +menu-button('Мультиплеер', '/lobby')
-            +menu-button('Таблица лидеров', '/leaders')
-            +menu-button('Чат', '/chat')
-            +menu-button('Авторы', '/authors')
-            +menu-button('Выход', '/logout')
+            include /pug-mixins/link/link.pug
+            +link('Профиль', 'profile', 'menu')
+            +link('Сингплеер', 'game', 'menu')
+            +link('Мультиплеер', 'lobby', 'menu')
+            +link('Таблица лидеров', 'leaders', 'menu')
+            +link('Чат', 'chat', 'menu')
+            +link('Авторы', 'authors', 'menu')
+            +link('Выход', 'logout', 'secondary')
         when false
-            include /pug-mixins/menu-button/menu-button.pug
-            +menu-button('Авторизация', '/auth')
-            +menu-button('Регистрация', '/signup')
-            +menu-button('Сингплеер', '/game')
-            +menu-button('Авторы', '/authors')
+            include /pug-mixins/link/link.pug
+            +link('Авторизация', 'auth', 'menu')
+            +link('Регистрация', 'signup', 'menu')
+            +link('Сингплеер', 'game', 'menu')
+            +link('Авторы', 'authors', 'menu')

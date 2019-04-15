@@ -12,7 +12,7 @@ class BasePage {
 
 		target.innerHTML =
                 '<input type="checkbox" class="mobile-input">' +
-                '<i class="mobile-burger fa fa-bars fa-2x"></i>' +
+                '<div class="mobile-burger"></div>' +
                 '<div class="menu">' +
                 menu.render() +
                 '</div>' +
@@ -22,7 +22,7 @@ class BasePage {
 	}
 
 	static afterRender() {
-		const menuButtons = document.getElementsByClassName('menu-button');
+		const menuButtons = document.getElementsByClassName('button-secondary');
 
 		const name = 'logout';
 

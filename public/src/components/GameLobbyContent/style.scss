@@ -7,35 +7,41 @@
   width: 100%;
 
   &__game-block {
-    min-width: 400px;
-    width: 30vw;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    border: 1px solid darkgray;
+    justify-content: space-around;
+    align-items: center;
+    width: 60%;
+    height: 70px;
     margin-top: 10px;
     margin-bottom: 20px;
-    padding: 10px;
+    background-color: $menu_button_color;
 
-    div {
-      padding: 5px;
+    @media all and (max-width: $screen-md) {
+      flex-direction: column;
+      width: 90%;
+      height: 150px;
+    }
+
+    &:hover {
+      box-shadow: 0 0 10px 0 $menu-item_color_hover inset, 0 0 10px 4px $menu-item_color_hover;
     }
 
     &__btn {
-      background-color: green;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: $button_width;
+      height: $button_height;           
+      border-radius: $border-radius;
+      font-size: 100%;
       color: white;
-      text-align: center;
-      min-width: 100px;
+      background-color: $primary_button_color;
       cursor: pointer;
-    }
 
-    &__btn:hover {
-      background-color: white;
-      color: black;
+      &:hover {
+        box-shadow: 0 0 10px 0 $primary_button_color inset, 0 0 10px 4px $primary_button_color;
+      }
     }
-  }
-
-  &__game-block:hover {
-    background-color: darkgrey;
   }
 }

@@ -1,8 +1,7 @@
-@import "src/pug-mixins/menu-button/menu-button.scss";
-
 .menu {
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 25%;
     min-width: $menu_min-width;
     font-family: $title_font-family;
@@ -11,39 +10,51 @@
     @media all and (max-width: $screen-md) {
         position: fixed;
         left: -$menu_min-width;
-        background-color: $menu-item_color_hover;
+        background-color: #296c98;
     }
 
     &__header {
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: $menu-item_color;
+        background-color: #041125;
         height: 15%;
-        min-height: 50px;
+        width: 100%;
         color: white;
+
+        @media all and (max-width: $screen-md) {
+            position: absolute;
+            top: 0;
+        }
     }
 
     &__logo {
+        margin: 15px;
         width: $logo-size;
         height: $logo-size;
-        background-image: url("./img/logo.webp");
+        background-image: url("./img/logo1.svg");
         background-size: cover;
     }
 
     &__nav {
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-gap: 20px;
         justify-items: center;
+
+        @media all and (max-width: $screen-md) {
+            max-height: calc(100% - 240px);
+            overflow-y: auto;
+        }
     }
 }
 
 @media all and (max-width: $screen-md) {
     .mobile-input:checked ~ .menu {
+        display: flex;
         left: 0;
         z-index: 2;
         width: 100%;
         height: 100%;
-        justify-content: space-evenly;
+        justify-content: center;
     }
 }

@@ -4,8 +4,7 @@
     padding: 80px 40px 40px 40px;
     align-items: center;
     width: 100%;
-    background-color: $content_color;
-    opacity: $content_opacity;
+    background-color: $content-color;
     overflow-y: auto;
 
     @media all and (max-width: $screen-md) {
