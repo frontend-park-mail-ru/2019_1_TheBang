@@ -40,6 +40,11 @@
         display: grid;
         grid-gap: 20px;
         justify-items: center;
+
+        @media all and (max-width: $screen-md) {
+            max-height: calc(100% - 240px);
+            overflow-y: auto;
+        }
     }
 }
 
