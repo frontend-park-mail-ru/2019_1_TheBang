@@ -45,13 +45,10 @@ class ChatPage extends ContentMixin {
 				sendMsg();
 			}
 		});
-		
+
 		connection.onmessage = e => {
 			ChatContent.createMsg(JSON.parse(e.data))
 		};
-
-
-
 	}
 }
 

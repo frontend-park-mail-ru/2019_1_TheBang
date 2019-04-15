@@ -2,11 +2,11 @@
     include /pug-mixins/title/title.pug
     +title(title)
     form.form(autocomplete='off')
-        include /pug-mixins/form-item/form-item.pug
-        +form-item('Логин', 'text')
-        +form-item('Никнейм', 'text')
-        +form-item('Пароль', 'password')
-        +form-item('Повторите пароль', 'password-repeat')
+        include /pug-mixins/form-item-container/form-item-container.pug
+        +form-item-container('Логин', 'text')
+        +form-item-container('Никнейм', 'text')
+        +form-item-container('Пароль', 'password')
+        +form-item-container('Повторите пароль', 'password-repeat')
         include /pug-mixins/button/button.pug
         +button('Зарегистрироваться', 'primary')
     include /pug-mixins/link/link.pug
