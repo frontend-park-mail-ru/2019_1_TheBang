@@ -1,6 +1,5 @@
 .chat
     .chat__messages
-.chat__input
-    input(type='text', name='chat-message', placeholder='Введите сообщение')
-    include /pug-mixins/button/button.pug
-    +button('Отправить')
+.chat__send
+    input(type='text', name='chat-message', placeholder='Введите сообщение').chat__input
+    span.chat__button

@@ -15,7 +15,7 @@ class ChatPage extends ContentMixin {
 		const user = Store.getUser();
 		const author = user.nickname;
 
-		const btn = document.querySelector('.button');
+		const btn = document.querySelector('.chat__button');
 
 		btn.addEventListener('click', () => {
 			const messageDOM = document.getElementsByName('chat-message')[0];
