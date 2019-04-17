@@ -14,6 +14,8 @@ const PageEvents = {
 
 	GET_LEADERBOARD_SUCCESS: 'page:get-leaderboard-success',
 	GET_LEADERBOARD_ERROR: 'page:get-leaderboard-error',
+	CHECK_LEADERBOARD_EXISTS: 'page:check-leaderboard-exists',
+	CHECK_LEADERBOARD_NOT_EXISTS: 'page:check-leaderboard-not-exists',
 
 	BASE_COMPONENTS_RENDER: 'page:render-base-component',
 	UPDATE_STORE: 'page:update-user-store',

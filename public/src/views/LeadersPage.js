@@ -5,6 +5,10 @@ import 'src/pug-mixins/hidden/hidden.scss';
 import EventBus from 'src/events/EventBus';
 import NetworkEvents from 'src/events/NetworkEvents';
 
+const PAGE_COUNT_ITEMS = 6;
+const CACHE_PAGE = [];
+let CURRENT_PAGE = 1;
+
 
 class LeadersPage extends ContentMixin {
 	constructor() {
@@ -13,62 +17,68 @@ class LeadersPage extends ContentMixin {
 
 	afterRender() {
 		super.afterRender();
-		EventBus.emit(NetworkEvents.GET_LEADERBOARD, 1);
-
-		const baseURL = window.location.href;
-		const newURL = baseURL + '/1';
-		history.pushState(null, null, newURL);
-
-		// const pages = document.getElementsByClassName('paginator')[0].children;
-
-		// [].forEach.call(pages, (page) => {
-		// 	page.addEventListener('click', () => {
-		// 		const pageNumber = page.innerText;
-		// 		EventBus.emit(NetworkEvents.GET_LEADERBOARD, pageNumber);
-		// 	})
-
-
-		// })
+		LeadersPage.setPageData();
 
 		const prevPage = document.querySelector('.paginator__left');
-		prevPage.classList.add('hidden');
 		const nextPage = document.querySelector('.paginator__right');
 
-		function urlChange(pageNumber) {
-			const hash = window.location.hash.split('/').slice(0, 2).join('/');
-			const baseURL = window.location.protocol + '//' + window.location.host + hash;
-			const newURL = baseURL + '/' + pageNumber;
-			history.pushState(null, null, newURL);
-			EventBus.emit(NetworkEvents.GET_LEADERBOARD, pageNumber);
-		}
+		nextPage.addEventListener('click', () => {
+			CURRENT_PAGE++;
+			LeadersPage.setPageData();
+		});
 
 		prevPage.addEventListener('click', () => {
-			const pageNumber = +window.location.hash.split('/')[2] - 1;
-			if (pageNumber == 1) {
-				prevPage.classList.add('hidden');
-			}
-			urlChange(pageNumber);
-		})
-
-		nextPage.addEventListener('click', () => {
-			const pageNumber = +window.location.hash.split('/')[2] + 1;
-			if (pageNumber == 2) {
-				prevPage.classList.remove('hidden');
-			}
-			urlChange(pageNumber);
-		})
+			CURRENT_PAGE--;
+			LeadersPage.setPageData();
+		});
 	}
 
-	static onSuccess(data) {
+	static setPageData() {
+		LeadersPage.checkPageExist();
+
+		if (CACHE_PAGE[CURRENT_PAGE]) {
+			LeadersPage.createRows(CACHE_PAGE[CURRENT_PAGE]);
+			return
+		}
+
+		EventBus.emit(NetworkEvents.GET_LEADERBOARD, CURRENT_PAGE);
+	}
+
+	static checkPageExist() {
+		const prev = CURRENT_PAGE - 1;
+		const next = CURRENT_PAGE + 1;
+		const prevPage = document.querySelector('.paginator__left');
+		const nextPage = document.querySelector('.paginator__right');
+
+		if (CACHE_PAGE[prev]) {
+			prevPage.classList.remove('hidden');
+		} else if (CACHE_PAGE[prev] === null) {
+			prevPage.classList.add('hidden');
+		} else {
+			EventBus.emit(NetworkEvents.CHECK_LEADERBOARD, prev);
+		}
+
+		if (CACHE_PAGE[next]) {
+			nextPage.classList.remove('hidden');
+		} else if (CACHE_PAGE[next] === null) {
+			nextPage.classList.add('hidden');
+		} else {
+			EventBus.emit(NetworkEvents.CHECK_LEADERBOARD, next);
+		}
+	}
+
+	static createRows(data) {
 		const table = document.querySelector('.leaderboard-js');
 		table.innerHTML = '';
+		const startPosition = (CURRENT_PAGE - 1) * PAGE_COUNT_ITEMS + 1;
 
-		[].forEach.call(data, (item) => {
+		[].forEach.call(data, (item, idx) => {
 			const row = document.createElement('div');
 			row.classList.add('leaderboard__row', 'leaderboard__cell');
 
 			const position = document.createElement('div');
-			position.innerText = item.position;
+
+			position.innerText = startPosition + idx;
 
 			const nickname = document.createElement('div');
 			nickname.innerText = item.nickname;
@@ -84,6 +94,14 @@ class LeadersPage extends ContentMixin {
 		})
 	}
 
+	static onSuccess(result) {
+		const data = result.data;
+		const pageNumber = Number(result.pageNumber);
+
+		CACHE_PAGE[pageNumber] = data;
+		LeadersPage.createRows(data, pageNumber);
+	}
+
 	static onError() {
 		const table = document.querySelector('.leaderboard');
 		const paginator = document.querySelector('.paginator');
@@ -92,6 +110,38 @@ class LeadersPage extends ContentMixin {
 		const error = document.createElement('div');
 		error.innerText = 'Не удалось загрузить данные, попробуйте позже';
 		table.appendChild(error);
+	}
+
+	static onExistPage(result) {
+		const pageNumber = result.pageNumber;
+		const data = result.data;
+		const prev = CURRENT_PAGE - 1;
+		const next = CURRENT_PAGE + 1;
+		const prevPage = document.querySelector('.paginator__left');
+		const nextPage = document.querySelector('.paginator__right');
+
+		if (pageNumber === prev) {
+			prevPage.classList.remove('hidden');
+			CACHE_PAGE[prev] = data;
+		} else {
+			nextPage.classList.remove('hidden');
+			CACHE_PAGE[next] = data;
+		}
+	}
+
+	static onNotExistPage(pageNumber) {
+		const prev = CURRENT_PAGE - 1;
+		const next = CURRENT_PAGE + 1;
+		const prevPage = document.querySelector('.paginator__left');
+		const nextPage = document.querySelector('.paginator__right');
+
+		if (pageNumber === prev) {
+			prevPage.classList.add('hidden');
+			CACHE_PAGE[prev] = null;
+		} else {
+			nextPage.classList.add('hidden');
+			CACHE_PAGE[next] = null;
+		}
 	}
 }
 

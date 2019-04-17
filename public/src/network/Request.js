@@ -1,5 +1,3 @@
-// const backend = 'https://stormy-fjord-97392.herokuapp.com/';
-// const backend = 'http://127.0.0.1:8090/';
 import BackendResource from 'src/network/BackendResource';
 
 /**
