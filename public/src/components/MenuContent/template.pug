@@ -12,9 +12,13 @@ nav.menu__nav
             +link('Чат', 'chat', 'menu')
             +link('Авторы', 'authors', 'menu')
             +link('Выход', 'logout', 'secondary')
+            .menu__nav-info
+                +link('Презентация', 'info', 'secondary')
         when false
             include /pug-mixins/link/link.pug
             +link('Авторизация', 'auth', 'menu')
             +link('Регистрация', 'signup', 'menu')
             +link('Сингплеер', 'game', 'menu')
             +link('Авторы', 'authors', 'menu')
+            .menu__nav-info
+                +link('Презентация', 'info', 'secondary')

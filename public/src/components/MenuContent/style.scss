@@ -45,7 +45,18 @@
             max-height: calc(100% - 240px);
             overflow-y: auto;
         }
+
+        &-info {
+            position: absolute;
+            bottom: 10px;
+            
+            @media all and (max-width: $screen-md) {
+                position: unset;
+            }
+        }
+
     }
+
 }
 
 @media all and (max-width: $screen-md) {
