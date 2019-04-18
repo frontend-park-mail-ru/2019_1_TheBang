@@ -25,9 +25,12 @@ class GameLobbyContent {
 		btn.innerText = 'Присоединиться';
 		btn.dataset.id = data.id;
 
-		btn.addEventListener('click', (event) => {
+		const handler = (event) => {
+			btn.removeEventListener('click', handler);
 			EventBus.emit(GameEvents.GAME_START, event.target.dataset.id);
-		});
+		};
+
+		btn.addEventListener('click', handler);
 
 		block.append(name, score, btn);
 

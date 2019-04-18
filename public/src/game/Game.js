@@ -119,7 +119,7 @@ class Game {
 			}
 			else {
 				document.querySelector(id).className = 'block player bye';
-				document.querySelector('.info').textContent = 'bye!'
+				document.querySelector('.info').textContent = 'bye!';
 			}
 
 
@@ -131,7 +131,7 @@ class Game {
 		renderMaze();
 		let direction = 0;
 
-		document.addEventListener('keydown', (event) => {
+		const keyHandler = (event) => {
 			switch (event.keyCode) {
 			case DOWN:
 				direction = DOWN;  break;
@@ -146,7 +146,10 @@ class Game {
 			if (direction !== 0) {
 				changePlayerPos(direction)
 			}
-		});
+		};
+
+		document.addEventListener('keydown', keyHandler);
+		Game.unlockKeyBoard(keyHandler);
 
 		const changePlayerPos = (direction) => {
 			let [dy, dx] = [0, 0];
@@ -179,6 +182,15 @@ class Game {
 			}
 
 		}
+	}
+
+	static unlockKeyBoard(keyLock) {
+		const change = () => {
+			window.removeEventListener('hashchange', change);
+			document.removeEventListener('keydown', keyLock);
+		};
+
+		window.addEventListener('hashchange', change)
 	}
 }
 
