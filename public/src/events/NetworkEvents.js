@@ -5,6 +5,7 @@ const NetworkEvents = {
 	LOGOUT: 'network:logout-user',
 	GET_USER: 'network:get-user',
 	GET_LEADERBOARD: 'network:get-leaderboard',
+	CHECK_LEADERBOARD: 'network:check-leaderboard',
 };
 
 export default NetworkEvents

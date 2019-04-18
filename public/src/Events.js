@@ -34,6 +34,10 @@ EventBus.on(NetworkEvents.GET_LEADERBOARD, Network.onGetLeaderboard);
 EventBus.on(PageEvents.GET_LEADERBOARD_SUCCESS, View.LeadersPage.onSuccess);
 EventBus.on(PageEvents.GET_LEADERBOARD_ERROR, View.LeadersPage.onError);
 
+EventBus.on(NetworkEvents.CHECK_LEADERBOARD, Network.onCheckPageLeaderboard);
+EventBus.on(PageEvents.CHECK_LEADERBOARD_EXISTS, View.LeadersPage.onExistPage);
+EventBus.on(PageEvents.CHECK_LEADERBOARD_NOT_EXISTS, View.LeadersPage.onNotExistPage);
+
 EventBus.on(GameNetworkEvents.GET_ROOMS, GameNetwork.onGetRooms);
 EventBus.on(GamePageEvents.GET_ROOMS_SUCCESS, View.GameLobbyPage.onSuccess);
 

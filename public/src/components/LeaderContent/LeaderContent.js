@@ -4,7 +4,6 @@ import leaderComponent from 'src/components/LeaderContent/template.pug';
 
 class LeaderContent {
 
-	// TODO нужно переверстать таблицу
 	render() {
 		const renderData = {
 			title: 'Таблица лидеров',
