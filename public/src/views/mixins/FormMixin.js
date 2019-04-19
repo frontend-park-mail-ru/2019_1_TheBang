@@ -25,8 +25,8 @@ class FormMixin extends ContentMixin{
 			})
 		}
 
-		form.addEventListener('submit', (e) => {
-			e.preventDefault();
+		const formHandler = (event) => {
+			event.preventDefault();
 
 			const formInputs = form.getElementsByClassName('form-item__input');
 			let error = false;
@@ -48,8 +48,16 @@ class FormMixin extends ContentMixin{
 			if (this.SubmitRequest) {
 				this.SubmitRequest(form)
 			}
+		};
 
-		})
+		form.addEventListener('submit', formHandler);
+
+		const change = () => {
+			window.removeEventListener('hashchange', change);
+			form.removeEventListener('submit', formHandler);
+		};
+
+		window.addEventListener('hashchange', change)
 	}
 
 	static clearMessage() {

@@ -31,11 +31,13 @@ class BasePage {
 		})[0];
 
 		if (button) {
-			button.addEventListener('click', (e) => {
+			const btnHandler = (e) => {
 				e.preventDefault();
-
+				button.removeEventListener('click', btnHandler);
 				EventBus.emit(NetworkEvents.LOGOUT);
-			})
+			};
+
+			button.addEventListener('click', btnHandler);
 		}
 	}
 }

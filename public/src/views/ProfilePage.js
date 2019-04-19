@@ -45,10 +45,19 @@ class ProfilePage extends FormMixin {
 		super.afterRender();
 		const uploadInput = document.querySelector('.button-upload');
 
-		uploadInput.addEventListener('change', (e) => {
+		const uploadHandler = (event) => {
 			const avatar = document.querySelector('.profile__avatar');
-			avatar.src = window.URL.createObjectURL(e.target.files[0]);
-		})
+			avatar.src = window.URL.createObjectURL(event.target.files[0]);
+		};
+
+		uploadInput.addEventListener('change', uploadHandler);
+
+		const change = () => {
+			window.removeEventListener('hashchange', change);
+			uploadInput.removeEventListener('change', uploadHandler);
+		};
+
+		window.addEventListener('hashchange', change);
 	}
 
 }

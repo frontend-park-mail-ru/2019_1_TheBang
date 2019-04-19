@@ -36,15 +36,24 @@ class ChatPage extends ContentMixin {
 			messageDOM.value = '';
 		}
 
-		btn.addEventListener('click', () => {
-			sendMsg();
-		});
+		btn.addEventListener('click', sendMsg);
 
-		input.addEventListener('keydown', (e) => {
-			if (e.keyCode == 13) {
+		const sendMsgEnter = (event) => {
+			if (event.keyCode === 13) {
 				sendMsg();
 			}
-		});
+		};
+
+		input.addEventListener('keydown', sendMsgEnter);
+
+		const change = () => {
+			window.removeEventListener('hashchange', change);
+			btn.removeEventListener('click', sendMsg);
+			input.removeEventListener('keydown', sendMsgEnter);
+			connection.close()
+		};
+
+		window.addEventListener('hashchange', change);
 
 		connection.onmessage = e => {
 			ChatContent.createMsg(JSON.parse(e.data))
