@@ -3,9 +3,3 @@ package-lock.json
 .idea
 *.scssc
 dist
-print
-theme
-reset.css
-reveal.css
-lib
-plugin
