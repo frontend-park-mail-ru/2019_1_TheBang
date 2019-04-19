@@ -3,4 +3,9 @@ package-lock.json
 .idea
 *.scssc
 dist
-reveal.js-3.8.0
+reveal.js-3.8.0/css/print
+reveal.js-3.8.0/css/theme
+reveal.js-3.8.0/css/reset.css
+reveal.js-3.8.0/css/reveal.css
+reveal.js-3.8.0/lib
+reveal.js-3.8.0/plugin
