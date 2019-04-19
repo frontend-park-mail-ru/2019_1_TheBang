@@ -3,3 +3,4 @@ package-lock.json
 .idea
 *.scssc
 dist
+reveal.js-3.8.0
