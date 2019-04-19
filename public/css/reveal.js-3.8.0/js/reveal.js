@@ -608,7 +608,7 @@
 
 			// Success callback
 			script.onload = script.onreadystatechange = function( event ) {
-				if( event.type === "load" || (/loaded|complete/.test( script.readyState ) ) ) {
+				if( event.type === 'load' || (/loaded|complete/.test( script.readyState ) ) ) {
 
 					// Kill event listeners
 					script.onload = script.onreadystatechange = script.onerror = null;
@@ -837,10 +837,10 @@
 			slideHeight = slideSize.height;
 
 		// Let the browser know what page size we want to print
-		injectStyleSheet( '@page{size:'+ pageWidth +'px '+ pageHeight +'px; margin: 0px;}' );
+		injectStyleSheet( '@page{size:' + pageWidth + 'px ' + pageHeight + 'px; margin: 0px;}' );
 
 		// Limit the size of certain elements to the dimensions of the slide
-		injectStyleSheet( '.reveal section>img, .reveal section>video, .reveal section>iframe{max-width: '+ slideWidth +'px; max-height:'+ slideHeight +'px}' );
+		injectStyleSheet( '.reveal section>img, .reveal section>video, .reveal section>iframe{max-width: ' + slideWidth + 'px; max-height:' + slideHeight + 'px}' );
 
 		document.body.classList.add( 'print-pdf' );
 		document.body.style.width = pageWidth + 'px';
@@ -921,7 +921,7 @@
 						else {
 							notesElement.style.left = notesSpacing + 'px';
 							notesElement.style.bottom = notesSpacing + 'px';
-							notesElement.style.width = ( pageWidth - notesSpacing*2 ) + 'px';
+							notesElement.style.width = ( pageWidth - notesSpacing * 2 ) + 'px';
 							page.appendChild( notesElement );
 						}
 
@@ -1598,7 +1598,7 @@
 			}
 		}
 		else {
-			console.warn( 'reveal.js: "'+ id +'" plugin has already been registered' );
+			console.warn( 'reveal.js: "' + id + '" plugin has already been registered' );
 		}
 
 	}
@@ -1720,7 +1720,7 @@
 		var dx = a.x - b.x,
 			dy = a.y - b.y;
 
-		return Math.sqrt( dx*dx + dy*dy );
+		return Math.sqrt( dx * dx + dy * dy );
 
 	}
 
@@ -2079,15 +2079,15 @@
 
 		dom.overlay.innerHTML = [
 			'<header>',
-				'<a class="close" href="#"><span class="icon"></span></a>',
-				'<a class="external" href="'+ url +'" target="_blank"><span class="icon"></span></a>',
+			'<a class="close" href="#"><span class="icon"></span></a>',
+			'<a class="external" href="' + url + '" target="_blank"><span class="icon"></span></a>',
 			'</header>',
 			'<div class="spinner"></div>',
 			'<div class="viewport">',
-				'<iframe src="'+ url +'"></iframe>',
-				'<small class="viewport-inner">',
-					'<span class="x-frame-error">Unable to load iframe. This is likely due to the site\'s policy (x-frame-options).</span>',
-				'</small>',
+			'<iframe src="' + url + '"></iframe>',
+			'<small class="viewport-inner">',
+			'<span class="x-frame-error">Unable to load iframe. This is likely due to the site\'s policy (x-frame-options).</span>',
+			'</small>',
 			'</div>'
 		].join('');
 
@@ -2164,10 +2164,10 @@
 
 			dom.overlay.innerHTML = [
 				'<header>',
-					'<a class="close" href="#"><span class="icon"></span></a>',
+				'<a class="close" href="#"><span class="icon"></span></a>',
 				'</header>',
 				'<div class="viewport">',
-					'<div class="viewport-inner">'+ html +'</div>',
+				'<div class="viewport-inner">' + html + '</div>',
 				'</div>'
 			].join('');
 
@@ -2261,7 +2261,7 @@
 						dom.slides.style.top = '50%';
 						dom.slides.style.bottom = 'auto';
 						dom.slides.style.right = 'auto';
-						transformSlides( { layout: 'translate(-50%, -50%) scale('+ scale +')' } );
+						transformSlides( { layout: 'translate(-50%, -50%) scale(' + scale + ')' } );
 					}
 				}
 
@@ -2528,9 +2528,9 @@
 
 		transformSlides( {
 			overview: [
-				'scale('+ scale +')',
-				'translateX('+ ( -indexh * overviewSlideWidth ) +'px)',
-				'translateY('+ ( -indexv * overviewSlideHeight ) +'px)'
+				'scale(' + scale + ')',
+				'translateX(' + ( -indexh * overviewSlideWidth ) + 'px)',
+				'translateY(' + ( -indexv * overviewSlideHeight ) + 'px)'
 			].join( ' ' )
 		} );
 
@@ -3414,19 +3414,19 @@
 
 				value = [];
 				switch( format ) {
-					case 'c':
-						value.push( getSlidePastCount() + 1 );
-						break;
-					case 'c/t':
-						value.push( getSlidePastCount() + 1, '/', getTotalSlides() );
-						break;
-					case 'h/v':
-						value.push( indexh + 1 );
-						if( isVerticalSlide() ) value.push( '/', indexv + 1 );
-						break;
-					default:
-						value.push( indexh + 1 );
-						if( isVerticalSlide() ) value.push( '.', indexv + 1 );
+				case 'c':
+					value.push( getSlidePastCount() + 1 );
+					break;
+				case 'c/t':
+					value.push( getSlidePastCount() + 1, '/', getTotalSlides() );
+					break;
+				case 'h/v':
+					value.push( indexh + 1 );
+					if( isVerticalSlide() ) value.push( '/', indexv + 1 );
+					break;
+				default:
+					value.push( indexh + 1 );
+					if( isVerticalSlide() ) value.push( '.', indexv + 1 );
 				}
 			}
 
@@ -3449,14 +3449,14 @@
 		var url = '#' + locationHash();
 		if( typeof b === 'number' && !isNaN( b ) ) {
 			return  '<a href="' + url + '">' +
-					'<span class="slide-number-a">'+ a +'</span>' +
-					'<span class="slide-number-delimiter">'+ delimiter +'</span>' +
-					'<span class="slide-number-b">'+ b +'</span>' +
+					'<span class="slide-number-a">' + a + '</span>' +
+					'<span class="slide-number-delimiter">' + delimiter + '</span>' +
+					'<span class="slide-number-b">' + b + '</span>' +
 					'</a>';
 		}
 		else {
 			return '<a href="' + url + '">' +
-			       '<span class="slide-number-a">'+ a +'</span>' +
+			       '<span class="slide-number-a">' + a + '</span>' +
 			       '</a>';
 		}
 
@@ -3472,16 +3472,16 @@
 
 		// Remove the 'enabled' class from all directions
 		dom.controlsLeft.concat( dom.controlsRight )
-						.concat( dom.controlsUp )
-						.concat( dom.controlsDown )
-						.concat( dom.controlsPrev )
-						.concat( dom.controlsNext ).forEach( function( node ) {
-			node.classList.remove( 'enabled' );
-			node.classList.remove( 'fragmented' );
+			.concat( dom.controlsUp )
+			.concat( dom.controlsDown )
+			.concat( dom.controlsPrev )
+			.concat( dom.controlsNext ).forEach( function( node ) {
+				node.classList.remove( 'enabled' );
+				node.classList.remove( 'fragmented' );
 
-			// Set 'disabled' attribute on all directions
-			node.setAttribute( 'disabled', 'disabled' );
-		} );
+				// Set 'disabled' attribute on all directions
+				node.setAttribute( 'disabled', 'disabled' );
+			} );
 
 		// Add the 'enabled' class to the available routes; remove 'disabled' attribute to enable buttons
 		if( routes.left ) dom.controlsLeft.forEach( function( el ) { el.classList.add( 'enabled' ); el.removeAttribute( 'disabled' ); } );
@@ -3685,7 +3685,7 @@
 				horizontalOffsetMultiplier = config.parallaxBackgroundHorizontal;
 			}
 			else {
-				horizontalOffsetMultiplier = horizontalSlideCount > 1 ? ( backgroundWidth - slideWidth ) / ( horizontalSlideCount-1 ) : 0;
+				horizontalOffsetMultiplier = horizontalSlideCount > 1 ? ( backgroundWidth - slideWidth ) / ( horizontalSlideCount - 1 ) : 0;
 			}
 
 			horizontalOffset = horizontalOffsetMultiplier * indexh * -1;
@@ -3699,7 +3699,7 @@
 				verticalOffsetMultiplier = config.parallaxBackgroundVertical;
 			}
 			else {
-				verticalOffsetMultiplier = ( backgroundHeight - slideHeight ) / ( verticalSlideCount-1 );
+				verticalOffsetMultiplier = ( backgroundHeight - slideHeight ) / ( verticalSlideCount - 1 );
 			}
 
 			verticalOffset = verticalSlideCount > 0 ?  verticalOffsetMultiplier * indexv : 0;
@@ -3791,7 +3791,7 @@
 
 				// Images
 				if( backgroundImage ) {
-					backgroundContent.style.backgroundImage = 'url('+ encodeURI( backgroundImage ) +')';
+					backgroundContent.style.backgroundImage = 'url(' + encodeURI( backgroundImage ) + ')';
 				}
 				// Videos
 				else if ( backgroundVideo && !isSpeakerNotes() ) {
@@ -3816,7 +3816,7 @@
 
 					// Support comma separated lists of video sources
 					backgroundVideo.split( ',' ).forEach( function( source ) {
-						video.innerHTML += '<source src="'+ source +'">';
+						video.innerHTML += '<source src="' + source + '">';
 					} );
 
 					backgroundContent.appendChild( video );
@@ -3952,7 +3952,7 @@
 	function formatEmbeddedContent() {
 
 		var _appendParamToIframeSource = function( sourceAttribute, sourceURL, param ) {
-			toArray( dom.slides.querySelectorAll( 'iframe['+ sourceAttribute +'*="'+ sourceURL +'"]' ) ).forEach( function( el ) {
+			toArray( dom.slides.querySelectorAll( 'iframe[' + sourceAttribute + '*="' + sourceURL + '"]' ) ).forEach( function( el ) {
 				var src = el.getAttribute( sourceAttribute );
 				if( src && src.indexOf( param ) === -1 ) {
 					el.setAttribute( sourceAttribute, src + ( !/\?/.test( src ) ? '?' : '&' ) + param );
@@ -5414,7 +5414,7 @@
 	 */
 	function onPointerDown( event ) {
 
-		if( event.pointerType === event.MSPOINTER_TYPE_TOUCH || event.pointerType === "touch" ) {
+		if( event.pointerType === event.MSPOINTER_TYPE_TOUCH || event.pointerType === 'touch' ) {
 			event.touches = [{ clientX: event.clientX, clientY: event.clientY }];
 			onTouchStart( event );
 		}
@@ -5428,7 +5428,7 @@
 	 */
 	function onPointerMove( event ) {
 
-		if( event.pointerType === event.MSPOINTER_TYPE_TOUCH || event.pointerType === "touch" )  {
+		if( event.pointerType === event.MSPOINTER_TYPE_TOUCH || event.pointerType === 'touch' )  {
 			event.touches = [{ clientX: event.clientX, clientY: event.clientY }];
 			onTouchMove( event );
 		}
@@ -5442,7 +5442,7 @@
 	 */
 	function onPointerUp( event ) {
 
-		if( event.pointerType === event.MSPOINTER_TYPE_TOUCH || event.pointerType === "touch" )  {
+		if( event.pointerType === event.MSPOINTER_TYPE_TOUCH || event.pointerType === 'touch' )  {
 			event.touches = [{ clientX: event.clientX, clientY: event.clientY }];
 			onTouchEnd( event );
 		}
@@ -5648,7 +5648,7 @@
 
 		// Cosmetics
 		this.diameter = 100;
-		this.diameter2 = this.diameter/2;
+		this.diameter2 = this.diameter / 2;
 		this.thickness = 6;
 
 		// Flags if we are currently playing

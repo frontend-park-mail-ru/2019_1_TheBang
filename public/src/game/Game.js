@@ -94,12 +94,12 @@ class Game {
 					block.classList.add('block');
 
 					switch (maze[row][col]) {
-						case WALL:
-							block.classList.add(ROTATE_CLASSES[Math.floor(Math.random() * ROTATE_CLASSES.length)]);
-							break;
-						case DIAMOND:
-							block.classList.add(DIAMOND_CLASSES[Math.floor(Math.random() * DIAMOND_CLASSES.length)]);
-							break;
+					case WALL:
+						block.classList.add(ROTATE_CLASSES[Math.floor(Math.random() * ROTATE_CLASSES.length)]);
+						break;
+					case DIAMOND:
+						block.classList.add(DIAMOND_CLASSES[Math.floor(Math.random() * DIAMOND_CLASSES.length)]);
+						break;
 					}
 
 					block.classList.add('empty');
@@ -122,7 +122,7 @@ class Game {
 					const id = ['#id-', col, '-', row].join('');
 					const item = document.querySelector(id);
 
-					let classes = item.classList.value.split(' ');
+					const classes = item.classList.value.split(' ');
 					classes.pop();
 
 					let itemClass = '';

@@ -10,16 +10,16 @@ import 'src/pug-mixins/slides/slide7/slide7.scss';
 import 'src/components/HomeContent/style.scss';
 
 class InfoContent {
-    constructor (isAuth) {
-        this.isAuth = Boolean(isAuth[0]);
-    }
+	constructor (isAuth) {
+		this.isAuth = Boolean(isAuth[0]);
+	}
     
-    render() {
-        const renderData = {
+	render() {
+		const renderData = {
 			is_auth: this.isAuth,
 		};
-        return infoComponent.call({}, renderData);
-    }
+		return infoComponent.call({}, renderData);
+	}
 }
 
 export default InfoContent;
