@@ -1,20 +1,20 @@
 .rotate {
     &__fast-clockwise {
         -webkit-animation-name: cog;
-        -webkit-animation-duration: 150s;
+        -webkit-animation-duration: 100s;
         -webkit-animation-iteration-count: infinite;
         -webkit-animation-timing-function: linear;
         -moz-animation-name: cog;
-        -moz-animation-duration: 150s;
+        -moz-animation-duration: 100s;
         -moz-animation-iteration-count: infinite;
         -moz-animation-timing-function: linear;
         -ms-animation-name: cog;
-        -ms-animation-duration: 150s;
+        -ms-animation-duration: 100s;
         -ms-animation-iteration-count: infinite;
         -ms-animation-timing-function: linear;
         
         animation-name: cog;
-        animation-duration: 150s;
+        animation-duration: 100s;
         animation-iteration-count: infinite;
         animation-timing-function: linear;
         }
@@ -41,20 +41,20 @@
 
     &__middle-no-clockwise {
         -webkit-animation-name: cog2;
-        -webkit-animation-duration: 200s;
+        -webkit-animation-duration: 150s;
         -webkit-animation-iteration-count: infinite;
         -webkit-animation-timing-function: linear;
         -moz-animation-name: cog2;
-        -moz-animation-duration: 200s;
+        -moz-animation-duration: 150s;
         -moz-animation-iteration-count: infinite;
         -moz-animation-timing-function: linear;
         -ms-animation-name: cog2;
-        -ms-animation-duration: 200s;
+        -ms-animation-duration: 150s;
         -ms-animation-iteration-count: infinite;
         -ms-animation-timing-function: linear;
         
         animation-name: cog2;
-        animation-duration: 200s;
+        animation-duration: 150s;
         animation-iteration-count: infinite;
         animation-timing-function: linear;
         }
@@ -81,20 +81,20 @@
 
     &__slow-clockwise {
         -webkit-animation-name: cog3;
-        -webkit-animation-duration: 250s;
+        -webkit-animation-duration: 200s;
         -webkit-animation-iteration-count: infinite;
         -webkit-animation-timing-function: linear;
         -moz-animation-name: cog3;
-        -moz-animation-duration: 250s;
+        -moz-animation-duration: 200s;
         -moz-animation-iteration-count: infinite;
         -moz-animation-timing-function: linear;
         -ms-animation-name: cog3;
-        -ms-animation-duration: 250s;
+        -ms-animation-duration: 200s;
         -ms-animation-iteration-count: infinite;
         -ms-animation-timing-function: linear;
         
         animation-name: cog3;
-        animation-duration: 250s;
+        animation-duration: 200s;
         animation-iteration-count: infinite;
         animation-timing-function: linear;
         }
