@@ -9,7 +9,9 @@
     height: 100%;
 
     &__img1 {
-        position: relative;
+        position: absolute;
+        left: 50%;
+        top: 30%;
         width: 250px;
         height: 250px;
         background-image: url("../../../src/components/HomeContent/img/logo1.svg");
@@ -18,6 +20,7 @@
         z-index: 1;
 
         @media all and (max-width: $screen-md) {
+            left: 30%;
             width: 125px;
             height: 125px;
         }

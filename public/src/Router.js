@@ -31,6 +31,8 @@ router.addUrl('/chat', View.ChatPage, 'chat', Permission.LOGIN_REQUIRED);
 
 router.addUrl('/lobby', View.GameLobbyPage, 'lobby', Permission.LOGIN_REQUIRED);
 
+router.addUrl('/presentation', View.InfoPage, 'presentation', Permission.ANONYMOUS);
+
 router.addUrl('/not_found', View.NotFoundPage, 'not_found');
 router.addUrl('/unauthorized', View.UnAuthorizedPage, 'unauthorized');
 

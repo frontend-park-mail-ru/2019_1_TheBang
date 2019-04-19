@@ -4,9 +4,14 @@ import homeComponent from 'src/components/HomeContent/template.pug'
 
 
 class HomeContent {
+	constructor (isAuth) {
+		this.isAuth = Boolean(isAuth[0]);
+	}
+
 	render() {
 		const renderData = {
 			title: 'TheBang!',
+			is_auth: this.isAuth,
 		};
 		return homeComponent.call({}, renderData);
 	}

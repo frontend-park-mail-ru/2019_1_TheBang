@@ -8,4 +8,8 @@
     div.home__button-container
         include /pug-mixins/link/link.pug
         +link('Синглплеер', 'game', 'primary')
-        +link('Мультиплеер', 'game', 'primary')
+        case is_auth
+            when true
+                +link('Мультиплеер', 'lobby', 'primary')
+            when false
+                +link('Мультиплеер', 'auth', 'primary')
