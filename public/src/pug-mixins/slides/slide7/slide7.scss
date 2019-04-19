@@ -1,0 +1,22 @@
+.slide7 {
+    &__img {
+        position: absolute;
+        left: 50%;
+        width: 300px;
+        height: 300px;
+        background-image: url('./img/golang.png');
+        background-size: cover;
+
+        &:hover {
+            transition: all 2s ease-in-out;
+            -webkit-transition: all 2s ease-in-out; /** Chrome & Safari **/
+            -moz-transition: all 2s ease-in-out; /** Firefox **/
+            -o-transition: all 2s ease-in-out; /** Opera **/
+
+            transform: translate(-350px,0);
+            -webkit-transform: translate(-350px,0); /** Safari & Chrome **/
+            -o-transform: translate(-350px,0); /** Opera **/
+            -moz-transform: translate(-350px,0); /** Firefox **/
+        }
+    }
+}

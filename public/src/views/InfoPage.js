@@ -10,7 +10,7 @@ class InfoPage extends ContentMixin {
     
     afterRender() {
         window.location.replace('#/presentation');
-        Reveal.initialize();
+        Reveal.initialize("overview", "true");
         console.log(Reveal);
     }
 }
