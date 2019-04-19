@@ -9,12 +9,10 @@ class InfoPage extends ContentMixin {
     }
     
     afterRender() {
-      Reveal.initialize();
+        window.location.replace('#/presentation');
+        Reveal.initialize();
+        console.log(Reveal);
     }
-
-    static onSuccess() {
-		window.location.replace('#/info');
-	}
 }
 
 export default InfoPage;

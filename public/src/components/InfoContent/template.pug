@@ -1,8 +1,16 @@
 .reveal
     .slides
-        section
-            include /pug-mixins/slides/slide1
+        section(style="position: relative;")
+            include /pug-mixins/slides/slide1/slide1
             +slide1()
         section
-            include /pug-mixins/slides/slide2
+            include /pug-mixins/slides/slide2/slide2
             +slide2()
+        section
+            section
+                include /pug-mixins/slides/slide3/slide3
+                +slide3()
+            section
+                include /pug-mixins/slides/slide4/slide4
+                +slide4()
+

@@ -1,0 +1,16 @@
+.slide2 {
+    display: flex;
+
+    &__block {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    &__img {
+        width: 200px;
+        height: 400px;
+        background-image: url('./img/Anton.jpg');
+        background-size: cover;
+    }
+}
