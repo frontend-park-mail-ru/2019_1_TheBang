@@ -55,6 +55,18 @@ class Game {
 		const LEFT = 37;
 		const RIGHT = 39;
 
+		const ROTATE_CLASSES = [
+			'rotate__fast-clockwise',
+			'rotate__middle-no-clockwise',
+			'rotate__slow-clockwise',
+		];
+
+		const DIAMOND_CLASSES = [
+			'diamond__craft',
+			'diamond__sun',
+			'diamond__blackhole',
+		];
+
 		const generateDiamond = () => {
 			let count = 0;
 
@@ -78,6 +90,20 @@ class Game {
 				for (let col = 0; col < COLS; col++) {
 					const block = document.createElement('div');
 					block.id = ['id-', col, '-', row].join('');
+
+					block.classList.add('block');
+
+					switch (maze[row][col]) {
+						case WALL:
+							block.classList.add(ROTATE_CLASSES[Math.floor(Math.random() * ROTATE_CLASSES.length)]);
+							break;
+						case DIAMOND:
+							block.classList.add(DIAMOND_CLASSES[Math.floor(Math.random() * DIAMOND_CLASSES.length)]);
+							break;
+					}
+
+					block.classList.add('empty');
+
 					document.querySelector('.board').appendChild(block);
 				}
 			}
@@ -93,6 +119,12 @@ class Game {
 
 			for (let row = 0; row < ROWS; row++) {
 				for (let col = 0; col < COLS; col++) {
+					const id = ['#id-', col, '-', row].join('');
+					const item = document.querySelector(id);
+
+					let classes = item.classList.value.split(' ');
+					classes.pop();
+
 					let itemClass = '';
 					switch (maze[row][col]) {
 					case PLAYER:
@@ -108,9 +140,11 @@ class Game {
 					default:
 						itemClass = 'empty'
 					}
-					const id = ['#id-', col, '-', row].join('');
 
-					document.querySelector(id).className = 'block ' + itemClass
+					classes.push(itemClass);
+					// const id = ['#id-', col, '-', row].join('');
+
+					item.className = classes.join(' ') ;  //'block ' + itemClass
 				}
 			}
 			const id = ['#id-', player[1], '-', player[0]].join('');

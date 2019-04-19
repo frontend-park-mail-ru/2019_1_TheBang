@@ -19,6 +19,14 @@ class GamePage{
 	}
 
 	afterRender() {
+		// const fullScreenEvent = (event) => {
+		// 	if (event.keyCode === 13) {
+		// 		document.querySelector('.frame').requestFullscreen();
+		// 	}
+		// };
+
+		// document.addEventListener('keydown', fullScreenEvent);
+
 		EventBus.emit(GameEvents.GAME_START);
 	}
 }
