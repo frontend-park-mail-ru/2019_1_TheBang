@@ -1,11 +1,12 @@
 import InfoContent from 'src/components/InfoContent/InfoContent';
 import ContentMixin from 'src/views/mixins/ContentMixin';
+import Store from 'src/Store';
 
 import Reveal from 'css/reveal.js-3.8.0/js/reveal.js';
 
 class InfoPage extends ContentMixin {
     constructor() {
-      super(InfoContent);
+      super(InfoContent, Store.isAuth());
     }
     
     afterRender() {
