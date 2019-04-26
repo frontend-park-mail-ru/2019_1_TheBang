@@ -1,19 +1,135 @@
 import BackendResource from 'src/network/BackendResource';
+import GamePage from 'src/views/GamePage';
+import GameWinnerPage from 'src/views/GameWinnerPage';
+import GameLosePage from 'src/views/GameLosePage';
+import Store from 'src/Store';
+import onPageLoad from 'src/app';
+
+//TODO тут дохуя рефакторинга
+
+let MAZE = {};
+
+let ROWS = 0;
+let COLS = 0;
+
+const EMPTY = 0;
+const WALL = 1;
+const DIAMOND = 2;
+
+const PLAYER = 20;
+const EXIT = 3;
+const EXIT_READY = 6;
+// const DIAMOND = 2;
+let DIAMOND_COUNT = 0;
+
 
 class Game {
 	/**
      *
      * @param roomID - id комнаты - индикатор онлайн режима
      */
+
 	static start(roomID) {
 
 		if (roomID) {
 			const url = [BackendResource.GAME_WSS, 'room/', roomID].join('');
 			const connection = new WebSocket(url);
 
-			connection.onmessage = (e) => {
-				console.log(JSON.parse(e.data))
+			const user = Store.getUser();
+			const identificator = user.nickname;
+			let lastData = {};
+
+			connection.onopen = () => {
+				const change = () => {
+					console.log('out game');
+					window.removeEventListener('hashchange', change);
+					connection.close()
+				};
+
+				window.addEventListener('hashchange', change);
 			};
+
+			connection.onmessage = (e) => {
+				const data = JSON.parse(e.data);
+
+				if (data.type === 'start_game') {
+					console.log('game start bitch');
+
+					const game = new GamePage();
+					const element = game.getTargetRender();
+					element.innerHTML = game.render();
+
+
+					Game.onlineInit(data);
+				}
+
+				if (data.type === 'game_snap_shot') {
+
+					Game.onlinePushState(data, connection);
+
+					Object.values(data.data.players_positions).forEach((item) => {
+						MAZE[item.x][item.y] = EMPTY;
+					});
+
+					lastData = data;
+				}
+			};
+
+			connection.onclose = () => {
+
+				connection.close();
+				if (!lastData) {
+					return
+				}
+
+				const playersScore = lastData.data.players_score;
+				const gemsMax = lastData.data.max_gems_count;
+
+				if (playersScore[identificator] === gemsMax) {
+					onPageLoad(null, GameWinnerPage);
+					return
+				}
+				onPageLoad(null, GameLosePage);
+
+			};
+
+			let direction = '';
+
+			const DOWN = 40;
+			const UP = 38;
+			const LEFT = 37;
+			const RIGHT = 39;
+
+			const keyHandler = (event) => {
+				switch (event.keyCode) {
+				case RIGHT:
+					console.log('right');
+					direction = 'down';  break;
+				case LEFT:
+					console.log('left');
+					direction = 'up'; break;
+				case UP:
+					console.log('up');
+					direction = 'left'; break;
+				case DOWN:
+					console.log('down');
+					direction = 'right'; break;
+				}
+
+				const action = {
+					type: 'action',
+					data: {
+						time: 'Date.now()',
+						player: identificator,
+						move: direction
+					}
+				};
+				console.log('send action', event.keyCode);
+				// MAZE[playerROW][playerCOL] = EMPTY;
+				connection.send(JSON.stringify(action))
+			};
+
+			document.addEventListener('keydown', keyHandler);
 
 			return
 		}
@@ -226,6 +342,138 @@ class Game {
 
 		window.addEventListener('hashchange', change)
 	}
+
+	static onlineInit(data) {
+
+		const gameData = data.data.game_map;
+
+		MAZE = gameData.map;
+
+		ROWS = gameData.height;
+		COLS = gameData.width;
+
+		DIAMOND_COUNT = gameData.gems;
+
+		const ROTATE_CLASSES = [
+			'rotate__fast-clockwise',
+			'rotate__middle-no-clockwise',
+			'rotate__slow-clockwise',
+		];
+
+		const DIAMOND_CLASSES = [
+			'diamond__craft',
+			'diamond__sun',
+			'diamond__blackhole',
+		];
+
+		const createBoard = () => {
+			for (let row = 0; row < ROWS; row++) {
+				for (let col = 0; col < COLS; col++) {
+					const block = document.createElement('div');
+					block.id = ['id-', col, '-', row].join('');
+
+					block.classList.add('block');
+
+					switch (MAZE[row][col]) {
+					case WALL:
+						block.classList.add(ROTATE_CLASSES[Math.floor(Math.random() * ROTATE_CLASSES.length)]);
+						break;
+					case DIAMOND:
+						block.classList.add(DIAMOND_CLASSES[Math.floor(Math.random() * DIAMOND_CLASSES.length)]);
+						break;
+					}
+
+					block.classList.add('empty');
+
+					document.querySelector('.board').appendChild(block);
+				}
+			}
+		};
+
+		createBoard();
+	}
+
+	static onlinePushState(data) {
+		const user = Store.getUser();
+		const identificator = user.nickname;
+
+		console.log(data);
+
+		const gems = data.data.gems_count;
+		const teleport = data.data.is_teleport;
+		const gemsMax = data.data.max_gems_count;
+		const playersPosition = data.data.players_positions; // nickname: x, y
+		const playersScore = data.data.players_score; // nickname: score
+
+		const teleportCOL = data.data.teleport.y;
+		const teleportROW = data.data.teleport.x;
+
+		const playerCOL = playersPosition[identificator].y;
+		const playerROW = playersPosition[identificator].x;
+		console.log('you here', playerROW, playerCOL);
+
+		const renderMaze = () => {
+			if (playersScore[identificator] < gemsMax) {
+				document.querySelector('.info').textContent = 'collect all the gems'
+			} else {
+				MAZE[teleportROW][teleportCOL] = EXIT_READY;
+				document.querySelector('.info').textContent = 'go to the teleport'
+			}
+
+			Object.values(playersPosition).forEach((item) => {
+				MAZE[item.x][item.y] = PLAYER;
+				console.log('player on ', item.x, item.y)
+			});
+
+
+			for (let row = 0; row < ROWS; row++) {
+				for (let col = 0; col < COLS; col++) {
+					const id = ['#id-', col, '-', row].join('');
+					const item = document.querySelector(id);
+
+					const classes = item.classList.value.split(' ');
+					classes.pop();
+
+					let itemClass = '';
+					switch (MAZE[row][col]) {
+					case PLAYER:
+						itemClass = 'player'; break;
+					case WALL:
+						itemClass = 'wall'; break;
+					case EXIT:
+						itemClass = 'exit'; break;
+					case EXIT_READY:
+						itemClass = 'exit show'; break;
+					case DIAMOND:
+						itemClass = 'diamond'; break;
+					default:
+						itemClass = 'empty'
+					}
+
+					classes.push(itemClass);
+					// const id = ['#id-', col, '-', row].join('');
+
+					item.className = classes.join(' ') ;  //'block ' + itemClass
+				}
+			}
+			const id = ['#id-', playerCOL, '-', playerROW].join('');
+			if (!(playersScore[identificator] === gemsMax && playerCOL === teleportCOL && playerROW === teleportROW)) {
+				document.querySelector(id).className = 'block player'
+			}
+			else {
+				document.querySelector(id).className = 'block player bye';
+				document.querySelector('.info').textContent = 'bye!';
+			}
+
+
+			document.querySelector('.diamond-count').textContent = playersScore[identificator] + '/' + gemsMax
+		};
+
+
+		renderMaze();
+
+	}
+
 }
 
 export default Game;
