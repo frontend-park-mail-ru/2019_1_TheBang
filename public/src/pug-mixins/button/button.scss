@@ -65,4 +65,11 @@
             background: url("../../../src/pug-mixins/button/img/upload-to-cloud.svg");
         }
     }
+
+    &-vk {
+        width: 50px;
+        height: 50px;
+        background-size: cover;
+        background-image: url("../../../src/pug-mixins/button/img/vk.png");
+    }
 }
