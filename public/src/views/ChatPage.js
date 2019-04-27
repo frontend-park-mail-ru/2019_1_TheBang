@@ -1,6 +1,5 @@
 import ChatContent from 'src/components/ChatContent/ChatContent';
 import ContentMixin from 'src/views/mixins/ContentMixin';
-import Store from 'src/Store';
 import BackendResource from 'src/network/BackendResource';
 import EventBus from 'src/events/EventBus';
 import NetworkEvents from 'src/events/NetworkEvents';
@@ -18,10 +17,8 @@ class ChatPage extends ContentMixin {
 		TIMESTAMP_ANCHOR = Date.now();
 		EventBus.emit(NetworkEvents.GET_MESSAGES, TIMESTAMP_ANCHOR);
 
-		const url = [BackendResource.CHAT_WSS, 'ws'].join('');
+		const url = [BackendResource.CHAT_WSS, 'chat'].join('');
 		const connection = new WebSocket(url);
-		const user = Store.getUser();
-		const author = user.nickname;
 
 		const btn = document.querySelector('.chat__button');
 		const input = document.querySelector('.chat__input');
@@ -35,7 +32,7 @@ class ChatPage extends ContentMixin {
 			}
 
 			const data = {
-				author: author,
+				timestamp: Date.now(),
 				message: message
 			};
 
@@ -93,7 +90,7 @@ class ChatPage extends ContentMixin {
 		TIMESTAMP_ANCHOR = data[data.length - 1];
 
 		data.forEach((item) => {
-			const msg = ChatContent.createMsg(item);
+			const msg = ChatContent.createMsg(JSON.parse(item));
 			ChatContent.appendTop(msg);
 		});
 
