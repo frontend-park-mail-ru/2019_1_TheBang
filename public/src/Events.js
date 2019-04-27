@@ -49,3 +49,5 @@ EventBus.on(GameEvents.GAME_START, Game.start);
 
 EventBus.on(PageEvents.CREATE_CHAT_MESSAGES, View.ChatPage.onCreateMessages);
 EventBus.on(NetworkEvents.GET_MESSAGES, ChatNetwork.onGetMessages);
+
+EventBus.on(NetworkEvents.AUTH_VK, Network.onVkAuth);

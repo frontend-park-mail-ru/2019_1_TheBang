@@ -131,6 +131,16 @@ class Network {
 				EventBus.emit(PageEvents.CHECK_LEADERBOARD_NOT_EXISTS, pageNumber)
 			})
 	}
+
+	static onVkAuth() {
+		Request.vkRequest('oauth/vk/connect', 'GET')
+			.then(() => {
+				EventBus.emit(PageEvents.SIGNUP_SUCCESS);
+			})
+			.catch((err) => {
+				EventBus.emit(PageEvents.SIGNUP_ERROR, err)
+			});
+	}
 }
 
 export default Network;
