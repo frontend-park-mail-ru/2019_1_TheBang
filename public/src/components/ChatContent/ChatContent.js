@@ -26,14 +26,14 @@ class ChatContent {
 
 		const avatar = document.createElement('img');
 		avatar.classList.add('chat__avatar');
-		avatar.src = 'https://avatars.mds.yandex.net/get-banana/49904/x25bsJOa_1i00wtlAJpQFJSM_banana_20161021_409-220-RUB-1x402x.png/optimize';
+		avatar.src = data.photo_url;
 		// data.photo_url;
 
 		const sendTime = document.createElement('div');
 		sendTime.classList.add('chat__time');
 		const time = new Date();
 		// time.setTime(data.timestamp);
-		time.setTime(1497094200000);
+		time.setTime(data.timestamp);
 		sendTime.innerText = time.toDateString();
 		// data.timestamp
 
