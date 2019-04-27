@@ -27,7 +27,7 @@ router.addUrl('/signup', View.SignUpPage, 'signup', Permission.ANONYMOUS);
 router.addUrl('/authors', View.AuthorsPage, 'authors');
 router.addUrl('/game', View.GamePage, 'game');
 router.addUrl('/leaders', View.LeadersPage, 'leaders', Permission.LOGIN_REQUIRED);
-router.addUrl('/chat', View.ChatPage, 'chat', Permission.LOGIN_REQUIRED);
+router.addUrl('/chat', View.ChatPage, 'chat');
 
 router.addUrl('/online', View.GameLobbyPage, 'online', Permission.LOGIN_REQUIRED);
 
