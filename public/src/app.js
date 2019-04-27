@@ -13,11 +13,11 @@ EventBus.on(PageEvents.LOAD_PAGE, onPageLoad);
 /**
  * Подгрузка view для каждой страницы при переходе по url
  */
-function onPageLoad() {
+function onPageLoad(event, ControllerRender, ...ControllerArgs) {
 	const url = location.hash.slice(1) || '/';
-	let controller = Router.getController(url);
+	let controller = ControllerRender || Router.getController(url);
 
-	controller = new controller();
+	controller = new controller(...ControllerArgs);
 
 	if (!PermissionController.checkConstraint(controller)) {
 		return
@@ -50,3 +50,5 @@ if ('serviceWorker' in navigator) {
 		navigator.serviceWorker.register('/service-worker.js')
 	});
 }
+
+export default onPageLoad;

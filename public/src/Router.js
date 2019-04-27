@@ -29,7 +29,7 @@ router.addUrl('/game', View.GamePage, 'game');
 router.addUrl('/leaders', View.LeadersPage, 'leaders', Permission.LOGIN_REQUIRED);
 router.addUrl('/chat', View.ChatPage, 'chat', Permission.LOGIN_REQUIRED);
 
-router.addUrl('/lobby', View.GameLobbyPage, 'lobby', Permission.LOGIN_REQUIRED);
+router.addUrl('/online', View.GameLobbyPage, 'online', Permission.LOGIN_REQUIRED);
 
 router.addUrl('/presentation', View.InfoPage, 'presentation');
 

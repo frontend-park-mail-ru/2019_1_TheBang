@@ -12,6 +12,16 @@ class GameNetwork {
 				EventBus.emit(GamePageEvents.GET_ROOMS_SUCCESS, data);
 			})
 	}
+
+	static onCreateRoom() {
+		Request.gameRequest('room', 'POST')
+			.then((res) => {
+				return res.json()
+			})
+			.then((data) => {
+				EventBus.emit(GamePageEvents.CREATE_ROOM_SUCCESS, [data]);
+			})
+	}
 }
 
 export default GameNetwork;
