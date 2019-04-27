@@ -90,7 +90,7 @@ class ChatPage extends ContentMixin {
 		TIMESTAMP_ANCHOR = data[data.length - 1];
 
 		data.forEach((item) => {
-			const msg = ChatContent.createMsg(JSON.parse(item));
+			const msg = ChatContent.createMsg(item);
 			ChatContent.appendTop(msg);
 		});
 
