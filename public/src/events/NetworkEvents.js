@@ -6,6 +6,7 @@ const NetworkEvents = {
 	GET_USER: 'network:get-user',
 	GET_LEADERBOARD: 'network:get-leaderboard',
 	CHECK_LEADERBOARD: 'network:check-leaderboard',
+	GET_MESSAGES: 'network:get-chat-message'
 };
 
 export default NetworkEvents

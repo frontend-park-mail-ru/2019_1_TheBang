@@ -19,6 +19,8 @@ const PageEvents = {
 
 	BASE_COMPONENTS_RENDER: 'page:render-base-component',
 	UPDATE_STORE: 'page:update-user-store',
+
+	CREATE_CHAT_MESSAGES: 'page:create-chat-messages'
 };
 
 export default PageEvents

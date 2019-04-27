@@ -9,6 +9,8 @@ import GameNetwork from 'src/network/GameNetwork';
 import GamePageEvents from 'src/events/GamePageEvents';
 import Game from 'src/game/Game';
 import GameEvents from 'src/events/GameEvents';
+import ChatNetwork from 'src/network/ChatNetwork';
+
 
 EventBus.on(PageEvents.UPDATE_STORE, Store.onUpdateUser.bind(Store));
 EventBus.on(PageEvents.BASE_COMPONENTS_RENDER, View.BasePage.onRender);
@@ -44,3 +46,6 @@ EventBus.on(GamePageEvents.CREATE_ROOM_SUCCESS, View.GameLobbyPage.onCreateRoom)
 EventBus.on(GamePageEvents.GET_ROOMS_SUCCESS, View.GameLobbyPage.onSuccess);
 
 EventBus.on(GameEvents.GAME_START, Game.start);
+
+EventBus.on(PageEvents.CREATE_CHAT_MESSAGES, View.ChatPage.onCreateMessages);
+EventBus.on(NetworkEvents.GET_MESSAGES, ChatNetwork.onGetMessages);
