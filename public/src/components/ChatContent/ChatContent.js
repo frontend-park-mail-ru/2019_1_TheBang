@@ -1,8 +1,7 @@
 import 'src/components/ChatContent/style.scss';
 import 'src/pug-mixins/hidden/hidden.scss';
 import chatComponent from 'src/components/ChatContent/template.pug';
-import Store from 'src/Store.js';
-import { userInfo } from 'os';
+import Store from 'src/Store';
 
 class ChatContent {
 
@@ -27,7 +26,7 @@ class ChatContent {
 
 		const avatar = document.createElement('img');
 		avatar.classList.add('chat__avatar');
-		avatar.src = "https://avatars.mds.yandex.net/get-banana/49904/x25bsJOa_1i00wtlAJpQFJSM_banana_20161021_409-220-RUB-1x402x.png/optimize";
+		avatar.src = 'https://avatars.mds.yandex.net/get-banana/49904/x25bsJOa_1i00wtlAJpQFJSM_banana_20161021_409-220-RUB-1x402x.png/optimize';
 		// data.photo_url;
 
 		const sendTime = document.createElement('div');
@@ -42,22 +41,10 @@ class ChatContent {
 		header.append(authorBlock, sendTime);
 		// block.append(author, message, avatar);
 
-		return block;
-	}
-
-	static appendTop(block) {
-		const container = document.querySelector('.chat__messages');
-		container.prepend(block);
-	}
-
-	static appendBottom(block) {
-		const container = document.querySelector('.chat__messages');
-		// container.append(block);
-
 		const checkbox = document.createElement('input');
 		checkbox.type = 'checkbox';
 		checkbox.classList.add('chat__checkbox');
-		
+
 		checkbox.addEventListener('click', () => {
 			const menu = document.querySelector('.chat__menu');
 			if (checkbox.checked) {
@@ -71,25 +58,20 @@ class ChatContent {
 				menu.classList.add('hidden');
 				block.classList.remove('chat__block-select');
 			}
-		})
+		});
 
 		block.append(header, message, checkbox);
 
-		// block.addEventListener('click', () => {
-		// 	const hack = () => {
-		// 		block.removeEventListener('click', hack)
-		// 		const menu = document.querySelector('.chat__menu');
-		// 		menu.classList.add('hidden');
-		// 		block.classList.remove('chat__block-select');
-		// 	}
+		return block;
+	}
 
-		// 	block.addEventListener('click', hack);
+	static appendTop(block) {
+		const container = document.querySelector('.chat__messages');
+		container.prepend(block);
+	}
 
-		// 	const menu = document.querySelector('.chat__menu');
-		// 	menu.classList.remove('hidden');
-		// 	block.classList.add('chat__block-select');
-		// });
-
+	static appendBottom(block) {
+		const container = document.querySelector('.chat__messages');
 		container.append(block);
 	}
 
@@ -97,7 +79,7 @@ class ChatContent {
 		const user = Store.getUser();
 		const renderData = {
 			nickname: user.nickname
-		}
+		};
 
 		return chatComponent.call({}, renderData);
 	}
