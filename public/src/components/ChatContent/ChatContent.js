@@ -77,8 +77,14 @@ class ChatContent {
 
 	render() {
 		const user = Store.getUser();
+		let nickname = user.nickname;
+
+		if (!user.nickname) {
+			nickname = "undef";
+		}
+
 		const renderData = {
-			nickname: user.nickname
+			nickname: nickname
 		};
 
 		return chatComponent.call({}, renderData);
