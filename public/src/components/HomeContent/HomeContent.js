@@ -5,7 +5,7 @@ import homeComponent from 'src/components/HomeContent/template.pug'
 
 class HomeContent {
 	constructor (isAuth) {
-		this.isAuth = Boolean(isAuth[0]);
+		this.isAuth = Boolean(isAuth);
 	}
 
 	render() {

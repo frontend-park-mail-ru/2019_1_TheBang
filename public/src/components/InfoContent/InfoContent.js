@@ -11,7 +11,7 @@ import 'src/components/HomeContent/style.scss';
 
 class InfoContent {
 	constructor (isAuth) {
-		this.isAuth = Boolean(isAuth[0]);
+		this.isAuth = Boolean(isAuth);
 	}
     
 	render() {
