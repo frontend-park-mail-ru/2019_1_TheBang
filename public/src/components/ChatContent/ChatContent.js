@@ -42,6 +42,15 @@ class ChatContent {
 		header.append(authorBlock, sendTime);
 		// block.append(author, message, avatar);
 
+		return block;
+	}
+
+	static appendTop(block) {
+		const container = document.querySelector('.chat__messages');
+		container.prepend(block);
+	}
+
+	static appendBottom(block) {
 		const container = document.querySelector('.chat__messages');
 		// container.append(block);
 

@@ -36,6 +36,12 @@ class Request {
 		return Request.request(path, method, data, url)
 	}
 
+	static chatRequest(path, method, data) {
+		const url = [BackendResource.CHAT_HTTPS, path].join('');
+
+		return Request.request(path, method, data, url)
+	}
+
 	static image(name) {
 		return [BackendResource.BASE_HTTPS, 'icon/', name || 'default_img'].join('');
 	}
