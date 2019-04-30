@@ -22,6 +22,10 @@ class Store {
 		}
 	}
 
+	updateScore(count) {
+		this.score = count;
+	}
+
 }
 
 export default new Store();

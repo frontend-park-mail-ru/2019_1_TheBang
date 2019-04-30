@@ -12,7 +12,7 @@ let MAZE = {};
 let ROWS = 0;
 let COLS = 0;
 
-const EMPTY = 0;
+// const EMPTY = 0;
 const WALL = 1;
 const DIAMOND = 2;
 
@@ -20,7 +20,7 @@ const PLAYER = 20;
 const EXIT = 3;
 const EXIT_READY = 6;
 // const DIAMOND = 2;
-let DIAMOND_COUNT = 0;
+// let DIAMOND_COUNT = 0;
 
 
 class Game {
@@ -85,8 +85,9 @@ class Game {
 				const playersScore = lastData.data.players_score;
 				const gemsMax = lastData.data.max_gems_count;
 
-				if (playersScore[identificator] === gemsMax) {
-					onPageLoad(null, GameWinnerPage);
+				if (playersScore[identificator] === gemsMax || playersScore[identificator] === Math.max.apply(null, Object.values(playersScore))) {
+					onPageLoad(null, GameWinnerPage, playersScore[identificator]);
+					Store.updateScore(playersScore[identificator]);
 					return
 				}
 				onPageLoad(null, GameLosePage);
@@ -125,7 +126,6 @@ class Game {
 					}
 				};
 				console.log('send action', event.keyCode);
-				// MAZE[playerROW][playerCOL] = EMPTY;
 				connection.send(JSON.stringify(action))
 			};
 
@@ -268,8 +268,8 @@ class Game {
 				document.querySelector(id).className = 'block player'
 			}
 			else {
-				document.querySelector(id).className = 'block player bye';
-				document.querySelector('.info').textContent = 'bye!';
+				onPageLoad(null, GameWinnerPage);
+				return
 			}
 
 
@@ -352,7 +352,7 @@ class Game {
 		ROWS = gameData.height;
 		COLS = gameData.width;
 
-		DIAMOND_COUNT = gameData.gems;
+		// DIAMOND_COUNT = gameData.gems;
 
 		const ROTATE_CLASSES = [
 			'rotate__fast-clockwise',
@@ -399,7 +399,7 @@ class Game {
 
 		console.log(data);
 
-		const gems = data.data.gems_count;
+		// const gems = data.data.gems_count;
 		const teleport = data.data.is_teleport;
 		const gemsMax = data.data.max_gems_count;
 		const playersPosition = data.data.players_positions; // nickname: x, y
@@ -413,7 +413,7 @@ class Game {
 		console.log('you here', playerROW, playerCOL);
 
 		const renderMaze = () => {
-			if (playersScore[identificator] < gemsMax) {
+			if (!teleport) {
 				document.querySelector('.info').textContent = 'collect all the gems'
 			} else {
 				MAZE[teleportROW][teleportCOL] = EXIT_READY;
