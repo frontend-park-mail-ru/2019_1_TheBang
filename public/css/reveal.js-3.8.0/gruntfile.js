@@ -1,3 +1,4 @@
+/* eslint-disable */
 const sass = require('node-sass');
 
 module.exports = grunt => {

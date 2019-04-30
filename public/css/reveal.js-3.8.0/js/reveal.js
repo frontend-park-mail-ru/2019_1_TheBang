@@ -1,3 +1,4 @@
+/* eslint-disable */
 /*!
  * reveal.js
  * http://revealjs.com

@@ -34,7 +34,7 @@ class ChatContent {
 		const time = new Date();
 		// time.setTime(data.timestamp);
 		time.setTime(data.timestamp);
-		sendTime.innerText = time.getHours() + ":" + time.getMinutes() + " " + time.toDateString();
+		sendTime.innerText = time.getHours() + ':' + time.getMinutes() + ' ' + time.toDateString();
 		// data.timestamp
 
 		authorBlock.append(avatar, author);
@@ -80,7 +80,7 @@ class ChatContent {
 		let nickname = user.nickname;
 
 		if (!user.nickname) {
-			nickname = "undef";
+			nickname = 'undef';
 		}
 
 		const renderData = {

@@ -21,6 +21,10 @@ class GameLobbyPage extends ContentMixin {
 		EventBus.emit(GameNetworkEvents.GET_ROOMS);
 
 		const refreshLobby = setInterval(() => {
+			if (!document.querySelector('.game-container')) {
+				clearInterval(refreshLobby);
+				return
+			}
 			EventBus.emit(GameNetworkEvents.GET_ROOMS);
 		}, 50);
 
@@ -67,7 +71,6 @@ class GameLobbyPage extends ContentMixin {
 	static onCreateRoom(data) {
 		GameLobbyPage.onSuccess(data);
 		EventBus.emit(GameEvents.GAME_START, data[0].id);
-
 		onPageLoad(null, GameWaitingPage, data[0].room);
 	}
 

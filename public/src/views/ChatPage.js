@@ -69,8 +69,7 @@ class ChatPage extends ContentMixin {
 		const chatBox = document.querySelector('.chat');
 
 		const infinityScroll = () => {
-			console.log(chatBox.scrollTop, chatBox.clientHeight, chatBox.scrollHeight);
-			if (chatBox.scrollTop + chatBox.clientHeight >= chatBox.scrollHeight) {
+			if ((chatBox.scrollTop + chatBox.clientHeight >= chatBox.scrollHeight) && TIMESTAMP_ANCHOR) {
 				EventBus.emit(NetworkEvents.GET_MESSAGES, TIMESTAMP_ANCHOR);
 			}
 		};
@@ -87,7 +86,8 @@ class ChatPage extends ContentMixin {
 			btnLast.remove();
 		}
 
-		TIMESTAMP_ANCHOR = data[data.length - 1];
+		const lastMsg = data[data.length - 1];
+		TIMESTAMP_ANCHOR = lastMsg && lastMsg.timestamp;
 
 		data.forEach((item) => {
 			const msg = ChatContent.createMsg(item);
@@ -96,7 +96,7 @@ class ChatPage extends ContentMixin {
 
 		const chatBox = document.querySelector('.chat');
 
-		if (chatBox.scrollHeight <= chatBox.clientHeight) {
+		if ((chatBox.scrollHeight <= chatBox.clientHeight) && TIMESTAMP_ANCHOR) {
 			EventBus.emit(NetworkEvents.GET_MESSAGES, TIMESTAMP_ANCHOR);
 		}
 	}
