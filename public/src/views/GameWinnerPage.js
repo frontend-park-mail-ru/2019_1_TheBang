@@ -14,9 +14,10 @@ class GameWinnerPage extends ContentMixin {
 
 	afterRender() {
 		const btn = document.querySelector('.link');
-
+		console.log('hello wiinner');
 		const toLobby = () => {
 			onPageLoad(null, GameLobbyPage);
+			console.log('click hello wiinner');
 			btn.removeEventListener('click', toLobby);
 		};
 		btn.addEventListener('click', toLobby)

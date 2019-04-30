@@ -30,7 +30,7 @@ function onPageLoad(event, ControllerRender, ...ControllerArgs) {
 	const element = controller.getTargetRender();
 
 	element.innerHTML = controller.render();
-
+	console.log(controller.afterRender);
 	controller.afterRender()
 }
 
