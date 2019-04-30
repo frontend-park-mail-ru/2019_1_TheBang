@@ -87,7 +87,7 @@ class ChatPage extends ContentMixin {
 			btnLast.remove();
 		}
 
-		TIMESTAMP_ANCHOR = data[data.length - 1];
+		TIMESTAMP_ANCHOR = data[data.length - 1].timestamp;
 
 		data.forEach((item) => {
 			const msg = ChatContent.createMsg(item);
@@ -99,6 +99,8 @@ class ChatPage extends ContentMixin {
 		if (chatBox.scrollHeight <= chatBox.clientHeight) {
 			EventBus.emit(NetworkEvents.GET_MESSAGES, TIMESTAMP_ANCHOR);
 		}
+
+		document.querySelector('.chat__messages').lastElementChild.scrollIntoView(false);
 	}
 }
 

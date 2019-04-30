@@ -73,6 +73,7 @@ class ChatContent {
 	static appendBottom(block) {
 		const container = document.querySelector('.chat__messages');
 		container.append(block);
+		block.scrollIntoView(false);
 	}
 
 	render() {
