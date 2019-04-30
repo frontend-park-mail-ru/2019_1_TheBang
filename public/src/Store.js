@@ -23,7 +23,7 @@ class Store {
 	}
 
 	updateScore(count) {
-		this.score = count;
+		this.score = Number(this.score) + Number(count);
 	}
 
 }

@@ -5,7 +5,11 @@ import GameLobbyPage from 'src/views/GameLobbyPage';
 
 class GameWinnerPage extends ContentMixin {
 	constructor(score) {
-		super(GameAlertContent, 'Вы выиграли!', 'Ваш счет: ' + score);
+		let subtitle = 'Ваш счет: ' + score;
+		if (!score) {
+			subtitle = ''
+		}
+		super(GameAlertContent, 'Вы выиграли!', subtitle);
 	}
 
 	afterRender() {
