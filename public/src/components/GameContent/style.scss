@@ -1,4 +1,5 @@
 .frame {
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -16,6 +17,16 @@
   @media all and (max-width: $screen-md) {
     --block-size: 50px;
   }
+
+  &__controlls {
+    display: none;
+
+    @media all and (max-width: $screen-md) {
+      display: grid;
+      position: absolute;
+      bottom: 20px;
+    }
+  }
 }
 
 .header {
@@ -32,6 +43,10 @@
   flex-direction: row;
   height: var(--game-size);
   width: 100%;
+
+  @media all and (max-width: $screen-md) {
+    height: 100%;
+  }
 }
 
 .board {
@@ -39,18 +54,27 @@
   // height: 100%;
   // width: var(--game-size);
 
-  height: 500px;
-  width: 500px;
+  height: 90%;
+  width: 90%; 
   overflow: scroll;
 
   display: grid;
   grid-template-columns: repeat(var(--matrix-capacity), var(--block-size));
-  grid-template-rows: repeat(var(--matrix-capacity), var(--block-size))
+  grid-template-rows: repeat(var(--matrix-capacity), var(--block-size));
+  justify-content: center;
+
+  &::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  @media all and (max-width: $screen-md) {
+    justify-content: start;
+  }
 }
 
 .space {
   height: var(--game-size);
-  width: calc(100% - var(--game-size) / 2);
+  width: calc((100% - var(--game-size)) / 2);
   background-color: rgba(0, 0, 0, 0.5);
 }
 
@@ -138,7 +162,7 @@
   float: left;
   font-size: 0.9em;
   color: #cbdbfc;
-  line-height: var(--block-size)
+  line-height: var(--block-size);
 }
 
 .bye {

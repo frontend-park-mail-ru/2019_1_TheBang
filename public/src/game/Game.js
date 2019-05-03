@@ -201,10 +201,30 @@ class Game {
 			} while (count !== DIAMOND_COUNT)
 		};
 
+		const createWallBlock = () => {
+			const block = document.createElement('div');
+			block.classList.add('block', 'wall');
+			block.classList.add(ROTATE_CLASSES[Math.floor(Math.random() * ROTATE_CLASSES.length)]);
+
+			return block;
+		}
+
 		const createBoard = () => {
+			const board = document.querySelector('.board');
+
+			for (let col = -1; col < COLS + 1; col++) {
+				const block = createWallBlock();
+				block.id = ['id-', col, '-', -1].join('');
+				board.appendChild(block);
+			}
+
 			for (let row = 0; row < ROWS; row++) {
+				let block = createWallBlock();
+				block.id = ['id-', -1, '-', row].join('');
+				board.appendChild(block);
+
 				for (let col = 0; col < COLS; col++) {
-					const block = document.createElement('div');
+					let block = document.createElement('div');
 					block.id = ['id-', col, '-', row].join('');
 
 					block.classList.add('block');
@@ -220,8 +240,18 @@ class Game {
 
 					block.classList.add('empty');
 
-					document.querySelector('.board').appendChild(block);
-				}
+					board.appendChild(block);
+				};
+
+				block = createWallBlock();
+				block.id = ['id-', COLS, '-', row].join('');
+				board.appendChild(block);
+			};
+
+			for (let col = -1; col < COLS + 1; col++) {
+				const block = createWallBlock();
+				block.id = ['id-', col, '-', ROWS].join('');
+				board.appendChild(block);
 			}
 		};
 
@@ -272,8 +302,8 @@ class Game {
 				return
 			}
 
-
-			document.querySelector('.diamond-count').textContent = bag + '/' + DIAMOND_COUNT
+			document.querySelector('.diamond-count').textContent = bag + '/' + DIAMOND_COUNT;
+			document.querySelector(".player").scrollIntoView({block:"nearest"});
 		};
 
 		generateDiamond();
@@ -303,6 +333,7 @@ class Game {
 
 		const changePlayerPos = (direction) => {
 			let [dy, dx] = [0, 0];
+
 			switch (direction) {
 			case UP:
 				dy = -1; break;
@@ -328,9 +359,12 @@ class Game {
 					bag++
 				}
 
-				renderMaze()
+				renderMaze();
+				document.querySelector(".player").scrollIntoView({block:"nearest"});
+			} else {
+				const id = ['#id-', x, '-', y].join('');
+				document.querySelector(id).scrollIntoView({block:"nearest"});
 			}
-
 		}
 	}
 
