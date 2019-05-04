@@ -22,8 +22,9 @@
   &__buttons {
     display: flex;
     flex-direction: row;
-    width: 100%;
-    justify-content: center;
+    padding-left: 50px;
+    width: calc(100% - 50px);
+    justify-content: flex-start;
     align-items: center;
 
     @media all and (max-width: $screen-md) {
@@ -67,6 +68,13 @@
     }
   }
 
+  &__space {
+    position: relative;
+    height: var(--game-size);
+    width: calc((100% - var(--game-size)) / 2);
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
   &__controlls {
     display: none;
 
@@ -84,7 +92,7 @@
     padding-right: 10px;
     width: calc(100% - 10px);
     height: $game-footer_height;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.8);
   }
 
   &__show {
@@ -120,6 +128,7 @@
   align-items: flex-end;
   height: var(--game-size);
   width: 100%;
+  overflow: hidden;
 }
 
 .board {
@@ -144,12 +153,6 @@
   @media all and (max-width: $screen-md) {
     justify-content: start;
   }
-}
-
-.space {
-  height: var(--game-size);
-  width: calc((100% - var(--game-size)) / 2);
-  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .block {

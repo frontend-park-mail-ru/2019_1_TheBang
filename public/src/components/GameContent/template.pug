@@ -16,9 +16,13 @@
                     .diamond-count
         .frame__help Keys: &larr; &rarr; &uarr; &darr;
     .game-container
-        .space
+        .frame__space
+            include /pug-mixins/left-board/left-board.pug
+            +left-board()
         .board
-        .space
+        .frame__space
+            include /pug-mixins/right-board/right-board.pug
+            +right-board()
     .frame__footer
         .frame__show
             include /pug-mixins/link/link.pug

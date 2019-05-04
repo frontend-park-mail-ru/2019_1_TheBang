@@ -1,0 +1,50 @@
+.right-board {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+
+    &__meteorits {
+        position: absolute;
+        z-index: 1;
+        right: 1%;
+        top: 5%;
+        width: 50%;
+        height: 30%;
+        background-image: url("./img/meteor.svg");
+        background-size: 100% 100%;
+    }
+
+    &__planets {
+        position: absolute;
+        z-index: 0;
+        top: 10%;
+        left: 5%;
+        width: 90%;
+        height: 50%;
+        transform: rotate(180deg);
+        background-image: url("./img/eclipse.svg");
+        background-size: 100% 100%;
+    }
+
+    &__stars {
+        position: absolute;
+        z-index: 1;
+        bottom: 1%;
+        width: 90%;
+        height: 40%;
+        background-image: url("./img/stars.svg");
+        background-size: 100% 100%;
+    }
+
+    &__black-hole {
+        position: absolute;
+        bottom: 10%;
+        right: 10%;
+        width: 50%;
+        height: 20%;
+        background-image: url("./img/blackhole.svg");
+        background-size: 100% 100%;
+    }
+}
