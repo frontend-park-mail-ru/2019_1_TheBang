@@ -19,7 +19,10 @@
         .space
         .board
         .space
-    .footer
+    .frame__footer
+        .frame__show
+            include /pug-mixins/link/link.pug
+            +link('', '', 'home')
     .frame__controlls
         include /pug-mixins/controlls/controlls.pug
         +controlls()
