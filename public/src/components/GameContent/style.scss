@@ -132,12 +132,6 @@
 }
 
 .board {
-  // height: calc(var(--matrix-capacity) * var(--block-size));
-  // height: 100%;
-  // width: var(--game-size);
-
-  // height: 90%;
-  // width: 90%; 
   height: calc(var(--game-size) - 20px);
   overflow: scroll;
 
