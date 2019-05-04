@@ -16,3 +16,5 @@ mixin link(title, path_target, type)
         when 'external'
             a.link(href=path_target, target="_blank").button.button-menu
                 b= title
+        when 'home'
+            a.link-home(href='#/' + path_target)
