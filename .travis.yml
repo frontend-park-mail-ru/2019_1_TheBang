@@ -8,6 +8,8 @@ cache:
   directories:
     # we also need to cache folder with Cypress binary
     - ~/.cache
+env:
+  - PORT=9080
 install:
   - npm i && npm run build
 script:
