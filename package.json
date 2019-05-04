@@ -10,7 +10,7 @@
     "watch": "webpack -w",
     "now-build": "webpack --config webpack/webpack.prod.js",
     "cy:run": "cypress run",
-    "test": "start-server-and-test start http://localhost:8080 cy:run"
+    "test": "start-server-and-test start http://localhost:9080 cy:run"
   },
   "repository": {
     "type": "git",
