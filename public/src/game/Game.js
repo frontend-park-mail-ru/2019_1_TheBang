@@ -30,6 +30,7 @@ class Game {
      */
 
 	static start(roomID) {
+		const touchPad = document.querySelector('.controlls');
 
 		if (roomID) {
 			const url = [BackendResource.GAME_WSS, 'room/', roomID].join('');
@@ -42,6 +43,7 @@ class Game {
 			connection.onopen = () => {
 				const change = () => {
 					console.log('out game');
+					// document.removeEventListener('keydown', keyHandler);
 					window.removeEventListener('hashchange', change);
 					connection.close()
 				};
@@ -101,36 +103,91 @@ class Game {
 			const LEFT = 37;
 			const RIGHT = 39;
 
-			const keyHandler = (event) => {
-				switch (event.keyCode) {
-				case RIGHT:
-					console.log('right');
-					direction = 'down';  break;
-				case LEFT:
-					console.log('left');
-					direction = 'up'; break;
-				case UP:
-					console.log('up');
-					direction = 'left'; break;
-				case DOWN:
-					console.log('down');
-					direction = 'right'; break;
-				}
+			if (touchPad) {
 
-				const action = {
-					type: 'action',
-					data: {
-						time: 'Date.now()',
-						player: identificator,
-						move: direction
+				const touchUp = document.querySelector('.controlls__up');
+				touchUp.dataset.direction = UP;
+				const touchLeft = document.querySelector('.controlls__left');
+				touchUp.dataset.direction = LEFT;
+				const touchRight = document.querySelector('.controlls__right');
+				touchUp.dataset.direction = RIGHT;
+				const touchDown = document.querySelector('.controlls__down');
+				touchUp.dataset.direction = DOWN;
+
+				const touchMove = (event) => {
+					switch (Number(event.dataset.direction)) {
+					case RIGHT:
+						console.log('right');
+						direction = 'down';
+						break;
+					case LEFT:
+						console.log('left');
+						direction = 'up';
+						break;
+					case UP:
+						console.log('up');
+						direction = 'left';
+						break;
+					case DOWN:
+						console.log('down');
+						direction = 'right';
+						break;
 					}
+
+					const action = {
+						type: 'action',
+						data: {
+							time: 'Date.now()',
+							player: identificator,
+							move: direction
+						}
+					};
+					console.log('send action', event.keyCode);
+					connection.send(JSON.stringify(action))
 				};
-				console.log('send action', event.keyCode);
-				connection.send(JSON.stringify(action))
-			};
 
-			document.addEventListener('keydown', keyHandler);
+				touchUp.addEventListener('touchend', touchMove);
+				touchLeft.addEventListener('touchend', touchMove);
+				touchRight.addEventListener('touchend', touchMove);
+				touchDown.addEventListener('touchend', touchMove);
 
+			} else {
+
+				const keyHandler = (event) => {
+					switch (event.keyCode) {
+					case RIGHT:
+						console.log('right');
+						direction = 'down';
+						break;
+					case LEFT:
+						console.log('left');
+						direction = 'up';
+						break;
+					case UP:
+						console.log('up');
+						direction = 'left';
+						break;
+					case DOWN:
+						console.log('down');
+						direction = 'right';
+						break;
+					}
+
+					const action = {
+						type: 'action',
+						data: {
+							time: 'Date.now()',
+							player: identificator,
+							move: direction
+						}
+					};
+					console.log('send action', event.keyCode);
+					connection.send(JSON.stringify(action))
+				};
+
+				document.addEventListener('keydown', keyHandler);
+				Game.unlockKeyBoard(keyHandler);
+			}
 			return
 		}
 
@@ -201,7 +258,7 @@ class Game {
 			block.classList.add(ROTATE_CLASSES[Math.floor(Math.random() * ROTATE_CLASSES.length)]);
 
 			return block;
-		}
+		};
 
 		const createBoard = () => {
 			const board = document.querySelector('.frame__board');
@@ -309,26 +366,69 @@ class Game {
 		renderMaze();
 		let direction = 0;
 
-		const keyHandler = (event) => {
-			switch (event.keyCode) {
-			case DOWN:
-				direction = DOWN;  break;
-			case UP:
-				direction = UP; break;
-			case LEFT:
-				direction = LEFT; break;
-			case RIGHT:
-				direction = RIGHT; break;
-			}
+		if (touchPad) {
 
-			if (direction !== 0) {
-				changePlayerPos(direction)
-			}
-		};
+			const touchUp = document.querySelector('.controlls__up');
+			touchUp.dataset.direction = UP;
+			const touchLeft = document.querySelector('.controlls__left');
+			touchUp.dataset.direction = LEFT;
+			const touchRight = document.querySelector('.controlls__right');
+			touchUp.dataset.direction = RIGHT;
+			const touchDown = document.querySelector('.controlls__down');
+			touchUp.dataset.direction = DOWN;
 
-		document.addEventListener('keydown', keyHandler);
-		Game.unlockKeyBoard(keyHandler);
+			const touchMove = (event) => {
+				switch (Number(event.dataset.direction)) {
+				case RIGHT:
+					direction = RIGHT;
+					break;
+				case LEFT:
+					direction = LEFT;
+					break;
+				case UP:
+					direction = UP;
+					break;
+				case DOWN:
+					direction = DOWN;
+					break;
+				}
 
+				if (direction !== 0) {
+					changePlayerPos(direction)
+				}
+			};
+
+			touchUp.addEventListener('touchend', touchMove);
+			touchLeft.addEventListener('touchend', touchMove);
+			touchRight.addEventListener('touchend', touchMove);
+			touchDown.addEventListener('touchend', touchMove);
+
+		} else {
+
+			const keyHandler = (event) => {
+				switch (event.keyCode) {
+				case DOWN:
+					direction = DOWN;
+					break;
+				case UP:
+					direction = UP;
+					break;
+				case LEFT:
+					direction = LEFT;
+					break;
+				case RIGHT:
+					direction = RIGHT;
+					break;
+				}
+
+				if (direction !== 0) {
+					changePlayerPos(direction)
+				}
+			};
+
+			document.addEventListener('keydown', keyHandler);
+			Game.unlockKeyBoard(keyHandler);
+		}
 		const changePlayerPos = (direction) => {
 			let [dy, dx] = [0, 0];
 
@@ -398,7 +498,7 @@ class Game {
 			block.classList.add(ROTATE_CLASSES[Math.floor(Math.random() * ROTATE_CLASSES.length)]);
 
 			return block;
-		}
+		};
 
 		const createBoard = () => {
 			const board = document.querySelector('.frame__board');
