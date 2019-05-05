@@ -5,7 +5,7 @@ const build = path.resolve(__dirname, '../dist');
 const HtmlWebpackPlugin = require ('html-webpack-plugin');
 
 
-module.exports = {
+module.exports =  {
 	entry: path.resolve(src, 'app.js'),
 	output: {
 		path: build,

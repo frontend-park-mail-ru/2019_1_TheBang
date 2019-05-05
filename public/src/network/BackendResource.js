@@ -1,6 +1,6 @@
-const PORT_BASE = process.env.PORT_BASE || 8004; // 8001
-const PORT_GAME = process.env.PORT_GAME || 8005; // 8002
-const PORT_CHAT = process.env.PORT_CHAT || 8006; // 8003
+const PORT_BASE = process.env.PORT_BASE || 8004;
+const PORT_GAME = process.env.PORT_GAME || 8005;
+const PORT_CHAT = process.env.PORT_CHAT || 8006;
 
 const HTTP = 'http://';
 const WS = 'ws://';
@@ -9,7 +9,7 @@ const LOCAL_PREFIX = '127.0.0.1:';
 const END_SLASH = '/';
 let CURRENT_MODE = BACKEND_PREFIX;
 
-if (!process.env.PORT_BASE) {
+if (process.env.NODE_ENV === 'local') {
 	CURRENT_MODE = LOCAL_PREFIX
 }
 
