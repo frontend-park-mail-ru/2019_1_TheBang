@@ -152,10 +152,10 @@
         }
         @keyframes cog4 {
         from {
-            transform:rotate(0deg) translateX(250px) rotate(0deg);
+            transform:rotate(0deg) translateX(180%) rotate(0deg);
         }
         to {
-            transform:rotate(360deg) translateX(250px) rotate(-360deg);
+            transform:rotate(360deg) translateX(180%) rotate(-360deg);
         }
     }
 

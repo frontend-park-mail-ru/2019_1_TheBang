@@ -292,12 +292,15 @@ class Game {
 				document.querySelector(id).className = 'frame__block frame__block-player'
 			}
 			else {
-				onPageLoad(null, GameWinnerPage);
+				document.querySelector(id).className = 'frame__block frame__block-player frame__block-bye';
+				document.querySelector('.info').textContent = 'bye!';
+
+				document.removeEventListener('keydown', keyHandler);
+
+				const popup = document.createElement('div');
+				document.getElementById('root').append(popup);
+				setTimeout(onPageLoad, 1000, null, GameWinnerPage, popup, null);
 				return
-				// =======
-				// 				document.querySelector(id).className = 'frame__block frame__block-player frame__block-bye';
-				// 				document.querySelector('.info').textContent = 'bye!';
-				// >>>>>>> T60 поменяла имена классов на странице игры
 			}
 
 			document.querySelector('.frame__diamond-count-js').textContent = bag + '/' + DIAMOND_COUNT;

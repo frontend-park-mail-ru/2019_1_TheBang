@@ -1,0 +1,14 @@
+include /pug-mixins/title/title
++title("Вы выиграли!")
+.popup__score
+    h2=score
+    .popup__score-icon
+.popup__gif
+    .popup__alien
+    .popup__star.rotate__fast-around
+.popup__buttons
+    include /pug-mixins/link/link
+    +link('Домой', '', 'secondary')
+    include /pug-mixins/button/button
+    +button('Играть', 'primary')
+
