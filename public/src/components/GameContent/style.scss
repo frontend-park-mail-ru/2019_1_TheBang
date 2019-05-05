@@ -11,11 +11,15 @@
   --block-size: calc(var(--game-size) / var(--matrix-capacity));
   color: white;
 
-  @media all and (orientation: portrait) {
-     --game-size: calc(100vh - #{$game-header_height} - #{$game-footer_height} - 20px);
+  @media (pointer: coarse) {
+    --game-size: calc(100vh - #{$game-header_height} - #{$game-footer_height} - 20px);
   }
 
-  @media all and (max-width: $screen-md) {
+  @media (pointer: coarse) and (max-width: $screen-md) {
+    --block-size: 50px;
+  }
+
+  @media screen and (max-height: $screen-md) {
     --block-size: 50px;
   }
 
@@ -27,8 +31,14 @@
     justify-content: flex-start;
     align-items: center;
 
-    @media all and (max-width: $screen-md) {
+    @media screen and (max-width: $screen-md), (pointer: coarse) {
       display: none;
+    }
+
+    @media screen and (min-width: $screen-md) and (max-width: $screen-lg) {
+      padding-left: 0;
+      width: 20%;
+      justify-content: center;
     }
   }
 
@@ -39,6 +49,10 @@
     justify-content: space-between;
     align-items: center;
     text-align: center;
+
+    @media screen and (min-width: $screen-md) and (max-width: $screen-lg) {
+      width: 60%;
+    }
   }
 
   &__score {
@@ -63,9 +77,22 @@
   }
 
   &__help {
-    @media all and (max-width: $screen-md) {
+    @media screen and (min-width: $screen-md) and (max-width: $screen-lg) {
+      display: flex;
+      justify-content: center;
+      width: 20%;
+    }
+
+    @media screen and (max-width: $screen-md), (pointer: coarse) {
       display: none;
     }
+  }
+
+  &__diamond {
+    width: 50px;
+    height: 50px;
+    background-image: url("./img/star.svg");
+    background-size: cover;
   }
 
   &__space {
@@ -73,15 +100,20 @@
     height: var(--game-size);
     width: calc((100% - var(--game-size)) / 2);
     background-color: rgba(0, 0, 0, 0.5);
+
+    @media (pointer: coarse) and (orientation: landscape) and (max-height: $screen-sm) {
+      display: none;
+    }
   }
 
   &__controlls {
     display: none;
 
-    @media all and (max-width: $screen-md) {
+    @media (pointer: coarse) {
       display: grid;
       position: absolute;
       bottom: 20px;
+      z-index: 11;
     }
   }
 
@@ -98,7 +130,7 @@
   &__show {
     display: none;
 
-    @media all and (max-width: $screen-md) {
+    @media screen and (max-width: $screen-md), (pointer: coarse) {
       display: flex;
     }
   }
@@ -116,9 +148,23 @@
   border: 1px solid white;
   border-radius: 20px;
   
-  @media all and (max-width: $screen-md) {
+  @media screen and (max-width: $screen-md) {
+    grid-template-columns: 1fr;
+  }
+  
+  @media (pointer: coarse) {
     margin-top: 20px;
     grid-template-columns: 1fr;
+  }
+
+  @media screen and (min-width: $screen-md) and (max-width: $screen-lg) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  @media screen and (max-height: $screen-md) and (min-width: $screen-md) {
+    grid-template-columns: 1fr 4fr 1fr;
   }
 }
 
@@ -138,13 +184,13 @@
   display: grid;
   grid-template-columns: repeat(var(--matrix-capacity), var(--block-size));
   grid-template-rows: repeat(var(--matrix-capacity), var(--block-size));
-  justify-content: center;
+  // justify-content: center;
 
   &::-webkit-scrollbar {
     width: 0px;
   }
 
-  @media all and (max-width: $screen-md) {
+  @media screen and (max-width: $screen-md), (pointer: coarse) {
     justify-content: start;
   }
 }
@@ -153,6 +199,7 @@
   width: var(--block-size);
   height: var(--block-size);
   background-size: cover;
+  z-index: 10;
 }
 
 .diamond-count {}
