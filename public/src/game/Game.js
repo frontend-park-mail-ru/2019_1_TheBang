@@ -108,11 +108,11 @@ class Game {
 				const touchUp = document.querySelector('.controlls__up');
 				touchUp.dataset.direction = UP;
 				const touchLeft = document.querySelector('.controlls__left');
-				touchUp.dataset.direction = LEFT;
+				touchLeft.dataset.direction = LEFT;
 				const touchRight = document.querySelector('.controlls__right');
-				touchUp.dataset.direction = RIGHT;
+				touchRight.dataset.direction = RIGHT;
 				const touchDown = document.querySelector('.controlls__down');
-				touchUp.dataset.direction = DOWN;
+				touchDown.dataset.direction = DOWN;
 
 				const touchMove = (event) => {
 					switch (Number(event.target.dataset.direction)) {
@@ -371,13 +371,14 @@ class Game {
 			const touchUp = document.querySelector('.controlls__up');
 			touchUp.dataset.direction = UP;
 			const touchLeft = document.querySelector('.controlls__left');
-			touchUp.dataset.direction = LEFT;
+			touchLeft.dataset.direction = LEFT;
 			const touchRight = document.querySelector('.controlls__right');
-			touchUp.dataset.direction = RIGHT;
+			touchRight.dataset.direction = RIGHT;
 			const touchDown = document.querySelector('.controlls__down');
-			touchUp.dataset.direction = DOWN;
+			touchDown.dataset.direction = DOWN;
 
 			const touchMove = (event) => {
+				// console.log(Number(event.target.dataset.direction));
 				switch (Number(event.target.dataset.direction)) {
 				case RIGHT:
 					direction = RIGHT;
