@@ -115,7 +115,7 @@ class Game {
 				touchUp.dataset.direction = DOWN;
 
 				const touchMove = (event) => {
-					switch (Number(event.dataset.direction)) {
+					switch (Number(event.target.dataset.direction)) {
 					case RIGHT:
 						console.log('right');
 						direction = 'down';
@@ -378,7 +378,7 @@ class Game {
 			touchUp.dataset.direction = DOWN;
 
 			const touchMove = (event) => {
-				switch (Number(event.dataset.direction)) {
+				switch (Number(event.target.dataset.direction)) {
 				case RIGHT:
 					direction = RIGHT;
 					break;
