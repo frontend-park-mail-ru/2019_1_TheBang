@@ -51,3 +51,6 @@ EventBus.on(PageEvents.CREATE_CHAT_MESSAGES, View.ChatPage.onCreateMessages);
 EventBus.on(NetworkEvents.GET_MESSAGES, ChatNetwork.onGetMessages);
 
 EventBus.on(NetworkEvents.AUTH_VK, Network.onVkAuth);
+
+EventBus.on(NetworkEvents.DELETE_CHAT_MESSAGE, ChatNetwork.onDeleteMessage);
+EventBus.on(NetworkEvents.EDIT_CHAT_MESSAGE, ChatNetwork.onEditMessage);

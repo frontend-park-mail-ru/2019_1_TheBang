@@ -24,10 +24,25 @@ class ChatPage extends ContentMixin {
 		const input = document.querySelector('.chat__input');
 
 		function sendMsg() {
-			const messageDOM = document.getElementsByName('chat-message')[0];
+			const messageDOM = document.querySelector('.chat__input');
 			const message = messageDOM.value;
 
-			if (!message) {
+			if (!message || !message.trim()) {
+				return
+			}
+
+			messageDOM.value = '';
+
+			if (messageDOM.dataset.edited) {
+				const data = {
+					timestamp: Number(messageDOM.dataset.timestamp),
+					message: message,
+					author: messageDOM.dataset.author,
+				};
+				EventBus.emit(NetworkEvents.EDIT_CHAT_MESSAGE, data);
+				messageDOM.removeAttribute('data-timestamp');
+				messageDOM.removeAttribute('data-author');
+				messageDOM.removeAttribute('data-edited');
 				return
 			}
 
@@ -36,9 +51,8 @@ class ChatPage extends ContentMixin {
 				message: message
 			};
 
-			connection.send(JSON.stringify(data));
 
-			messageDOM.value = '';
+			connection.send(JSON.stringify(data));
 		}
 
 		btn.addEventListener('click', sendMsg);
@@ -62,7 +76,24 @@ class ChatPage extends ContentMixin {
 		window.addEventListener('hashchange', change);
 
 		connection.onmessage = e => {
-			const msg = ChatContent.createMsg(JSON.parse(e.data));
+			const data = JSON.parse(e.data);
+
+			if (data.deleted) {
+				const msgBlock = ChatPage.getMessage(data.author, data.timestamp.toString());
+				if (msgBlock) {
+					msgBlock.remove();
+				}
+				return
+			}
+
+			if (data.edited) {
+				const msgBlock = ChatPage.getMessage(data.author, data.timestamp.toString());
+				const msg = msgBlock.querySelector('.chat__message');
+				msg.innerText = data.message + ' (edit)';
+				return
+			}
+
+			const msg = ChatContent.createMsg(data);
 			ChatContent.appendBottom(msg);
 		};
 
@@ -77,7 +108,13 @@ class ChatPage extends ContentMixin {
 		chatBox.addEventListener('scroll', infinityScroll);
 	}
 
-
+	static getMessage(author, timestamp) {
+		const msgBlock = document.querySelector('.chat__messages');
+		const authorData = '[data-author="' + author + '"]';
+		const timestampData = '[data-timestamp="' + timestamp + '"]';
+		const el = msgBlock.querySelector(authorData + timestampData);
+		return el.parentNode;
+	}
 
 	static onCreateMessages(data) {
 		if (!data) {
