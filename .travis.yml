@@ -5,28 +5,26 @@ cache:
   npm: true
   directories:
   - "~/.cache"
-env:
-- PORT=9080
-install:
-- npm run heroku-postbuild
 jobs:
   include:
     - stage: "E2E Tests"
-      script: npm run test
+      env:
+      - PORT_TEST=9080
+      script: npm run heroku-postbuild && npm run test
     - stage: "Deploy DEV"
       if: branch = develop
       env:
-        - PORT_BASE=8004
-        - PORT_GAME=8005
-        - PORT_CHAT=8006
-      script: bash deploy.sh
+      - PORT_BASE=8004
+      - PORT_GAME=8005
+      - PORT_CHAT=8006
+      script: npm run heroku-postbuild && bash deploy.sh
     - stage: "Deploy PROD"
       if: branch = master
       env:
       - PORT_BASE=8001
       - PORT_GAME=8002
       - PORT_CHAT=8003
-      script: bash deploy.sh
+      script: npm run heroku-postbuild && bash deploy.sh
 before_install:
 - openssl aes-256-cbc -K $encrypted_5f1908ef1e01_key -iv $encrypted_5f1908ef1e01_iv
   -in 2019_1_TheBang_id_rsa.pem.enc -out ./2019_1_TheBang_id_rsa.pem -d
