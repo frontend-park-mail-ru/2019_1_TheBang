@@ -47,6 +47,7 @@
     &__delete {
       width: 30px;
       height: 30px;
+      cursor: pointer;
       background-image: url("./img/garbage.svg");
       background-size: cover;
     }
@@ -54,6 +55,7 @@
     &__edit {
       width: 30px;
       height: 30px;
+      cursor: pointer;
       background-image: url("./img/edit.svg");
       background-size: cover;
     }

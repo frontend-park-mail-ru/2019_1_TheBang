@@ -13,6 +13,14 @@ class ChatNetwork {
 				EventBus.emit(PageEvents.CREATE_CHAT_MESSAGES, data)
 			})
 	}
+
+	static onDeleteMessage(data) {
+		Request.chatRequest('message', 'DELETE', JSON.stringify(data))
+	}
+
+	static onEditMessage(data) {
+		Request.chatRequest('message', 'PUT', JSON.stringify(data))
+	}
 }
 
 export default ChatNetwork;
