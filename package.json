@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --config webpack/webpack.dev.js",
+    "build:dev": "webpack --env.PORT_BASE=8004 --env.PORT_GAME=8005 --env.PORT_CHAT=8006 --config webpack/webpack.dev.js",
     "start": "node server",
-    "heroku-postbuild": "webpack --config webpack/webpack.prod.js",
+    "build:prod": "webpack --env.PORT_BASE=8001 --env.PORT_GAME=8002 --env.PORT_CHAT=8003 --config webpack/webpack.prod.js",
     "watch": "webpack -w",
     "now-build": "webpack --config webpack/webpack.prod.js",
     "cy:run": "cypress run",
