@@ -11,12 +11,21 @@ install:
 - npm run heroku-postbuild
 jobs:
   include:
-    - stage: test
-      name: "E2E Tests"
+    - stage: "E2E Tests"
       script: npm run test
-    - stage: deploy
-      name: "Deploy"
+    - stage: "Deploy DEV"
       if: branch = develop
+      env:
+        - PORT_BASE=8004
+        - PORT_GAME=8005
+        - PORT_CHAT=8006
+      script: bash deploy.sh
+    - stage: "Deploy PROD"
+      if: branch = master
+      env:
+      - PORT_BASE=8001
+      - PORT_GAME=8002
+      - PORT_CHAT=8003
       script: bash deploy.sh
 before_install:
 - openssl aes-256-cbc -K $encrypted_5f1908ef1e01_key -iv $encrypted_5f1908ef1e01_iv

@@ -1,3 +1,4 @@
+// У нас nginx теперь этим вообще не пользуемся!
 const express = require('express');
 
 const app = express();
