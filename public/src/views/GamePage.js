@@ -27,6 +27,9 @@ class GamePage{
 
 		// document.addEventListener('keydown', fullScreenEvent);
 
+		// сюда вместо 12 писать с бека размерность лабиринта
+		document.querySelector('.frame').style.setProperty('--matrix-capacity', 12 + 2);
+
 		EventBus.emit(GameEvents.GAME_START);
 	}
 }

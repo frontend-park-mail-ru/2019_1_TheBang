@@ -1,141 +1,246 @@
-// body {
-//   margin: 0;
-//   padding: 0;
-//   // background: #00272f;
-// }
-
 .frame {
-  --block-size: 45px;
-  top: 50%;
-  left: 50%;
-  margin-left: calc(-6 * var(--block-size));
-  margin-top: calc(-7 * var(--block-size));
-  height: calc(14 * var(--block-size));
-  width: calc(12 * var(--block-size));
-  position: absolute;
+  position: relative;
   display: flex;
   flex-direction: column;
-  // grid-template-rows: var(--block-size) calc(12 * var(--block-size)) var(--block-size);
-}
-
-.header {
-  display: flex;
   align-items: center;
-  justify-content: space-around;
-  background-color: $content-color;
-  height: calc(var(--block-size) + 10px);
-}
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+  --matrix-capacity: 14;
+  --game-size: calc(100vh - #{$game-header_height} - #{$game-footer_height});
+  --block-size: calc(var(--game-size) / var(--matrix-capacity));
+  color: white;
 
-.board {
-  height: calc(12 * var(--block-size));
-  width: calc(12 * var(--block-size));
-  // background: #5fcde4;
-  border-radius: 8px;
-  display: grid;
-  grid-template-columns: repeat(12, var(--block-size));
-  grid-template-rows: repeat(12, var(--block-size))
-}
-
-.block {
-  width: var(--block-size);
-  height: var(--block-size);
-  border-radius: 8px;
-  // background: url('./img/ground.jpg');
-  background-size: cover;
-}
-
-.empty {
-  // background: #cbdbfc;
-}
-
-.wall {
-  width: var(--block-size);
-  height: var(--block-size);
-  background-size: cover;
-  background: url('./img/stone-rock-svgrepo-com.svg');
-  // box-sizing: border-box;
-}
-
-.diamond {
-  background-size: var(--block-size, --block-size);
-  background-position: center center;
-  background: url('./img/star.svg');
-  // background-color: #cbdbfc;
-  // opacity: 0.3;
-
-  &__craft {
-    background: url('./img/craft.svg');
+  @media (pointer: coarse) {
+    --game-size: calc(100vh - #{$game-header_height} - #{$game-footer_height} - 20px);
   }
 
-  &__sun {
-    background: url('./img/sun.svg');
+  @media (pointer: coarse) and (max-width: $screen-md) {
+    --block-size: 50px;
   }
 
-  &__blackhole {
-    background: url('./img/blackhole.svg');
+  @media screen and (max-height: $screen-md) {
+    --block-size: 50px;
   }
-}
 
-.exit {
-  background: url(./img/jupiter.svg);
-  opacity: 0;
-}
-
-.exit.show {
-  opacity: 1;
-}
-
-.player {
-  background: url('./img/player.svg');
-  background-position: center center;
-  background-size: var(--block-size, --block-size);
-  // background-color: #cbdbfc
-}
-
-.header .diamond {
-  background-color: transparent;
-  float: right;
-}
-
-.diamond-count,
-.footer {
-  color: #cbdbfc;
-  line-height: 35px;
-  padding-left: 15px;
-  font-family: Sans;
-}
-
-.diamond-count {
-  float: right;
-}
-
-.footer {
-  text-align: center
-}
-
-.help {
-  float: left;
-  font-size: 0.9em;
-  color: #cbdbfc;
-  line-height: var(--block-size)
-}
-
-.bye {
-  animation: 1s linear teleport;
-  animation-fill-mode: forwards;
-}
-
-@keyframes teleport {
-  0% {
-    opacity: 1;
+  &__header {
+    display: grid;
+    grid-template-columns: calc((100% - var(--game-size)) / 2 - 1px) var(--game-size) calc((100% - var(--game-size)) / 2 - 1px);
+    align-items: center;
+    justify-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: calc(100% - 2px);
+    height: calc(#{$game-header_height} - 2px);
+    background-color: $menu_button_color;
+    border: 1px solid white;
+    border-radius: 20px;
+    
+    @media screen and (max-width: $screen-md) {
+      grid-template-columns: 1fr;
+    }
+    
+    @media (pointer: coarse) {
+      margin-top: 20px;
+      grid-template-columns: 1fr;
+    }
+  
+    @media screen and (min-width: $screen-md) and (max-width: $screen-lg) {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+    }
+  
+    @media screen and (max-height: $screen-md) and (min-width: $screen-md) {
+      grid-template-columns: 1fr 4fr 1fr;
+    }
   }
-  80% {
-    opacity: 0;
+
+  &__buttons {
+    display: flex;
+    flex-direction: row;
+    padding-left: 50px;
+    width: calc(100% - 50px);
+    justify-content: flex-start;
+    align-items: center;
+
+    @media screen and (max-width: $screen-md), (pointer: coarse) {
+      display: none;
+    }
+
+    @media screen and (min-width: $screen-md) and (max-width: $screen-lg) {
+      padding-left: 0;
+      width: 20%;
+      justify-content: center;
+    }
   }
-  100% {
-    background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pjxzdmcgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMTI4IDEyODsiIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDEyOCAxMjgiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6IzFDQTJCQjt9Cgkuc3Qxe2ZpbGw6I0VBQzEwMDt9Cjwvc3R5bGU+PGcgaWQ9Il94MzFfMl8zRF9QcmludGluZyIvPjxnIGlkPSJfeDMxXzFfVlJfR2VhciIvPjxnIGlkPSJfeDMxXzBfVmlydHVhbF9yZWFsaXR5Ii8+PGcgaWQ9Il94MzlfX0F1Z21lbnRlZF9yZWFsaXR5Ii8+PGcgaWQ9Il94MzhfX1RlbGVwb3J0Ij48Zz48ZWxsaXBzZSBjbGFzcz0ic3QxIiBjeD0iNjQiIGN5PSI4OCIgcng9IjUyIiByeT0iMjAiLz48Zz48cmVjdCBoZWlnaHQ9IjgiIHdpZHRoPSI4IiB4PSI5MiIgeT0iMjgiLz48cmVjdCBoZWlnaHQ9IjgiIHdpZHRoPSI4IiB4PSIyOCIgeT0iMTYiLz48cmVjdCBoZWlnaHQ9IjgiIHdpZHRoPSI4IiB4PSI0NCIgeT0iNDAiLz48cGF0aCBkPSJNMTEyLDQwdjM1LjJjLTMuMy0yLjMtNy4zLTQuMi0xMi01LjhWNDRoLTh2MjMuMUM4My4zLDY1LDczLjYsNjQsNjQsNjRjLTQsMC04LDAuMi0xMiwwLjVWNTZoLTh2OS41ICAgICBjLTIuNywwLjQtNS40LDEtOCwxLjZWMzJoLTh2MzcuNGMtNC43LDEuNi04LjcsMy41LTEyLDUuOFY1Nkg4djMyYzAsMTUuNiwyOC45LDI0LDU2LDI0czU2LTguNCw1Ni0yNFY0MEgxMTJ6IE0xNiw4OCAgICAgYzAtNSwxMC4zLTExLjUsMjgtMTQuNHYyOC45QzI2LjMsOTkuNSwxNiw5MywxNiw4OHogTTg4LDEwMS43VjgwaC04djIzYy00LjksMC42LTEwLjIsMS0xNiwxYy00LjIsMC04LjItMC4yLTEyLTAuNVY3Mi41ICAgICBjMy44LTAuMyw3LjgtMC41LDEyLTAuNWMyOS43LDAsNDgsOS4zLDQ4LDE2QzExMiw5Mi42LDEwMy4yLDk4LjUsODgsMTAxLjd6Ii8+PC9nPjwvZz48L2c+PGcgaWQ9Il94MzdfX0dsYXNzZXNzIi8+PGcgaWQ9Il94MzZfX0ZvbGRpbmdfcGhvbmUiLz48ZyBpZD0iX3gzNV9fRHJvbmUiLz48ZyBpZD0iX3gzNF9fUmV0aW5hX3NjYW4iLz48ZyBpZD0iX3gzM19fU21hcnR3YXRjaCIvPjxnIGlkPSJfeDMyX19CaW9uaWNfQXJtIi8+PGcgaWQ9Il94MzFfX0NoaXAiLz48L3N2Zz4=') no-repeat;
-    background-size: var(--block-size, --block-size);
-    background-position: center center;
-    // background-color: #cbdbfc;
+
+  &__game-info {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+
+    @media screen and (min-width: $screen-md) and (max-width: $screen-lg) {
+      width: 60%;
+    }
+  }
+
+  &__score {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+  }
+
+  &__user-info {
+    display: grid;
+    grid-template-columns: auto 50px;
+    justify-items: center;
+    align-items: center;
+  }
+
+  &__avatar {
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    background-image: url("./img/player.svg");
+  }
+
+  &__help {
+    @media screen and (min-width: $screen-md) and (max-width: $screen-lg) {
+      display: flex;
+      justify-content: center;
+      width: 20%;
+    }
+
+    @media screen and (max-width: $screen-md), (pointer: coarse) {
+      display: none;
+    }
+  }
+
+  &__diamond {
+    width: 50px;
+    height: 50px;
+    background-image: url("./img/star.svg");
+    background-size: cover;
+  }
+
+  &__diamond-count-js {}
+
+  &__game-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    height: var(--game-size);
+    width: 100%;
+    overflow: hidden;
+  }
+
+  &__space {
+    position: relative;
+    height: var(--game-size);
+    width: calc((100% - var(--game-size)) / 2);
+    background-color: rgba(0, 0, 0, 0.5);
+
+    @media (pointer: coarse) and (orientation: landscape) and (max-height: $screen-sm) {
+      display: none;
+    }
+  }
+
+  &__controlls {
+    display: none;
+
+    @media (pointer: coarse) {
+      display: grid;
+      position: absolute;
+      bottom: 20px;
+      z-index: 11;
+    }
+  }
+
+  &__board {
+    height: calc(var(--game-size) - 20px);
+    overflow: scroll;
+  
+    display: grid;
+    grid-template-columns: repeat(var(--matrix-capacity), var(--block-size));
+    grid-template-rows: repeat(var(--matrix-capacity), var(--block-size));
+  
+    &::-webkit-scrollbar {
+      width: 0px;
+    }
+  
+    @media screen and (max-width: $screen-md), (pointer: coarse) {
+      justify-content: start;
+    }
+  }
+
+  &__block {
+    width: var(--block-size);
+    height: var(--block-size);
+    background-size: cover;
+    z-index: 10;
+
+    &-empty {}
+
+    &-wall {
+      background-image: url('./img/stone-rock-svgrepo-com.svg');
+    }
+
+    &-diamond {
+      background-image: url('./img/star.svg');
+    }
+
+    &-player {
+      background: url('./img/player.svg');
+    }
+
+    &-exit {
+      background: url(./img/jupiter.svg);
+      opacity: 0;
+    }
+
+    &-show {
+      opacity: 1;
+    }
+
+    &-bye {
+      animation: 1s linear teleport;
+      animation-fill-mode: forwards;
+  
+      @keyframes teleport {
+        0% {
+          opacity: 1;
+        }
+        80% {
+          opacity: 0;
+        }
+        100% {
+          background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pjxzdmcgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMTI4IDEyODsiIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDEyOCAxMjgiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6IzFDQTJCQjt9Cgkuc3Qxe2ZpbGw6I0VBQzEwMDt9Cjwvc3R5bGU+PGcgaWQ9Il94MzFfMl8zRF9QcmludGluZyIvPjxnIGlkPSJfeDMxXzFfVlJfR2VhciIvPjxnIGlkPSJfeDMxXzBfVmlydHVhbF9yZWFsaXR5Ii8+PGcgaWQ9Il94MzlfX0F1Z21lbnRlZF9yZWFsaXR5Ii8+PGcgaWQ9Il94MzhfX1RlbGVwb3J0Ij48Zz48ZWxsaXBzZSBjbGFzcz0ic3QxIiBjeD0iNjQiIGN5PSI4OCIgcng9IjUyIiByeT0iMjAiLz48Zz48cmVjdCBoZWlnaHQ9IjgiIHdpZHRoPSI4IiB4PSI5MiIgeT0iMjgiLz48cmVjdCBoZWlnaHQ9IjgiIHdpZHRoPSI4IiB4PSIyOCIgeT0iMTYiLz48cmVjdCBoZWlnaHQ9IjgiIHdpZHRoPSI4IiB4PSI0NCIgeT0iNDAiLz48cGF0aCBkPSJNMTEyLDQwdjM1LjJjLTMuMy0yLjMtNy4zLTQuMi0xMi01LjhWNDRoLTh2MjMuMUM4My4zLDY1LDczLjYsNjQsNjQsNjRjLTQsMC04LDAuMi0xMiwwLjVWNTZoLTh2OS41ICAgICBjLTIuNywwLjQtNS40LDEtOCwxLjZWMzJoLTh2MzcuNGMtNC43LDEuNi04LjcsMy41LTEyLDUuOFY1Nkg4djMyYzAsMTUuNiwyOC45LDI0LDU2LDI0czU2LTguNCw1Ni0yNFY0MEgxMTJ6IE0xNiw4OCAgICAgYzAtNSwxMC4zLTExLjUsMjgtMTQuNHYyOC45QzI2LjMsOTkuNSwxNiw5MywxNiw4OHogTTg4LDEwMS43VjgwaC04djIzYy00LjksMC42LTEwLjIsMS0xNiwxYy00LjIsMC04LjItMC4yLTEyLTAuNVY3Mi41ICAgICBjMy44LTAuMyw3LjgtMC41LDEyLTAuNWMyOS43LDAsNDgsOS4zLDQ4LDE2QzExMiw5Mi42LDEwMy4yLDk4LjUsODgsMTAxLjd6Ii8+PC9nPjwvZz48L2c+PGcgaWQ9Il94MzdfX0dsYXNzZXNzIi8+PGcgaWQ9Il94MzZfX0ZvbGRpbmdfcGhvbmUiLz48ZyBpZD0iX3gzNV9fRHJvbmUiLz48ZyBpZD0iX3gzNF9fUmV0aW5hX3NjYW4iLz48ZyBpZD0iX3gzM19fU21hcnR3YXRjaCIvPjxnIGlkPSJfeDMyX19CaW9uaWNfQXJtIi8+PGcgaWQ9Il94MzFfX0NoaXAiLz48L3N2Zz4=') no-repeat;
+          background-size: var(--block-size, --block-size);
+          background-position: center center;
+        }
+      }
+    }
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 10px;
+    width: calc(100% - 10px);
+    height: $game-footer_height;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  &__show {
+    display: none;
+
+    @media screen and (max-width: $screen-md), (pointer: coarse) {
+      display: flex;
+    }
   }
 }
