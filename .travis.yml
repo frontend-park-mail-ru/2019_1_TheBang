@@ -8,9 +8,16 @@ cache:
 env:
 - PORT=9080
 install:
-- npm i && npm run build
-script:
-- npm run test
+- npm run heroku-postbuild
+jobs:
+  include:
+    - stage: test
+      name: "E2E Tests"
+      script: npm run test
+    - stage: deploy
+      name: "Deploy"
+      if: branch = develop
+      script: bash deploy.sh
 before_install:
 - openssl aes-256-cbc -K $encrypted_5f1908ef1e01_key -iv $encrypted_5f1908ef1e01_iv
   -in 2019_1_TheBang_id_rsa.pem.enc -out ./2019_1_TheBang_id_rsa.pem -d
