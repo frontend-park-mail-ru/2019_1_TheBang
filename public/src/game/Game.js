@@ -177,12 +177,6 @@ class Game {
 			'rotate__slow-clockwise',
 		];
 
-		const DIAMOND_CLASSES = [
-			'diamond__craft',
-			'diamond__sun',
-			'diamond__blackhole',
-		];
-
 		const generateDiamond = () => {
 			let count = 0;
 
@@ -203,14 +197,14 @@ class Game {
 
 		const createWallBlock = () => {
 			const block = document.createElement('div');
-			block.classList.add('block', 'wall');
+			block.classList.add('frame__block', 'frame__block-wall');
 			block.classList.add(ROTATE_CLASSES[Math.floor(Math.random() * ROTATE_CLASSES.length)]);
 
 			return block;
 		}
 
 		const createBoard = () => {
-			const board = document.querySelector('.board');
+			const board = document.querySelector('.frame__board');
 
 			for (let col = -1; col < COLS + 1; col++) {
 				const block = createWallBlock();
@@ -224,29 +218,29 @@ class Game {
 				board.appendChild(block);
 
 				for (let col = 0; col < COLS; col++) {
-					let block = document.createElement('div');
+					const block = document.createElement('div');
 					block.id = ['id-', col, '-', row].join('');
 
-					block.classList.add('block');
+					block.classList.add('frame__block');
 
 					switch (maze[row][col]) {
 					case WALL:
 						block.classList.add(ROTATE_CLASSES[Math.floor(Math.random() * ROTATE_CLASSES.length)]);
 						break;
 					case DIAMOND:
-						block.classList.add(DIAMOND_CLASSES[Math.floor(Math.random() * DIAMOND_CLASSES.length)]);
+						block.classList.add('frame__block-diamond');
 						break;
 					}
 
-					block.classList.add('empty');
+					block.classList.add('frame__block-empty');
 
 					board.appendChild(block);
-				};
+				}
 
 				block = createWallBlock();
 				block.id = ['id-', COLS, '-', row].join('');
 				board.appendChild(block);
-			};
+			}
 
 			for (let col = -1; col < COLS + 1; col++) {
 				const block = createWallBlock();
@@ -274,17 +268,17 @@ class Game {
 					let itemClass = '';
 					switch (maze[row][col]) {
 					case PLAYER:
-						itemClass = 'player'; break;
+						itemClass = 'frame__block-player'; break;
 					case WALL:
-						itemClass = 'wall'; break;
+						itemClass = 'frame__block-wall'; break;
 					case EXIT:
-						itemClass = 'exit'; break;
+						itemClass = 'frame__block-exit'; break;
 					case EXIT_READY:
-						itemClass = 'exit show'; break;
+						itemClass = 'frame__block-exit frame__block-show'; break;
 					case DIAMOND:
-						itemClass = 'diamond'; break;
+						itemClass = 'frame__block-diamond'; break;
 					default:
-						itemClass = 'empty'
+						itemClass = 'frame__block-empty'
 					}
 
 					classes.push(itemClass);
@@ -295,15 +289,19 @@ class Game {
 			}
 			const id = ['#id-', player[1], '-', player[0]].join('');
 			if (!(bag === DIAMOND_COUNT && player[1] === EXIT_COL && player[0] === EXIT_ROW)) {
-				document.querySelector(id).className = 'block player'
+				document.querySelector(id).className = 'frame__block frame__block-player'
 			}
 			else {
 				onPageLoad(null, GameWinnerPage);
 				return
+				// =======
+				// 				document.querySelector(id).className = 'frame__block frame__block-player frame__block-bye';
+				// 				document.querySelector('.info').textContent = 'bye!';
+				// >>>>>>> T60 поменяла имена классов на странице игры
 			}
 
-			document.querySelector('.diamond-count').textContent = bag + '/' + DIAMOND_COUNT;
-			document.querySelector(".player").scrollIntoView({block:"nearest"});
+			document.querySelector('.frame__diamond-count-js').textContent = bag + '/' + DIAMOND_COUNT;
+			document.querySelector('.frame__block-player').scrollIntoView({block:'nearest'});
 		};
 
 		generateDiamond();
@@ -360,10 +358,10 @@ class Game {
 				}
 
 				renderMaze();
-				document.querySelector(".player").scrollIntoView({block:"nearest"});
+				document.querySelector('.frame__block-player').scrollIntoView({block:'nearest'});
 			} else {
 				const id = ['#id-', x, '-', y].join('');
-				document.querySelector(id).scrollIntoView({block:"nearest"});
+				document.querySelector(id).scrollIntoView({block:'nearest'});
 			}
 		}
 	}
@@ -394,22 +392,16 @@ class Game {
 			'rotate__slow-clockwise',
 		];
 
-		const DIAMOND_CLASSES = [
-			'diamond__craft',
-			'diamond__sun',
-			'diamond__blackhole',
-		];
-
 		const createWallBlock = () => {
 			const block = document.createElement('div');
-			block.classList.add('block', 'wall');
+			block.classList.add('frame__block', 'frame__block-wall');
 			block.classList.add(ROTATE_CLASSES[Math.floor(Math.random() * ROTATE_CLASSES.length)]);
 
 			return block;
 		}
 
 		const createBoard = () => {
-			const board = document.querySelector('.board');
+			const board = document.querySelector('.frame__board');
 
 			for (let col = -1; col < COLS + 1; col++) {
 				const block = createWallBlock();
@@ -423,29 +415,29 @@ class Game {
 				board.appendChild(block);
 
 				for (let col = 0; col < COLS; col++) {
-					let block = document.createElement('div');
+					const block = document.createElement('div');
 					block.id = ['id-', col, '-', row].join('');
 
-					block.classList.add('block');
+					block.classList.add('frame__block');
 
 					switch (MAZE[row][col]) {
 					case WALL:
 						block.classList.add(ROTATE_CLASSES[Math.floor(Math.random() * ROTATE_CLASSES.length)]);
 						break;
 					case DIAMOND:
-						block.classList.add(DIAMOND_CLASSES[Math.floor(Math.random() * DIAMOND_CLASSES.length)]);
+						block.classList.add('frame__block-diamond');
 						break;
 					}
 
-					block.classList.add('empty');
+					block.classList.add('frame__block-empty');
 
 					board.appendChild(block);
-				};
+				}
 
 				block = createWallBlock();
 				block.id = ['id-', COLS, '-', row].join('');
 				board.appendChild(block);
-			};
+			}
 
 			for (let col = -1; col < COLS + 1; col++) {
 				const block = createWallBlock();
@@ -501,17 +493,17 @@ class Game {
 					let itemClass = '';
 					switch (MAZE[row][col]) {
 					case PLAYER:
-						itemClass = 'player'; break;
+						itemClass = 'frame__block-player'; break;
 					case WALL:
-						itemClass = 'wall'; break;
+						itemClass = 'frame__block-wall'; break;
 					case EXIT:
-						itemClass = 'exit'; break;
+						itemClass = 'frame__block-exit'; break;
 					case EXIT_READY:
-						itemClass = 'exit show'; break;
+						itemClass = 'frame__block-exit frame__block-show'; break;
 					case DIAMOND:
-						itemClass = 'diamond'; break;
+						itemClass = 'frame__block-diamond'; break;
 					default:
-						itemClass = 'empty'
+						itemClass = 'frame__block-empty'
 					}
 
 					classes.push(itemClass);
@@ -522,16 +514,16 @@ class Game {
 			}
 			const id = ['#id-', playerCOL, '-', playerROW].join('');
 			if (!(playersScore[identificator] === gemsMax && playerCOL === teleportCOL && playerROW === teleportROW)) {
-				document.querySelector(id).className = 'block player'
+				document.querySelector(id).className = 'frame__block frame__block-player'
 			}
 			else {
-				document.querySelector(id).className = 'block player bye';
+				document.querySelector(id).className = 'frame__block frame__block-player frame__block-bye';
 				document.querySelector('.info').textContent = 'bye!';
 			}
 
 
-			document.querySelector('.diamond-count').textContent = playersScore[identificator] + '/' + gemsMax;
-			document.querySelector(id).scrollIntoView({block:"nearest"});
+			document.querySelector('.frame__diamond-count-js').textContent = playersScore[identificator] + '/' + gemsMax;
+			document.querySelector(id).scrollIntoView({block:'nearest'});
 		};
 
 

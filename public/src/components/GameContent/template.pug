@@ -1,8 +1,5 @@
-//- .absolute.absolute-top
-//-     include /pug-mixins/link/link.pug
-//-     +link('Домой', '', 'secondary')
 .frame
-    .header
+    .frame__header
         .frame__buttons
             include /pug-mixins/link/link.pug
             +link('', '', 'home')
@@ -13,13 +10,13 @@
             .info
             .frame__score
                     .frame__diamond
-                    .diamond-count
+                    .frame__diamond-count-js
         .frame__help Keys: &larr; &rarr; &uarr; &darr;
-    .game-container
+    .frame__game-container
         .frame__space
             include /pug-mixins/left-board/left-board.pug
             +left-board()
-        .board
+        .frame__board
         .frame__space
             include /pug-mixins/right-board/right-board.pug
             +right-board()
