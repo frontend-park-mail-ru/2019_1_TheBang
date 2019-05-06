@@ -308,34 +308,70 @@ class Game {
 			document.querySelector('.frame__block-player').scrollIntoView({block:'nearest'});
 		};
 
+		const homeLink = document.querySelector('.link-home');
+		const homeEvent = (e) => {
+			stopTimer();
+			document.removeEventListener('keydown', keyHandler);
+			if (!document.querySelector('.popup')) {
+				e.preventDefault();
+				const popup = document.createElement('div');
+				document.getElementById('root').append(popup);
+				onPageLoad(null, GameWinnerPage, popup, false, null);
+			}
+			homeLink.removeEventListener('click', homeEvent);
+		};
+
+		homeLink.addEventListener('click', homeEvent);
+
 		generateDiamond();
 		createBoard();
 		renderMaze();
 
 		let stopTime = 0;
-		const timerElement = document.querySelector('.frame__timer');
-		const timer = (startTime) => {
-			let minutes = parseInt(startTime / 60);
-			let seconds = startTime - 60 * minutes;
-			console.log(minutes + ":" + seconds);
-			timerElement.innerText = minutes + ":" + seconds;
-			startTime--;
-			if (startTime >= 0) {
-				stopTime = setTimeout(() => {timer(startTime)}, 1000);
-			} else {
-				clearTimeout(stopTime);
-				document.removeEventListener('keydown', keyHandler);
-				const popup = document.createElement('div');
-				document.getElementById('root').append(popup);
-				onPageLoad(null, GameWinnerPage, popup, false, null);
-			}
+		let startTime = 30;
+		const startTimer = () => {
+			const timerElement = document.querySelector('.frame__timer');
+			const timer = () => {
+				let minutes = parseInt(startTime / 60);
+				let seconds = startTime - 60 * minutes;
+				console.log(minutes + ":" + seconds);
+				timerElement.innerText = minutes + ":" + seconds;
+				startTime--;
+			};
+
+			stopTime = setInterval(() => {
+				timer();
+				if (startTime < 0) {
+					stopTimer();
+					document.removeEventListener('keydown', keyHandler);
+					const popup = document.createElement('div');
+					document.getElementById('root').append(popup);
+					onPageLoad(null, GameWinnerPage, popup, false, null);
+				};
+			}, 1000);
 		};
+		// const timer = (startTime) => {
+		// 	let minutes = parseInt(startTime / 60);
+		// 	let seconds = startTime - 60 * minutes;
+		// 	console.log(minutes + ":" + seconds);
+		// 	timerElement.innerText = minutes + ":" + seconds;
+		// 	startTime--;
+		// 	if (startTime >= 0) {
+		// 		stopTime = setInterval(() => {timer(startTime)}, 1000);
+		// 	} else {
+		// 		clearInterval(stopTime);
+		// 		document.removeEventListener('keydown', keyHandler);
+		// 		const popup = document.createElement('div');
+		// 		document.getElementById('root').append(popup);
+		// 		onPageLoad(null, GameWinnerPage, popup, false, null);
+		// 	}
+		// };
 
 		const stopTimer = () => {
-			clearTimeout(stopTime);
+			clearInterval(stopTime);
 		};
 
-		timer(30);
+		startTimer();
 
 		let direction = 0;
 
