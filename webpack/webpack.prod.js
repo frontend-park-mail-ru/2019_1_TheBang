@@ -4,6 +4,7 @@ const css = path.resolve(__dirname, '../public/css');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const merge = require('webpack-merge');
+const autoprefixer = require('autoprefixer');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const common = require('./webpack.common.js');
 const WorkboxPlugin = require('workbox-webpack-plugin');
@@ -39,6 +40,17 @@ module.exports = env => {
 					use: ExtractTextPlugin.extract({
 						fallback: 'style-loader',
 						use: ['css-loader',
+							{
+								loader: 'postcss-loader',
+								options: {
+									plugins: [
+										autoprefixer({
+											browsers: ['ie >= 8', 'last 4 version']
+										})
+									],
+									sourceMap: true
+								}
+							},
 							{
 								loader: 'sass-loader',
 								options: {

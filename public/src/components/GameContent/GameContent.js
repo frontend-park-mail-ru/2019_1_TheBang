@@ -12,7 +12,7 @@ class GameContent {
 		let nickname = user.nickname;
 
 		if (!user.nickname) {
-			nickname = "undef";
+			nickname = 'undef';
 		}
 
 		const renderData = {

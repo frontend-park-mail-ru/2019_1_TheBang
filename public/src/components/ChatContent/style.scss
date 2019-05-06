@@ -51,6 +51,14 @@
       width: 100%;
     }
   }
+    
+  &__delete {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    background-image: url("./img/garbage.svg");
+    background-size: cover;
+  }
 
   &__menu {
     display: flex;
@@ -60,17 +68,11 @@
     right: 20px;
     width: 80px;
   }
-
-  &__delete {
-    width: 30px;
-    height: 30px;
-    background-image: url("./img/garbage.svg");
-    background-size: cover;
-  }
-
+  
   &__edit {
     width: 30px;
     height: 30px;
+    cursor: pointer;
     background-image: url("./img/edit.svg");
     background-size: cover;
   }
