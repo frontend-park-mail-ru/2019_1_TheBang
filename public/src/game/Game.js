@@ -30,7 +30,11 @@ class Game {
      */
 
 	static start(roomID) {
-		const touchPad = document.querySelector('.controlls');
+		let touchPad = true;
+		if (document.querySelector('.frame__controlls').offsetHeight === 0) {
+			touchPad = false;
+		}
+		// const touchPad = document.querySelector('.controlls').getElementsByClassName.display;
 
 		if (roomID) {
 			const url = [BackendResource.GAME_WSS, 'room/', roomID].join('');
@@ -417,6 +421,27 @@ class Game {
 
 		let direction = 0;
 
+		const keyHandler = (event) => {
+			switch (event.keyCode) {
+			case DOWN:
+				direction = DOWN;
+				break;
+			case UP:
+				direction = UP;
+				break;
+			case LEFT:
+				direction = LEFT;
+				break;
+			case RIGHT:
+				direction = RIGHT;
+				break;
+			}
+
+			if (direction !== 0) {
+				changePlayerPos(direction)
+			}
+		};
+
 		if (touchPad) {
 
 			const touchUp = document.querySelector('.controlls__up');
@@ -457,26 +482,26 @@ class Game {
 
 		} else {
 
-			const keyHandler = (event) => {
-				switch (event.keyCode) {
-				case DOWN:
-					direction = DOWN;
-					break;
-				case UP:
-					direction = UP;
-					break;
-				case LEFT:
-					direction = LEFT;
-					break;
-				case RIGHT:
-					direction = RIGHT;
-					break;
-				}
+			// const keyHandler = (event) => {
+			// 	switch (event.keyCode) {
+			// 	case DOWN:
+			// 		direction = DOWN;
+			// 		break;
+			// 	case UP:
+			// 		direction = UP;
+			// 		break;
+			// 	case LEFT:
+			// 		direction = LEFT;
+			// 		break;
+			// 	case RIGHT:
+			// 		direction = RIGHT;
+			// 		break;
+			// 	}
 
-				if (direction !== 0) {
-					changePlayerPos(direction)
-				}
-			};
+			// 	if (direction !== 0) {
+			// 		changePlayerPos(direction)
+			// 	}
+			// };
 
 			document.addEventListener('keydown', keyHandler);
 			Game.unlockKeyBoard(keyHandler);
