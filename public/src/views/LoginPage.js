@@ -33,6 +33,16 @@ class LoginPage extends FormMixin {
 		}
 	}
 
+	afterRender() {
+		super.afterRender();
+
+		const vkAuth = document.querySelector('.button-vk');
+		vkAuth.addEventListener('click', (e) => {
+			e.preventDefault();
+			EventBus.emit(NetworkEvents.AUTH_VK);
+		});
+	}
+
 }
 
 export default LoginPage;

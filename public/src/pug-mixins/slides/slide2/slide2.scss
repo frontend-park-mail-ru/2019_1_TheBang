@@ -1,0 +1,32 @@
+.slide2 {
+    display: flex;
+
+    &__block {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    &__img {
+        width: 200px;
+        height: 300px;
+        background-image: url('./img/Anton.jpg');
+        background-size: cover;
+
+        &-Anton {
+            background-image: url('./img/Anton.jpg');
+        }
+
+        &-Liza {
+            background-image: url('./img/Liza.jpg');
+        }
+
+        &-Andrey {
+            background-image: url('./img/Andrey.jpg');
+        }
+
+        &-Ruslan {
+            background-image: url('./img/Ruslan.jpg');
+        }
+    }
+}

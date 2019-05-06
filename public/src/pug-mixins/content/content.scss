@@ -7,7 +7,7 @@
     background-color: $content-color;
     overflow-y: auto;
 
-    @media all and (max-width: $screen-md) {
+    @media (max-width: $screen-md), (max-height: $screen-md) {
         padding: 0;
     }
 }

@@ -102,11 +102,44 @@ class Network {
 				return res.json()
 			})
 			.then((data) => {
-				EventBus.emit(PageEvents.GET_LEADERBOARD_SUCCESS, data)
+				const result = {
+					data: data,
+					pageNumber: pageNumber
+				};
+
+				EventBus.emit(PageEvents.GET_LEADERBOARD_SUCCESS, result)
 			})
 			.catch(() => {
-				EventBus.emit(PageEvents.GET_LEADERBOARD_ERROR)
+				EventBus.emit(PageEvents.GET_LEADERBOARD_ERROR, pageNumber)
 			})
+	}
+
+	static onCheckPageLeaderboard(pageNumber) {
+		Request.request('leaderbord/' + pageNumber, 'GET')
+			.then((res) => {
+				return res.json()
+			})
+			.then((data) => {
+				const result = {
+					data: data,
+					pageNumber: pageNumber
+				};
+
+				EventBus.emit(PageEvents.CHECK_LEADERBOARD_EXISTS, result)
+			})
+			.catch(() => {
+				EventBus.emit(PageEvents.CHECK_LEADERBOARD_NOT_EXISTS, pageNumber)
+			})
+	}
+
+	static onVkAuth() {
+		Request.vkRequest('oauth/vk/connect', 'GET')
+			.then(() => {
+				EventBus.emit(PageEvents.SIGNUP_SUCCESS);
+			})
+			.catch((err) => {
+				EventBus.emit(PageEvents.SIGNUP_ERROR, err)
+			});
 	}
 }
 

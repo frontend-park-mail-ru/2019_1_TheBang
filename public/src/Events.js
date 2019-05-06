@@ -9,6 +9,8 @@ import GameNetwork from 'src/network/GameNetwork';
 import GamePageEvents from 'src/events/GamePageEvents';
 import Game from 'src/game/Game';
 import GameEvents from 'src/events/GameEvents';
+import ChatNetwork from 'src/network/ChatNetwork';
+
 
 EventBus.on(PageEvents.UPDATE_STORE, Store.onUpdateUser.bind(Store));
 EventBus.on(PageEvents.BASE_COMPONENTS_RENDER, View.BasePage.onRender);
@@ -34,7 +36,21 @@ EventBus.on(NetworkEvents.GET_LEADERBOARD, Network.onGetLeaderboard);
 EventBus.on(PageEvents.GET_LEADERBOARD_SUCCESS, View.LeadersPage.onSuccess);
 EventBus.on(PageEvents.GET_LEADERBOARD_ERROR, View.LeadersPage.onError);
 
+EventBus.on(NetworkEvents.CHECK_LEADERBOARD, Network.onCheckPageLeaderboard);
+EventBus.on(PageEvents.CHECK_LEADERBOARD_EXISTS, View.LeadersPage.onExistPage);
+EventBus.on(PageEvents.CHECK_LEADERBOARD_NOT_EXISTS, View.LeadersPage.onNotExistPage);
+
 EventBus.on(GameNetworkEvents.GET_ROOMS, GameNetwork.onGetRooms);
+EventBus.on(GameNetworkEvents.CREATE_ROOM, GameNetwork.onCreateRoom);
+EventBus.on(GamePageEvents.CREATE_ROOM_SUCCESS, View.GameLobbyPage.onCreateRoom);
 EventBus.on(GamePageEvents.GET_ROOMS_SUCCESS, View.GameLobbyPage.onSuccess);
 
 EventBus.on(GameEvents.GAME_START, Game.start);
+
+EventBus.on(PageEvents.CREATE_CHAT_MESSAGES, View.ChatPage.onCreateMessages);
+EventBus.on(NetworkEvents.GET_MESSAGES, ChatNetwork.onGetMessages);
+
+EventBus.on(NetworkEvents.AUTH_VK, Network.onVkAuth);
+
+EventBus.on(NetworkEvents.DELETE_CHAT_MESSAGE, ChatNetwork.onDeleteMessage);
+EventBus.on(NetworkEvents.EDIT_CHAT_MESSAGE, ChatNetwork.onEditMessage);

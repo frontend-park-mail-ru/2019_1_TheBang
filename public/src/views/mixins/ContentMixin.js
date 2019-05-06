@@ -11,7 +11,7 @@ class ContentMixin {
 	}
 
 	render()  {
-		const content = new this.content(this.args);
+		const content = new this.content(...this.args);
 		return content.render()
 	}
 

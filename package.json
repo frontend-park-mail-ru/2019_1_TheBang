@@ -4,13 +4,14 @@
   "description": "The best team 🤟",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --config webpack/webpack.dev.js",
+    "build": "webpack --env.NODE_ENV=local --config webpack/webpack.dev.js",
+    "build:dev": "webpack --env.NODE_ENV=develop --config webpack/webpack.dev.js",
     "start": "node server",
-    "heroku-postbuild": "webpack --config webpack/webpack.prod.js",
+    "build:prod": "webpack --env.NODE_ENV=production --config webpack/webpack.prod.js",
     "watch": "webpack -w",
     "now-build": "webpack --config webpack/webpack.prod.js",
     "cy:run": "cypress run",
-    "test": "start-server-and-test start http://localhost:8080 cy:run"
+    "test": "start-server-and-test start http://localhost:9080 cy:run"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,7 @@
     "@babel/core": "^7.3.4",
     "@babel/plugin-proposal-class-properties": "^7.3.4",
     "@babel/preset-env": "^7.3.4",
+    "autoprefixer": "^9.5.1",
     "babel-cli": "^6.26.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-loader": "^7.1.5",
@@ -44,6 +46,7 @@
     "image-webpack-loader": "^4.6.0",
     "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.11.0",
+    "postcss-loader": "^3.0.0",
     "pug": "^2.0.3",
     "pug-loader": "^2.4.0",
     "sass-loader": "^7.1.0",

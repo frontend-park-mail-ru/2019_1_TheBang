@@ -1,0 +1,37 @@
+.right-board-item {
+    position: absolute;
+    background-size: cover;
+
+    @media all and (max-width: $screen-lg) {
+        display: none;
+    }
+
+    &-meteorits {
+        z-index: 1;
+        right: 5%;
+        top: 5%;
+        width: 200px;
+        height: 200px;
+        background-image: url("./img/meteor.svg");
+        filter: brightness(0.3);
+    }
+
+    &-planets {
+        z-index: 0;
+        right: 5%;
+        width: 500px;
+        height: 500px;
+        transform: rotate(140deg);
+        background-image: url("./img/eclipse.svg");
+        filter: brightness(0.2);
+    }
+
+    &-black-hole {
+        bottom: 10%;
+        right: 10%;
+        width: 300px;
+        height: 300px;
+        background-image: url("./img/blackhole.svg");
+        filter: brightness(0.4);
+    }
+}

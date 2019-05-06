@@ -2,12 +2,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
     width: 25%;
     min-width: $menu_min-width;
     font-family: $title_font-family;
     overflow-y: auto;
 
-    @media all and (max-width: $screen-md) {
+    @media screen and (max-width: $screen-md) {
         position: fixed;
         left: -$menu_min-width;
         background-color: #296c98;
@@ -22,7 +23,7 @@
         width: 100%;
         color: white;
 
-        @media all and (max-width: $screen-md) {
+        @media screen and (max-width: $screen-md) {
             position: absolute;
             top: 0;
         }
@@ -41,14 +42,33 @@
         grid-gap: 20px;
         justify-items: center;
 
-        @media all and (max-width: $screen-md) {
-            max-height: calc(100% - 240px);
+        @media screen and (max-width: $screen-md) {
+            height: 60%;
             overflow-y: auto;
         }
+
+        &-info {
+            display: grid;
+            grid-gap: 20px;
+            position: absolute;
+            bottom: 10px;
+            left: calc(50% - 125px);
+            
+            @media screen and (max-width: $screen-md) {
+                position: unset;
+            }
+
+            @media (max-height: $screen-lg) {
+                position: unset;
+                margin-bottom: 20px;
+            }
+        }
+
     }
+
 }
 
-@media all and (max-width: $screen-md) {
+@media screen and (max-width: $screen-md) {
     .mobile-input:checked ~ .menu {
         display: flex;
         left: 0;

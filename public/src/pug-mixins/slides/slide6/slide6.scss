@@ -1,0 +1,21 @@
+.slide6 {
+    &__img {
+        width: 956px;
+        height: 525px;
+        background-size: cover;
+        position: absolute;
+
+        &-home {
+            background-image: url('./img/home.png');
+            background-size: cover;
+        }
+
+        &-login {
+            background-image: url('./img/login.png');
+        }
+
+        &-leaders {
+            background-image: url('./img/leaders.png');
+        }
+    }
+}

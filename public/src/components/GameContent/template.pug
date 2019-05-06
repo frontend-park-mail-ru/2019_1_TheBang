@@ -1,11 +1,30 @@
-.absolute.absolute-top
-    include /pug-mixins/link/link.pug
-    +link('Домой', '', 'secondary')
 .frame
-    .header
-        .help Keys: &larr; &rarr; &uarr; &darr;
-        .diamond-count
-        .block.diamond
-    .board
-    .footer
-        .info
+    .frame__header
+        .frame__buttons
+            include /pug-mixins/link/link.pug
+            +link('', '', 'home')
+        .frame__game-info
+            .frame__user-info
+                .frame__avatar
+                p=nickname
+            .info
+            .frame__score
+                    .frame__diamond
+                    .frame__diamond-count-js
+        .frame__help Keys: &larr; &rarr; &uarr; &darr;
+    .frame__game-container
+        .frame__space
+            include /pug-mixins/left-board/left-board.pug
+            +left-board()
+        .frame__board
+            .frame__timer
+        .frame__space
+            include /pug-mixins/right-board/right-board.pug
+            +right-board()
+    .frame__footer
+        .frame__show
+            include /pug-mixins/link/link.pug
+            +link('', '', 'home')
+    .frame__controlls
+        include /pug-mixins/controlls/controlls.pug
+        +controlls()

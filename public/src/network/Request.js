@@ -1,5 +1,3 @@
-// const backend = 'https://stormy-fjord-97392.herokuapp.com/';
-// const backend = 'http://127.0.0.1:8090/';
 import BackendResource from 'src/network/BackendResource';
 
 /**
@@ -34,6 +32,18 @@ class Request {
 
 	static gameRequest(path, method, data) {
 		const url = [BackendResource.GAME_HTTPS, path].join('');
+
+		return Request.request(path, method, data, url)
+	}
+
+	static chatRequest(path, method, data) {
+		const url = [BackendResource.CHAT_HTTPS, path].join('');
+
+		return Request.request(path, method, data, url)
+	}
+
+	static vkRequest(path, method, data) {
+		const url = [BackendResource.VK_CHAT, path].join('');
 
 		return Request.request(path, method, data, url)
 	}

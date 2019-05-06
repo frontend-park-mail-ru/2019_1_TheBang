@@ -1,0 +1,23 @@
+.slide4 {
+    &__alien {
+        position: absolute;
+        left: calc(50% - 125px);
+        top: calc(60% - 125px);
+        
+        width: 250px;
+        height: 250px;
+        background: url('./img/player.svg');
+        background-size: cover;
+    }
+
+    &__blackhole {
+        position: absolute;
+        left: calc(50% - 50px);
+        top: calc(60% - 50px);
+
+        width: 100px;
+        height: 100px;
+        background: url('./img/blackhole.svg');
+        background-size: cover;
+    }
+}

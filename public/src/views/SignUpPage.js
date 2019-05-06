@@ -15,7 +15,7 @@ class SignUpPage extends FormMixin{
 		const data = {
 			name: form[0].value,
 			nickname: form[1].value,
-			passwd: form[1].value
+			passwd: form[2].value
 		};
 
 		EventBus.emit(NetworkEvents.SIGNUP, data);

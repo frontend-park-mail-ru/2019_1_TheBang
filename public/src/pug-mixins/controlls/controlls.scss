@@ -1,0 +1,38 @@
+.controlls {
+    display: grid;
+    width: calc(#{$controll_width} * 3);
+    height: calc(#{$controll_height} * 3);
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    background-color: $content_color;
+    border-radius: 10px;
+    border: $border_width solid $border-color; 
+
+    &__up {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        background-image: url("./img/up.svg");
+        background-size: cover;
+    }
+
+    &__left {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        background-image: url("./img/left.svg");
+        background-size: cover;
+    }
+
+    &__right {
+        grid-column-start: 3;
+        grid-column-end: 4;
+        background-image: url("./img/right.svg");
+        background-size: cover;
+    }
+
+    &__down {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        background-image: url("./img/down.svg");
+        background-size: cover;
+    }
+}

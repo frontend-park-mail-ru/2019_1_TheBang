@@ -19,6 +19,17 @@ class GamePage{
 	}
 
 	afterRender() {
+		// const fullScreenEvent = (event) => {
+		// 	if (event.keyCode === 13) {
+		// 		document.querySelector('.frame').requestFullscreen();
+		// 	}
+		// };
+
+		// document.addEventListener('keydown', fullScreenEvent);
+
+		// сюда вместо 12 писать с бека размерность лабиринта
+		document.querySelector('.frame').style.setProperty('--matrix-capacity', 12 + 2);
+
 		EventBus.emit(GameEvents.GAME_START);
 	}
 }
