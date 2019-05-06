@@ -6,24 +6,24 @@ class GamePopupContent {
 	constructor (win, score) {
 		this.win = win;
 		if (this.score) {
-			this.score = "Счет: " + score;
+			this.score = 'Счет: ' + score;
 		} else {
-			this.score = "Играйте в мультиплеер для сохранения счета!";
+			this.score = 'Играйте в мультиплеер для сохранения счета!';
 		}
 	}
 
 	render() {
 		let title = '';
 		if (this.win) {
-			title = "Вы выиграли!";
+			title = 'Вы выиграли!';
 		} else {
-			title = "Вы проиграли!";
+			title = 'Вы проиграли!';
 		}
 
 		const renderData = {
 			title: title,
 			score: this.score
-        };
+		};
 		return gameAlertComponent.call({}, renderData);
 	}
 }

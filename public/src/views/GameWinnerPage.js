@@ -1,6 +1,4 @@
-import GameAlertContent from 'src/components/GameAlertContent/GameAlertContent';
 import GamePopupContent from 'src/components/GamePopupContent/GamePopupContent';
-import ContentMixin from 'src/views/mixins/ContentMixin';
 import onPageLoad from 'src/app';
 import GameLobbyPage from 'src/views/GameLobbyPage';
 import GamePage from 'src/views/GamePage';
@@ -12,7 +10,7 @@ class GameWinnerPage /*extends ContentMixin*/ {
 	}
 
 	render() {
-		this.targetRender.classList.add("popup");
+		this.targetRender.classList.add('popup');
 		return this.content.render()
 	}
 

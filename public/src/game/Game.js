@@ -31,7 +31,8 @@ class Game {
 
 	static start(roomID) {
 		let touchPad = true;
-		if (document.querySelector('.frame__controlls').offsetHeight === 0) {
+		const frameControlls = document.querySelector('.frame__controlls');
+		if (!frameControlls || frameControlls.offsetHeight === 0) {
 			touchPad = false;
 		}
 		// const touchPad = document.querySelector('.controlls').getElementsByClassName.display;
@@ -394,10 +395,10 @@ class Game {
 		const startTimer = () => {
 			const timerElement = document.querySelector('.frame__timer');
 			const timer = () => {
-				let minutes = parseInt(startTime / 60);
-				let seconds = startTime - 60 * minutes;
-				console.log(minutes + ":" + seconds);
-				timerElement.innerText = minutes + ":" + seconds;
+				const minutes = parseInt(startTime / 60);
+				const seconds = startTime - 60 * minutes;
+				console.log(minutes + ':' + seconds);
+				timerElement.innerText = minutes + ':' + seconds;
 				startTime--;
 			};
 
@@ -409,7 +410,7 @@ class Game {
 					const popup = document.createElement('div');
 					document.getElementById('root').append(popup);
 					onPageLoad(null, GameWinnerPage, popup, false, null);
-				};
+				}
 			}, 1000);
 		};
 
