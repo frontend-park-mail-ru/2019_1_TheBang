@@ -1,62 +1,79 @@
 .chat {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: calc(100% - #{$game-footer_height});
+
+  @media screen and (max-height: $screen-md) and (min-width: $screen-sm) and (min-height: $screen-sm-h) {
+    height: 100%;
+  }
+
+  &__chat {
     background-color: $border-color;
     width: 80%;
-    height: 80%;
+    height: calc(100% - 140px);
     overflow: auto;
     transform: rotate(180deg);
     direction: rtl;
 
-    @media all and (max-width: $screen-md) {
+    @media screen and (max-width: $screen-md), (max-height: $screen-md) {
       width: 100%;
     }
 
-    &__checkbox {
-      position: absolute;
-      top: 0;
+    @media screen and (max-height: $screen-md) {
+      // height: calc(80% - #{$game-footer_height});
+    }
+  }
+
+  &__checkbox {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    opacity: 0;
+    width: 100%; 
+  }
+
+  &__header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 80%;
+    height: 70px;
+    background-color: $border-color;
+    color: white;
+
+    @media screen and (max-width: $screen-md), (max-height: $screen-md) {
       width: 100%;
-      height: 100%;
-      z-index: 2;
-      opacity: 0;
-      width: 100%; 
     }
+  }
 
-    &__header {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      width: 80%;
-      height: 70px;
-      background-color: $border-color;
-      color: white;
+  &__menu {
+    display: flex;
+    justify-content: space-around;
+    position: absolute;
+    z-index: 2;
+    right: 20px;
+    width: 80px;
+  }
 
-      @media all and (max-width: $screen-md) {
-        width: 100%;
-      }
-    }
+  &__delete {
+    width: 30px;
+    height: 30px;
+    background-image: url("./img/garbage.svg");
+    background-size: cover;
+  }
 
-    &__menu {
-      display: flex;
-      justify-content: space-around;
-      position: absolute;
-      z-index: 2;
-      right: 20px;
-      width: 80px;
-    }
-
-    &__delete {
-      width: 30px;
-      height: 30px;
-      background-image: url("./img/garbage.svg");
-      background-size: cover;
-    }
-
-    &__edit {
-      width: 30px;
-      height: 30px;
-      background-image: url("./img/edit.svg");
-      background-size: cover;
-    }
+  &__edit {
+    width: 30px;
+    height: 30px;
+    background-image: url("./img/edit.svg");
+    background-size: cover;
+  }
 
   &__send {
     display: flex;
@@ -67,8 +84,13 @@
     background-color: $border-color;
     border-top: 1px solid white;
 
-    @media all and (max-width: $screen-md) {
+    @media screen and (max-width: $screen-md), (max-height: $screen-md) {
       width: 100%;
+    }
+
+    @media screen and (max-height: $screen-md) {
+      position: absolute;
+      bottom: 0;
     }
   }
 
@@ -115,23 +137,6 @@
     &-select {
       box-shadow: 0 0 10px 0 $menu-item_color_hover inset, 0 0 10px 4px $menu-item_color_hover;
     }
-
-    // &__author {
-    //   font-weight: bold;
-    //   margin: 1px 10px;
-    //   color: gold;
-    // }
-
-    // &__message {
-    //   margin: 1px 10px;
-    // }
-
-    // &__avatar {
-    //   width: 100px;
-    //   height: 100px;
-    //   background-size: cover;
-    // }
-
   }
 
   &__block-header {

@@ -1,6 +1,7 @@
 @import "src/pug-mixins/title/title.scss";
 
 .home {
+    position: relative;
     display: grid;
     grid-template-rows: 80px auto 250px;
     justify-content: center;
@@ -10,53 +11,54 @@
 
     &__img1 {
         position: absolute;
-        left: 50%;
+        left: 30%;
         top: 30%;
-        width: 250px;
-        height: 250px;
+        width: 30%;
+        height: 30%;
         background-image: url("../../../src/components/HomeContent/img/logo1.svg");
-        background-size: cover;
+        background-size: 100% 100%;
         margin: 20px;
         z-index: 1;
 
-        @media all and (max-width: $screen-md) {
-            left: 30%;
-            width: 125px;
-            height: 125px;
+        @media screen and (max-height: $screen-sm) {
+            display: none;
         }
     }
 
     &__img2 {
         position: absolute;
-        left: 40%;
+        left: 10%;
         top: 18%;
-        width: 200px;
-        height: 200px;
+        width: 40%;
+        height: 40%;
         background-image: url("../../../src/components/HomeContent/img/jupiter.svg");
-        background-size: cover;
+        background-size: 100% 100%;
         margin: 20px;
 
-        @media all and (max-width: $screen-md) {
-            width: 100px;
-            height: 100px;
-            left: 10%;
+        @media screen and (max-height: $screen-sm) {
+            display: none;
         }
     }
 
     &__img3 {
         position: absolute;
-        left: 60%;
-        top: 25%;
-        width: 220px;
-        height: 220px;
+        right: 10%;
+        top: 20%;
+        width: 40%;
+        height: 30%;
+        max-height: 250px;
         background-image: url("../../../src/components/HomeContent/img/planet3.png");
-        background-size: cover;
+        background-size: contain;
+        background-repeat: no-repeat;
         margin: 20px;
 
-        @media all and (max-width: $screen-md) {
-            width: 110px;
-            height: 110px;
-            left: 50%;
+        @media (min-width: $screen-lg) {
+            top: 30%;
+            right: 10%;
+        }
+
+        @media screen and (max-height: $screen-sm) {
+            display: none;
         }
     }
 
@@ -65,7 +67,7 @@
         grid-gap: 25px;
         margin-top: 30px;
 
-        @media all and (max-width: $screen-md) {
+        @media (max-width: $screen-md) {
             margin-top: 0;
         }
     }

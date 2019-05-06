@@ -308,7 +308,8 @@ class Game {
 			document.querySelector('.frame__block-player').scrollIntoView({block:'nearest'});
 		};
 
-		const homeLink = document.querySelector('.link-home');
+		const homeLinks = [].slice.call(document.getElementsByClassName('link-home'));
+		console.log(homeLinks);
 		const homeEvent = (e) => {
 			stopTimer();
 			document.removeEventListener('keydown', keyHandler);
@@ -318,10 +319,10 @@ class Game {
 				document.getElementById('root').append(popup);
 				onPageLoad(null, GameWinnerPage, popup, false, null);
 			}
-			homeLink.removeEventListener('click', homeEvent);
+			homeLinks.forEach((link) => {link.removeEventListener('click', homeEvent)});
 		};
 
-		homeLink.addEventListener('click', homeEvent);
+		homeLinks.forEach((link) => {link.addEventListener('click', homeEvent)});
 
 		generateDiamond();
 		createBoard();
@@ -350,22 +351,6 @@ class Game {
 				};
 			}, 1000);
 		};
-		// const timer = (startTime) => {
-		// 	let minutes = parseInt(startTime / 60);
-		// 	let seconds = startTime - 60 * minutes;
-		// 	console.log(minutes + ":" + seconds);
-		// 	timerElement.innerText = minutes + ":" + seconds;
-		// 	startTime--;
-		// 	if (startTime >= 0) {
-		// 		stopTime = setInterval(() => {timer(startTime)}, 1000);
-		// 	} else {
-		// 		clearInterval(stopTime);
-		// 		document.removeEventListener('keydown', keyHandler);
-		// 		const popup = document.createElement('div');
-		// 		document.getElementById('root').append(popup);
-		// 		onPageLoad(null, GameWinnerPage, popup, false, null);
-		// 	}
-		// };
 
 		const stopTimer = () => {
 			clearInterval(stopTime);

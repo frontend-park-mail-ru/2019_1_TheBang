@@ -94,7 +94,7 @@ class ChatPage extends ContentMixin {
 			ChatContent.appendTop(msg);
 		});
 
-		const chatBox = document.querySelector('.chat');
+		const chatBox = document.querySelector('.chat__chat');
 
 		if ((chatBox.scrollHeight <= chatBox.clientHeight) && TIMESTAMP_ANCHOR) {
 			EventBus.emit(NetworkEvents.GET_MESSAGES, TIMESTAMP_ANCHOR);
