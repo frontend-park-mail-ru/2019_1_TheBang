@@ -6,8 +6,8 @@ import GameLobbyPage from 'src/views/GameLobbyPage';
 import GamePage from 'src/views/GamePage';
 
 class GameWinnerPage /*extends ContentMixin*/ {
-	constructor(targetRender, score) {
-		this.content = new GamePopupContent(true, score);
+	constructor(targetRender, win, score) {
+		this.content = new GamePopupContent(win, score);
 		this.targetRender = targetRender;
 	}
 

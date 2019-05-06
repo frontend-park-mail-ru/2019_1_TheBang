@@ -13,8 +13,15 @@ class GamePopupContent {
 	}
 
 	render() {
+		let title = '';
+		if (this.win) {
+			title = "Вы выиграли!";
+		} else {
+			title = "Вы проиграли!";
+		}
+
 		const renderData = {
-			win: this.win,
+			title: title,
 			score: this.score
         };
 		return gameAlertComponent.call({}, renderData);

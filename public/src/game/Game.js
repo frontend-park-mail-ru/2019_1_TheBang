@@ -295,11 +295,12 @@ class Game {
 				document.querySelector(id).className = 'frame__block frame__block-player frame__block-bye';
 				document.querySelector('.info').textContent = 'bye!';
 
+				stopTimer();
 				document.removeEventListener('keydown', keyHandler);
 
 				const popup = document.createElement('div');
 				document.getElementById('root').append(popup);
-				setTimeout(onPageLoad, 1000, null, GameWinnerPage, popup, null);
+				setTimeout(onPageLoad, 1000, null, GameWinnerPage, popup, true, null);
 				return
 			}
 
@@ -310,6 +311,32 @@ class Game {
 		generateDiamond();
 		createBoard();
 		renderMaze();
+
+		let stopTime = 0;
+		const timerElement = document.querySelector('.frame__timer');
+		const timer = (startTime) => {
+			let minutes = parseInt(startTime / 60);
+			let seconds = startTime - 60 * minutes;
+			console.log(minutes + ":" + seconds);
+			timerElement.innerText = minutes + ":" + seconds;
+			startTime--;
+			if (startTime >= 0) {
+				stopTime = setTimeout(() => {timer(startTime)}, 1000);
+			} else {
+				clearTimeout(stopTime);
+				document.removeEventListener('keydown', keyHandler);
+				const popup = document.createElement('div');
+				document.getElementById('root').append(popup);
+				onPageLoad(null, GameWinnerPage, popup, false, null);
+			}
+		};
+
+		const stopTimer = () => {
+			clearTimeout(stopTime);
+		};
+
+		timer(30);
+
 		let direction = 0;
 
 		const keyHandler = (event) => {
