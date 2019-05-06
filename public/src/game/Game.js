@@ -349,21 +349,72 @@ class Game {
 				document.querySelector(id).className = 'frame__block frame__block-player'
 			}
 			else {
-				onPageLoad(null, GameWinnerPage);
+				document.querySelector(id).className = 'frame__block frame__block-player frame__block-bye';
+				document.querySelector('.info').textContent = 'bye!';
+
+				stopTimer();
+				document.removeEventListener('keydown', keyHandler);
+
+				const popup = document.createElement('div');
+				document.getElementById('root').append(popup);
+				setTimeout(onPageLoad, 1000, null, GameWinnerPage, popup, true, null);
 				return
-				// =======
-				// 				document.querySelector(id).className = 'frame__block frame__block-player frame__block-bye';
-				// 				document.querySelector('.info').textContent = 'bye!';
-				// >>>>>>> T60 поменяла имена классов на странице игры
 			}
 
 			document.querySelector('.frame__diamond-count-js').textContent = bag + '/' + DIAMOND_COUNT;
 			document.querySelector('.frame__block-player').scrollIntoView({block:'nearest'});
 		};
 
+		const homeLinks = [].slice.call(document.getElementsByClassName('link-home'));
+		console.log(homeLinks);
+		const homeEvent = (e) => {
+			stopTimer();
+			document.removeEventListener('keydown', keyHandler);
+			if (!document.querySelector('.popup')) {
+				e.preventDefault();
+				const popup = document.createElement('div');
+				document.getElementById('root').append(popup);
+				onPageLoad(null, GameWinnerPage, popup, false, null);
+			}
+			homeLinks.forEach((link) => {link.removeEventListener('click', homeEvent)});
+		};
+
+		homeLinks.forEach((link) => {link.addEventListener('click', homeEvent)});
+
 		generateDiamond();
 		createBoard();
 		renderMaze();
+
+		let stopTime = 0;
+		let startTime = 30;
+		const startTimer = () => {
+			const timerElement = document.querySelector('.frame__timer');
+			const timer = () => {
+				let minutes = parseInt(startTime / 60);
+				let seconds = startTime - 60 * minutes;
+				console.log(minutes + ":" + seconds);
+				timerElement.innerText = minutes + ":" + seconds;
+				startTime--;
+			};
+
+			stopTime = setInterval(() => {
+				timer();
+				if (startTime < 0) {
+					stopTimer();
+					document.removeEventListener('keydown', keyHandler);
+					const popup = document.createElement('div');
+					document.getElementById('root').append(popup);
+					onPageLoad(null, GameWinnerPage, popup, false, null);
+				};
+			}, 1000);
+		};
+
+		const stopTimer = () => {
+			clearInterval(stopTime);
+		};
+
+		startTimer();
+
 		let direction = 0;
 
 		if (touchPad) {

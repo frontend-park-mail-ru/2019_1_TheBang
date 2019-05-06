@@ -1,11 +1,12 @@
-.chat__header
-    div
-    p=nickname
-    .chat__menu.hidden
-        button.chat__delete
-        button.chat__edit
 .chat
-    .chat__messages
-.chat__send
-    input(type='text', name='chat-message', placeholder='Введите сообщение').chat__input
-    span.chat__button
+    .chat__header
+        div
+        p=nickname
+        .chat__menu.hidden
+            button.chat__delete
+            button.chat__edit
+    .chat__chat
+        .chat__messages
+    .chat__send
+        input(type='text', name='chat-message', placeholder='Введите сообщение').chat__input
+        span.chat__button
