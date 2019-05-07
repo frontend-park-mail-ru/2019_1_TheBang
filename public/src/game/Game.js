@@ -318,7 +318,7 @@ class Game {
 				document.querySelector('.controlls__down').removeEventListener('touchend', touchMove);
 			} else {
 				document.removeEventListener('keydown', keyHandler);
-			};
+			}
 		};
 
 		const renderMaze = () => {

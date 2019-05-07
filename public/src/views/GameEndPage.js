@@ -26,7 +26,7 @@ class GameEndPage {
 			console.log('hello winner');
 		} else {
 			console.log('hello looser');
-		};
+		}
 
 		const toPlay = () => {
 			if (this.online) {
