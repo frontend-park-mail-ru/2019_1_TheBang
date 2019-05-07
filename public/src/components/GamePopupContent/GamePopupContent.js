@@ -1,15 +1,12 @@
-import gameAlertComponent from 'src/components/GamePopupContent/template.pug'
+import gamePopupComponent from 'src/components/GamePopupContent/template.pug'
 import 'src/components/GamePopupContent/style.scss';
 import 'src/pug-mixins/animation/rotate.scss';
 
 class GamePopupContent {
-	constructor (win, score) {
+	constructor (win, score, online) {
 		this.win = win;
-		if (this.score) {
-			this.score = 'Счет: ' + score;
-		} else {
-			this.score = 'Играйте в мультиплеер для сохранения счета!';
-		}
+		this.score = score;
+		this.online = online;
 	}
 
 	render() {
@@ -20,11 +17,18 @@ class GamePopupContent {
 			title = 'Вы проиграли!';
 		}
 
+		let score = '';
+		if (this.online) {
+			score = 'Счет: ' + this.score;
+		} else {
+			score = 'Играйте в мультиплеер для сохранения счета!';
+		}
+
 		const renderData = {
 			title: title,
-			score: this.score
+			score: score
 		};
-		return gameAlertComponent.call({}, renderData);
+		return gamePopupComponent.call({}, renderData);
 	}
 }
 

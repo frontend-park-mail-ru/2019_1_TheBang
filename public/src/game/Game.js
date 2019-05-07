@@ -1,7 +1,6 @@
 import BackendResource from 'src/network/BackendResource';
 import GamePage from 'src/views/GamePage';
-import GameWinnerPage from 'src/views/GameWinnerPage';
-import GameLosePage from 'src/views/GameLosePage';
+import GameEndPage from 'src/views/GameEndPage';
 import Store from 'src/Store';
 import onPageLoad from 'src/app';
 
@@ -35,7 +34,6 @@ class Game {
 		if (!frameControlls || frameControlls.offsetHeight === 0) {
 			touchPad = false;
 		}
-		// const touchPad = document.querySelector('.controlls').getElementsByClassName.display;
 
 		if (roomID) {
 			const url = [BackendResource.GAME_WSS, 'room/', roomID].join('');
@@ -92,13 +90,14 @@ class Game {
 				const playersScore = lastData.data.players_score;
 				const gemsMax = lastData.data.max_gems_count;
 
+				const popup = document.createElement('div');
+				document.getElementById('root').append(popup);
 				if (playersScore[identificator] === gemsMax || playersScore[identificator] === Math.max.apply(null, Object.values(playersScore))) {
-					onPageLoad(null, GameWinnerPage, playersScore[identificator]);
+					setTimeout(onPageLoad, 1000, null, GameEndPage, popup, true, playersScore[identificator], true);
 					Store.updateScore(playersScore[identificator]);
 					return
 				}
-				onPageLoad(null, GameLosePage);
-
+				setTimeout(onPageLoad, 1000, null, GameEndPage, popup, false, 0, true);
 			};
 
 			let direction = '';
@@ -311,6 +310,17 @@ class Game {
 			}
 		};
 
+		const removeControllsListener = () => {
+			if (touchPad) {
+				document.querySelector('.controlls__up').removeEventListener('touchend', touchMove);
+				document.querySelector('.controlls__left').removeEventListener('touchend', touchMove);
+				document.querySelector('.controlls__right').removeEventListener('touchend', touchMove);
+				document.querySelector('.controlls__down').removeEventListener('touchend', touchMove);
+			} else {
+				document.removeEventListener('keydown', keyHandler);
+			};
+		};
+
 		const renderMaze = () => {
 			if (bag < DIAMOND_COUNT) {
 				document.querySelector('.info').textContent = 'collect all the gems'
@@ -358,11 +368,11 @@ class Game {
 				document.querySelector('.info').textContent = 'bye!';
 
 				stopTimer();
-				document.removeEventListener('keydown', keyHandler);
+				removeControllsListener();
 
 				const popup = document.createElement('div');
 				document.getElementById('root').append(popup);
-				setTimeout(onPageLoad, 1000, null, GameWinnerPage, popup, true, null);
+				setTimeout(onPageLoad, 1000, null, GameEndPage, popup, true, null, false);
 				return
 			}
 
@@ -374,12 +384,13 @@ class Game {
 		console.log(homeLinks);
 		const homeEvent = (e) => {
 			stopTimer();
-			document.removeEventListener('keydown', keyHandler);
+			removeControllsListener();
+
 			if (!document.querySelector('.popup')) {
 				e.preventDefault();
 				const popup = document.createElement('div');
 				document.getElementById('root').append(popup);
-				onPageLoad(null, GameWinnerPage, popup, false, null);
+				onPageLoad(null, GameEndPage, popup, false, null, false);
 			}
 			homeLinks.forEach((link) => {link.removeEventListener('click', homeEvent)});
 		};
@@ -409,7 +420,7 @@ class Game {
 					document.removeEventListener('keydown', keyHandler);
 					const popup = document.createElement('div');
 					document.getElementById('root').append(popup);
-					onPageLoad(null, GameWinnerPage, popup, false, null);
+					onPageLoad(null, GameEndPage, popup, false, null, false);
 				}
 			}, 1000);
 		};
@@ -443,6 +454,28 @@ class Game {
 			}
 		};
 
+		const touchMove = (event) => {
+			// console.log(Number(event.target.dataset.direction));
+			switch (Number(event.target.dataset.direction)) {
+			case RIGHT:
+				direction = RIGHT;
+				break;
+			case LEFT:
+				direction = LEFT;
+				break;
+			case UP:
+				direction = UP;
+				break;
+			case DOWN:
+				direction = DOWN;
+				break;
+			}
+
+			if (direction !== 0) {
+				changePlayerPos(direction)
+			}
+		};
+
 		if (touchPad) {
 
 			const touchUp = document.querySelector('.controlls__up');
@@ -454,56 +487,12 @@ class Game {
 			const touchDown = document.querySelector('.controlls__down');
 			touchDown.dataset.direction = DOWN;
 
-			const touchMove = (event) => {
-				// console.log(Number(event.target.dataset.direction));
-				switch (Number(event.target.dataset.direction)) {
-				case RIGHT:
-					direction = RIGHT;
-					break;
-				case LEFT:
-					direction = LEFT;
-					break;
-				case UP:
-					direction = UP;
-					break;
-				case DOWN:
-					direction = DOWN;
-					break;
-				}
-
-				if (direction !== 0) {
-					changePlayerPos(direction)
-				}
-			};
-
 			touchUp.addEventListener('touchend', touchMove);
 			touchLeft.addEventListener('touchend', touchMove);
 			touchRight.addEventListener('touchend', touchMove);
 			touchDown.addEventListener('touchend', touchMove);
 
 		} else {
-
-			// const keyHandler = (event) => {
-			// 	switch (event.keyCode) {
-			// 	case DOWN:
-			// 		direction = DOWN;
-			// 		break;
-			// 	case UP:
-			// 		direction = UP;
-			// 		break;
-			// 	case LEFT:
-			// 		direction = LEFT;
-			// 		break;
-			// 	case RIGHT:
-			// 		direction = RIGHT;
-			// 		break;
-			// 	}
-
-			// 	if (direction !== 0) {
-			// 		changePlayerPos(direction)
-			// 	}
-			// };
-
 			document.addEventListener('keydown', keyHandler);
 			Game.unlockKeyBoard(keyHandler);
 		}

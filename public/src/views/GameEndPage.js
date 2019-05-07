@@ -3,10 +3,11 @@ import onPageLoad from 'src/app';
 import GameLobbyPage from 'src/views/GameLobbyPage';
 import GamePage from 'src/views/GamePage';
 
-class GameWinnerPage /*extends ContentMixin*/ {
-	constructor(targetRender, win, score) {
-		this.content = new GamePopupContent(win, score);
+class GameEndPage {
+	constructor(targetRender, win, score, online) {
+		this.content = new GamePopupContent(win, score, online);
 		this.targetRender = targetRender;
+		this.online = online;
 	}
 
 	render() {
@@ -18,28 +19,26 @@ class GameWinnerPage /*extends ContentMixin*/ {
 		return this.targetRender
 	}
 	
-	// constructor(score) {
-	// 	let subtitle = 'Ваш счет: ' + score;
-	// 	if (!score) {
-	// 		subtitle = ''
-	// 	}
-	// 	super(GamePopupContent, 'Вы выиграли!', subtitle);
-	// }
-
 	afterRender() {
 		const btn = document.querySelector('.button-primary');
-		console.log('hello winner');
+
+		if (this.win) {
+			console.log('hello winner');
+		} else {
+			console.log('hello looser');
+		};
+
 		const toPlay = () => {
-			if (this.score) {
+			if (this.online) {
 				onPageLoad(null, GameLobbyPage);
 			} else {
 				onPageLoad(null, GamePage);
 			}
-			console.log('click hello winner');
+			console.log('click play');
 			btn.removeEventListener('click', toPlay);
 		};
 		btn.addEventListener('click', toPlay)
 	}
 }
 
-export default GameWinnerPage;
+export default GameEndPage;

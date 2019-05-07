@@ -12,5 +12,4 @@ export {default as ChatPage} from 'src/views/ChatPage';
 export {default as GamePage} from 'src/views/GamePage';
 export {default as InfoPage} from 'src/views/InfoPage';
 export {default as GameWaitingPage} from 'src/views/GameWaitingPage';
-export {default as GameWinnerPage} from 'src/views/GameWinnerPage';
-export {default as GameLosePage} from 'src/views/GameLosePage';
+export {default as GameEndPage} from 'src/views/GameEndPage';

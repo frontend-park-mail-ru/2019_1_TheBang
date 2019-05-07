@@ -260,5 +260,10 @@
     background-color: $content-color;
     border-radius: $border-radius;
     color: white;
+
+    @media screen and (max-width: $screen-md) {
+      position: fixed;
+      top: 100px;
+    }
   }
 }
