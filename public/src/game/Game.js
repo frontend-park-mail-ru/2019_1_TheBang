@@ -56,7 +56,7 @@ class Game {
 
 			connection.onmessage = (e) => {
 				const data = JSON.parse(e.data);
-
+				console.log(data);
 				if (data.type === 'start_game') {
 					console.log('game start bitch');
 
@@ -76,6 +76,12 @@ class Game {
 						MAZE[item.x][item.y] = EMPTY;
 					});
 
+					data.data.gems_positions.forEach((item) => {
+						console.log('CLEAR GEMS');
+						MAZE[item.x][item.y] = EMPTY;
+						// console.log('player on ', item.x, item.y)
+					});
+					console.log(MAZE);
 					lastData = data;
 				}
 			};
@@ -545,6 +551,7 @@ class Game {
 	static onlineInit(data) {
 
 		const gameData = data.data.game_map;
+		// const gemsPosition = data.data.game_map.gems_positions;
 
 		MAZE = gameData.map;
 
@@ -591,7 +598,7 @@ class Game {
 					case WALL:
 						block.classList.add(ROTATE_CLASSES[Math.floor(Math.random() * ROTATE_CLASSES.length)]);
 						break;
-					case DIAMOND:
+					case DIAMOND || undefined:
 						block.classList.add('frame__block-diamond');
 						break;
 					}
@@ -627,6 +634,7 @@ class Game {
 		const gemsMax = data.data.max_gems_count;
 		const playersPosition = data.data.players_positions; // nickname: x, y
 		const playersScore = data.data.players_score; // nickname: score
+		const gemsPositions = data.data.gems_positions;
 
 		const teleportCOL = data.data.teleport.y;
 		const teleportROW = data.data.teleport.x;
@@ -647,6 +655,14 @@ class Game {
 				MAZE[item.x][item.y] = PLAYER;
 				console.log('player on ', item.x, item.y)
 			});
+
+			console.log(gemsPositions);
+			gemsPositions.forEach((item) => {
+				// console.log('CLEAR GEMS');
+				MAZE[item.x][item.y] = DIAMOND;
+				// console.log('player on ', item.x, item.y)
+			});
+
 
 
 			for (let row = 0; row < ROWS; row++) {
