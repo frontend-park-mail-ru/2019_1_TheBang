@@ -87,17 +87,19 @@ class Game {
 					return
 				}
 
+				console.log("connection onclose");
+
 				const playersScore = lastData.data.players_score;
 				const gemsMax = lastData.data.max_gems_count;
 
 				const popup = document.createElement('div');
 				document.getElementById('root').append(popup);
 				if (playersScore[identificator] === gemsMax || playersScore[identificator] === Math.max.apply(null, Object.values(playersScore))) {
-					setTimeout(onPageLoad, 1000, null, GameEndPage, popup, true, playersScore[identificator], true);
+					onPageLoad(null, GameEndPage, popup, true, playersScore[identificator], true);
 					Store.updateScore(playersScore[identificator]);
 					return
 				}
-				setTimeout(onPageLoad, 1000, null, GameEndPage, popup, false, 0, true);
+				onPageLoad(null, GameEndPage, popup, false, 0, true);
 			};
 
 			let direction = '';
@@ -415,6 +417,10 @@ class Game {
 
 			stopTime = setInterval(() => {
 				timer();
+				if (!document.querySelector('.frame')) {
+					stopTimer();
+				};
+
 				if (startTime < 0) {
 					stopTimer();
 					document.removeEventListener('keydown', keyHandler);
@@ -559,6 +565,22 @@ class Game {
 			'rotate__slow-clockwise',
 		];
 
+		const homeLinks = [].slice.call(document.getElementsByClassName('link-home'));
+		console.log(homeLinks);
+		const homeEvent = (e) => {
+			removeControllsListener();
+
+			if (!document.querySelector('.popup')) {
+				e.preventDefault();
+				const popup = document.createElement('div');
+				document.getElementById('root').append(popup);
+				onPageLoad(null, GameEndPage, popup, false, 0, true);
+			}
+			homeLinks.forEach((link) => {link.removeEventListener('click', homeEvent)});
+		};
+
+		homeLinks.forEach((link) => {link.addEventListener('click', homeEvent)});
+
 		const createWallBlock = () => {
 			const block = document.createElement('div');
 			block.classList.add('frame__block', 'frame__block-wall');
@@ -568,6 +590,8 @@ class Game {
 		};
 
 		const createBoard = () => {
+			document.querySelector('.frame__timer').remove();
+
 			const board = document.querySelector('.frame__board');
 
 			for (let col = -1; col < COLS + 1; col++) {

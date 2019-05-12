@@ -20,7 +20,12 @@ class GameEndPage {
 	}
 	
 	afterRender() {
-		const btn = document.querySelector('.button-primary');
+		const popup = document.querySelector('.popup');
+		popup.querySelector('.button-secondary').addEventListener('click', () => {
+			popup.remove();
+		});
+
+		const btn = popup.querySelector('.button-primary');
 
 		if (this.win) {
 			console.log('hello winner');
@@ -36,8 +41,16 @@ class GameEndPage {
 			}
 			console.log('click play');
 			btn.removeEventListener('click', toPlay);
+			popup.remove();
 		};
 		btn.addEventListener('click', toPlay)
+
+		const closeButton = popup.querySelector('.popup__close');
+		const close = () => {
+			closeButton.removeEventListener('click', close);
+			popup.remove();
+		};
+		closeButton.addEventListener('click', close);
 	}
 }
 
