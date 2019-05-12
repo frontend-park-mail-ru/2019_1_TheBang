@@ -87,7 +87,7 @@ class Game {
 					return
 				}
 
-				console.log("connection onclose");
+				console.log('connection onclose');
 
 				const playersScore = lastData.data.players_score;
 				const gemsMax = lastData.data.max_gems_count;
@@ -419,7 +419,7 @@ class Game {
 				timer();
 				if (!document.querySelector('.frame')) {
 					stopTimer();
-				};
+				}
 
 				if (startTime < 0) {
 					stopTimer();
@@ -568,7 +568,7 @@ class Game {
 		const homeLinks = [].slice.call(document.getElementsByClassName('link-home'));
 		console.log(homeLinks);
 		const homeEvent = (e) => {
-			removeControllsListener();
+			// removeControllsListener();
 
 			if (!document.querySelector('.popup')) {
 				e.preventDefault();
