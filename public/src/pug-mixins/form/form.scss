@@ -6,4 +6,12 @@
     justify-items: center;
     color: white;
     font-size: 100%;
+    width: $form-item_width;
+
+    &__message {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        height: 50px;
+    }
 }
