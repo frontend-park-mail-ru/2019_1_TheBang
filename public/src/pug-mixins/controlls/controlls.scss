@@ -13,6 +13,7 @@
         grid-column-end: 3;
         background-image: url("./img/up.svg");
         background-size: cover;
+        transform: rotate(-90deg);
     }
 
     &__left {
@@ -20,6 +21,7 @@
         grid-column-end: 2;
         background-image: url("./img/left.svg");
         background-size: cover;
+        transform: rotate(180deg);
     }
 
     &__right {
@@ -34,5 +36,6 @@
         grid-column-end: 3;
         background-image: url("./img/down.svg");
         background-size: cover;
+        transform: rotate(90deg);
     }
 }

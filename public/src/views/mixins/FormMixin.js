@@ -61,14 +61,6 @@ class FormMixin extends ContentMixin{
 	}
 
 	static clearMessage() {
-		const successMsg = document.getElementsByClassName(MessageClass.SUCCESS);
-
-		if (successMsg) {
-			while(successMsg.length > 0){
-				successMsg[0].parentNode.removeChild(successMsg[0]);
-			}
-		}
-
 		const errorMsg = document.getElementsByClassName(MessageClass.ERROR);
 
 		if (errorMsg) {
@@ -80,11 +72,11 @@ class FormMixin extends ContentMixin{
 	}
 
 	static ErrorMessage(message) {
-		FormMixin.createMsg(message, MessageClass.ERROR)
+		document.querySelector('.' + MessageClass.SEND_MESSAGE).innerText = message;
 	}
 
 	static SuccessMessage(message) {
-		FormMixin.createMsg(message, MessageClass.SUCCESS)
+		document.querySelector('.' + MessageClass.SEND_MESSAGE).innerText = message;
 	}
 
 	static createMsg(message, className) {

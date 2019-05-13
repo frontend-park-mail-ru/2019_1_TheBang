@@ -6,7 +6,7 @@
   width: 100%;
   height: calc(100% - #{$game-footer_height});
 
-  @media screen and (max-height: $screen-md) and (min-width: $screen-sm) and (min-height: $screen-sm-h) {
+  @media screen and (min-width: $screen-md) {
     height: 100%;
   }
 
@@ -20,10 +20,6 @@
 
     @media screen and (max-width: $screen-md), (max-height: $screen-md) {
       width: 100%;
-    }
-
-    @media screen and (max-height: $screen-md) {
-      // height: calc(80% - #{$game-footer_height});
     }
   }
 
