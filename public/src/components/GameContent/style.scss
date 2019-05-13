@@ -155,7 +155,7 @@
       display: grid;
       position: absolute;
       bottom: 20px;
-      z-index: 11;
+      z-index: 12;
     }
   }
 
@@ -236,6 +236,7 @@
     width: calc(100% - 10px);
     height: $game-footer_height;
     background-color: rgba(0, 0, 0, 0.8);
+    z-index: 11;
   }
 
   &__show {
