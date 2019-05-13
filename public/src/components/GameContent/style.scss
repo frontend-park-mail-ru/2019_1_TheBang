@@ -250,8 +250,8 @@
   &__timer {
     z-index: 11;
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 90px;
+    left: calc(50% - 50px);
     display: flex;
     justify-content: center;
     align-items: center;
