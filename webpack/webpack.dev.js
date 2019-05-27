@@ -47,9 +47,9 @@ module.exports = env => {
 			new webpack.DefinePlugin({
 				'process.env': {
 					'NODE_ENV': JSON.stringify(env.NODE_ENV),
-					'PORT_BASE': JSON.stringify(8004),
-					'PORT_GAME': JSON.stringify(8005),
-					'PORT_CHAT': JSON.stringify(8006),
+					'PORT_BASE': JSON.stringify(8001),
+					'PORT_GAME': JSON.stringify(8002),
+					'PORT_CHAT': JSON.stringify(8003),
 				}
 			}),
 		],
