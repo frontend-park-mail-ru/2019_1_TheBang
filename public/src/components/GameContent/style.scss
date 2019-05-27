@@ -155,7 +155,7 @@
       display: grid;
       position: absolute;
       bottom: 20px;
-      z-index: 11;
+      z-index: 12;
     }
   }
 
@@ -236,6 +236,7 @@
     width: calc(100% - 10px);
     height: $game-footer_height;
     background-color: rgba(0, 0, 0, 0.8);
+    z-index: 11;
   }
 
   &__show {
@@ -249,8 +250,8 @@
   &__timer {
     z-index: 11;
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 90px;
+    left: calc(50% - 50px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -260,5 +261,10 @@
     background-color: $content-color;
     border-radius: $border-radius;
     color: white;
+
+    @media screen and (max-width: $screen-md) {
+      position: fixed;
+      top: 100px;
+    }
   }
 }
