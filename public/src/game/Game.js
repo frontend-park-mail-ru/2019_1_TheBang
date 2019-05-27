@@ -160,9 +160,9 @@ class Game {
 
 					Game.onlinePushState(data, connection);
 
-					// Object.values(data.data.players_positions).forEach((item) => {
-					// 	MAZE[item.x][item.y] = EMPTY;
-					// });
+					Object.values(data.data.players_positions).forEach((item) => {
+						MAZE[item.x][item.y] = EMPTY;
+					});
 					//
 					// data.data.gems_positions.forEach((item) => {
 					// 	console.log('CLEAR GEMS', item.x, item.y);
@@ -176,58 +176,58 @@ class Game {
 				if (data.type === 'finish_game') {
 					console.log(data.data.winner, data.data.points);
           
-// 				console.log('connection onclose');
+					// 				console.log('connection onclose');
 
-// 				const playersScore = lastData.data.players_score;
-// 				const gemsMax = lastData.data.max_gems_count;
+					// 				const playersScore = lastData.data.players_score;
+					// 				const gemsMax = lastData.data.max_gems_count;
 
-// 				const popup = document.createElement('div');
-// 				document.getElementById('root').append(popup);
-// 				if (playersScore[identificator] === gemsMax || playersScore[identificator] === Math.max.apply(null, Object.values(playersScore))) {
-// 					onPageLoad(null, GameEndPage, popup, true, playersScore[identificator], true);
-// 					Store.updateScore(playersScore[identificator]);
-// 					return
-// 				}
-// 				onPageLoad(null, GameEndPage, popup, false, 0, true);
-// 			};
+					// 				const popup = document.createElement('div');
+					// 				document.getElementById('root').append(popup);
+					// 				if (playersScore[identificator] === gemsMax || playersScore[identificator] === Math.max.apply(null, Object.values(playersScore))) {
+					// 					onPageLoad(null, GameEndPage, popup, true, playersScore[identificator], true);
+					// 					Store.updateScore(playersScore[identificator]);
+					// 					return
+					// 				}
+					// 				onPageLoad(null, GameEndPage, popup, false, 0, true);
+					// 			};
 
-// 			let direction = '';
+					// 			let direction = '';
 
-// 			const DOWN = 40;
-// 			const UP = 38;
-// 			const LEFT = 37;
-// 			const RIGHT = 39;
+					// 			const DOWN = 40;
+					// 			const UP = 38;
+					// 			const LEFT = 37;
+					// 			const RIGHT = 39;
 
-// 			if (touchPad) {
+					// 			if (touchPad) {
 
-// 				const touchUp = document.querySelector('.controlls__up');
-// 				touchUp.dataset.direction = UP;
-// 				const touchLeft = document.querySelector('.controlls__left');
-// 				touchLeft.dataset.direction = LEFT;
-// 				const touchRight = document.querySelector('.controlls__right');
-// 				touchRight.dataset.direction = RIGHT;
-// 				const touchDown = document.querySelector('.controlls__down');
-// 				touchDown.dataset.direction = DOWN;
+					// 				const touchUp = document.querySelector('.controlls__up');
+					// 				touchUp.dataset.direction = UP;
+					// 				const touchLeft = document.querySelector('.controlls__left');
+					// 				touchLeft.dataset.direction = LEFT;
+					// 				const touchRight = document.querySelector('.controlls__right');
+					// 				touchRight.dataset.direction = RIGHT;
+					// 				const touchDown = document.querySelector('.controlls__down');
+					// 				touchDown.dataset.direction = DOWN;
 
-// 				const touchMove = (event) => {
-// 					switch (Number(event.target.dataset.direction)) {
-// 					case RIGHT:
-// 						console.log('right');
-// 						direction = 'down';
-// 						break;
-// 					case LEFT:
-// 						console.log('left');
-// 						direction = 'up';
-// 						break;
-// 					case UP:
-// 						console.log('up');
-// 						direction = 'left';
-// 						break;
-// 					case DOWN:
-// 						console.log('down');
-// 						direction = 'right';
-// 						break;
-// 					}
+					// 				const touchMove = (event) => {
+					// 					switch (Number(event.target.dataset.direction)) {
+					// 					case RIGHT:
+					// 						console.log('right');
+					// 						direction = 'down';
+					// 						break;
+					// 					case LEFT:
+					// 						console.log('left');
+					// 						direction = 'up';
+					// 						break;
+					// 					case UP:
+					// 						console.log('up');
+					// 						direction = 'left';
+					// 						break;
+					// 					case DOWN:
+					// 						console.log('down');
+					// 						direction = 'right';
+					// 						break;
+					// 					}
 
 					const popup = document.createElement('div');
 					document.getElementById('root').append(popup);
