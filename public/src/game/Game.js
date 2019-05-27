@@ -29,11 +29,7 @@ class Game {
      */
 
 	static start(roomID) {
-		let touchPad = true;
-		const frameControlls = document.querySelector('.frame__controlls');
-		if (!frameControlls || frameControlls.offsetHeight === 0) {
-			touchPad = false;
-		}
+		const touchPad = screen.width < 600;
 
 		if (roomID) {
 			const url = [BackendResource.GAME_WSS, 'room/', roomID].join('');
@@ -41,7 +37,7 @@ class Game {
 
 			const user = Store.getUser();
 			const identificator = user.nickname;
-			let lastData = {};
+			// let lastData = {};
 
 			connection.onopen = () => {
 				const change = () => {
@@ -56,7 +52,7 @@ class Game {
 
 			connection.onmessage = (e) => {
 				const data = JSON.parse(e.data);
-
+				console.log(data);
 				if (data.type === 'start_game') {
 					console.log('game start bitch');
 
@@ -64,6 +60,98 @@ class Game {
 					const element = game.getTargetRender();
 					element.innerHTML = game.render();
 
+					let direction = '';
+
+					const DOWN = 40;
+					const UP = 38;
+					const LEFT = 37;
+					const RIGHT = 39;
+
+					if (touchPad) {
+
+						const touchUp = document.querySelector('.controlls__up');
+						touchUp.dataset.direction = UP;
+						const touchLeft = document.querySelector('.controlls__left');
+						touchLeft.dataset.direction = LEFT;
+						const touchRight = document.querySelector('.controlls__right');
+						touchRight.dataset.direction = RIGHT;
+						const touchDown = document.querySelector('.controlls__down');
+						touchDown.dataset.direction = DOWN;
+
+						const touchMove = (event) => {
+							switch (Number(event.target.dataset.direction)) {
+							case RIGHT:
+								console.log('right');
+								direction = 'down';
+								break;
+							case LEFT:
+								console.log('left');
+								direction = 'up';
+								break;
+							case UP:
+								console.log('up');
+								direction = 'left';
+								break;
+							case DOWN:
+								console.log('down');
+								direction = 'right';
+								break;
+							}
+
+							const action = {
+								type: 'action',
+								data: {
+									time: 'Date.now()',
+									player: identificator,
+									move: direction
+								}
+							};
+							console.log('send action', event.keyCode);
+							connection.send(JSON.stringify(action))
+						};
+
+						touchUp.addEventListener('touchend', touchMove);
+						touchLeft.addEventListener('touchend', touchMove);
+						touchRight.addEventListener('touchend', touchMove);
+						touchDown.addEventListener('touchend', touchMove);
+
+					} else {
+
+						const keyHandler = (event) => {
+							switch (event.keyCode) {
+							case RIGHT:
+								console.log('right');
+								direction = 'down';
+								break;
+							case LEFT:
+								console.log('left');
+								direction = 'up';
+								break;
+							case UP:
+								console.log('up');
+								direction = 'left';
+								break;
+							case DOWN:
+								console.log('down');
+								direction = 'right';
+								break;
+							}
+
+							const action = {
+								type: 'action',
+								data: {
+									time: 'Date.now()',
+									player: identificator,
+									move: direction
+								}
+							};
+							console.log('send action', event.keyCode);
+							connection.send(JSON.stringify(action))
+						};
+
+						document.addEventListener('keydown', keyHandler);
+						Game.unlockKeyBoard(keyHandler);
+					}
 
 					Game.onlineInit(data);
 				}
@@ -75,125 +163,84 @@ class Game {
 					Object.values(data.data.players_positions).forEach((item) => {
 						MAZE[item.x][item.y] = EMPTY;
 					});
-
-					lastData = data;
-				}
-			};
-
-			connection.onclose = () => {
-
-				connection.close();
-				if (!lastData) {
-					return
+					//
+					// data.data.gems_positions.forEach((item) => {
+					// 	console.log('CLEAR GEMS', item.x, item.y);
+					// 	MAZE[item.x][item.y] = EMPTY;
+					// 	// console.log('player on ', item.x, item.y)
+					// });
+					console.log(MAZE);
+					// lastData = data;
 				}
 
-				console.log('connection onclose');
+				if (data.type === 'finish_game') {
+					console.log(data.data.winner, data.data.points);
+          
+					// 				console.log('connection onclose');
 
-				const playersScore = lastData.data.players_score;
-				const gemsMax = lastData.data.max_gems_count;
+					// 				const playersScore = lastData.data.players_score;
+					// 				const gemsMax = lastData.data.max_gems_count;
 
-				const popup = document.createElement('div');
-				document.getElementById('root').append(popup);
-				if (playersScore[identificator] === gemsMax || playersScore[identificator] === Math.max.apply(null, Object.values(playersScore))) {
-					onPageLoad(null, GameEndPage, popup, true, playersScore[identificator], true);
-					Store.updateScore(playersScore[identificator]);
-					return
-				}
-				onPageLoad(null, GameEndPage, popup, false, 0, true);
-			};
+					// 				const popup = document.createElement('div');
+					// 				document.getElementById('root').append(popup);
+					// 				if (playersScore[identificator] === gemsMax || playersScore[identificator] === Math.max.apply(null, Object.values(playersScore))) {
+					// 					onPageLoad(null, GameEndPage, popup, true, playersScore[identificator], true);
+					// 					Store.updateScore(playersScore[identificator]);
+					// 					return
+					// 				}
+					// 				onPageLoad(null, GameEndPage, popup, false, 0, true);
+					// 			};
 
-			let direction = '';
+					// 			let direction = '';
 
-			const DOWN = 40;
-			const UP = 38;
-			const LEFT = 37;
-			const RIGHT = 39;
+					// 			const DOWN = 40;
+					// 			const UP = 38;
+					// 			const LEFT = 37;
+					// 			const RIGHT = 39;
 
-			if (touchPad) {
+					// 			if (touchPad) {
 
-				const touchUp = document.querySelector('.controlls__up');
-				touchUp.dataset.direction = UP;
-				const touchLeft = document.querySelector('.controlls__left');
-				touchLeft.dataset.direction = LEFT;
-				const touchRight = document.querySelector('.controlls__right');
-				touchRight.dataset.direction = RIGHT;
-				const touchDown = document.querySelector('.controlls__down');
-				touchDown.dataset.direction = DOWN;
+					// 				const touchUp = document.querySelector('.controlls__up');
+					// 				touchUp.dataset.direction = UP;
+					// 				const touchLeft = document.querySelector('.controlls__left');
+					// 				touchLeft.dataset.direction = LEFT;
+					// 				const touchRight = document.querySelector('.controlls__right');
+					// 				touchRight.dataset.direction = RIGHT;
+					// 				const touchDown = document.querySelector('.controlls__down');
+					// 				touchDown.dataset.direction = DOWN;
 
-				const touchMove = (event) => {
-					switch (Number(event.target.dataset.direction)) {
-					case RIGHT:
-						console.log('right');
-						direction = 'down';
-						break;
-					case LEFT:
-						console.log('left');
-						direction = 'up';
-						break;
-					case UP:
-						console.log('up');
-						direction = 'left';
-						break;
-					case DOWN:
-						console.log('down');
-						direction = 'right';
-						break;
+					// 				const touchMove = (event) => {
+					// 					switch (Number(event.target.dataset.direction)) {
+					// 					case RIGHT:
+					// 						console.log('right');
+					// 						direction = 'down';
+					// 						break;
+					// 					case LEFT:
+					// 						console.log('left');
+					// 						direction = 'up';
+					// 						break;
+					// 					case UP:
+					// 						console.log('up');
+					// 						direction = 'left';
+					// 						break;
+					// 					case DOWN:
+					// 						console.log('down');
+					// 						direction = 'right';
+					// 						break;
+					// 					}
+
+					const popup = document.createElement('div');
+					document.getElementById('root').append(popup);
+
+					if (data.data.winner === identificator) {
+						setTimeout(onPageLoad, 1000, null, GameEndPage, popup, true, data.data.points, true);
+						Store.updateScore(data.data.points);
+						return
 					}
+					setTimeout(onPageLoad, 1000, null, GameEndPage, popup, false, 0, true);
+				}
 
-					const action = {
-						type: 'action',
-						data: {
-							time: 'Date.now()',
-							player: identificator,
-							move: direction
-						}
-					};
-					console.log('send action', event.keyCode);
-					connection.send(JSON.stringify(action))
-				};
-
-				touchUp.addEventListener('touchend', touchMove);
-				touchLeft.addEventListener('touchend', touchMove);
-				touchRight.addEventListener('touchend', touchMove);
-				touchDown.addEventListener('touchend', touchMove);
-
-			} else {
-
-				const keyHandler = (event) => {
-					switch (event.keyCode) {
-					case RIGHT:
-						console.log('right');
-						direction = 'down';
-						break;
-					case LEFT:
-						console.log('left');
-						direction = 'up';
-						break;
-					case UP:
-						console.log('up');
-						direction = 'left';
-						break;
-					case DOWN:
-						console.log('down');
-						direction = 'right';
-						break;
-					}
-
-					const action = {
-						type: 'action',
-						data: {
-							time: 'Date.now()',
-							player: identificator,
-							move: direction
-						}
-					};
-					console.log('send action', event.keyCode);
-					connection.send(JSON.stringify(action))
-				};
-
-				document.addEventListener('keydown', keyHandler);
-				Game.unlockKeyBoard(keyHandler);
-			}
+			};
 			return
 		}
 
@@ -337,6 +384,7 @@ class Game {
 					const item = document.querySelector(id);
 
 					const classes = item.classList.value.split(' ');
+					//ужастный фикс, понимаю :(
 					classes.pop();
 
 					let itemClass = '';
@@ -551,6 +599,7 @@ class Game {
 	static onlineInit(data) {
 
 		const gameData = data.data.game_map;
+		// const gemsPosition = data.data.game_map.gems_positions;
 
 		MAZE = gameData.map;
 
@@ -615,7 +664,7 @@ class Game {
 					case WALL:
 						block.classList.add(ROTATE_CLASSES[Math.floor(Math.random() * ROTATE_CLASSES.length)]);
 						break;
-					case DIAMOND:
+					case DIAMOND || undefined:
 						block.classList.add('frame__block-diamond');
 						break;
 					}
@@ -651,6 +700,7 @@ class Game {
 		const gemsMax = data.data.max_gems_count;
 		const playersPosition = data.data.players_positions; // nickname: x, y
 		const playersScore = data.data.players_score; // nickname: score
+		const gemsPositions = data.data.gems_positions;
 
 		const teleportCOL = data.data.teleport.y;
 		const teleportROW = data.data.teleport.x;
@@ -672,6 +722,15 @@ class Game {
 				console.log('player on ', item.x, item.y)
 			});
 
+			console.log(gemsPositions);
+			gemsPositions.forEach((item) => {
+				// console.log('CLEAR GEMS');
+				console.log('CREATE GEMS', item.x, item.y);
+				MAZE[item.x][item.y] = DIAMOND;
+				// console.log('player on ', item.x, item.y)
+			});
+
+
 
 			for (let row = 0; row < ROWS; row++) {
 				for (let col = 0; col < COLS; col++) {
@@ -680,6 +739,19 @@ class Game {
 
 					const classes = item.classList.value.split(' ');
 					classes.pop();
+					//TODO fix для удаления после сбора
+					let index = classes.indexOf('frame__block-diamond');
+					if (index > -1) {
+						classes.splice(index, 1);
+					}
+
+					index = classes.indexOf('frame__block-player');
+					if (index > -1) {
+						classes.splice(index, 1);
+					}
+					// classes.pop();
+					// classes.pop('frame__block-diamond');
+					// classes.pop('frame__block-player');
 
 					let itemClass = '';
 					switch (MAZE[row][col]) {
