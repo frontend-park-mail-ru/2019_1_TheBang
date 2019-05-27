@@ -1,6 +1,6 @@
-const PORT_BASE = process.env.PORT_BASE || 8004;
-const PORT_GAME = process.env.PORT_GAME || 8005;
-const PORT_CHAT = process.env.PORT_CHAT || 8006;
+const PORT_BASE = process.env.PORT_BASE || 8001;
+const PORT_GAME = process.env.PORT_GAME || 8002;
+const PORT_CHAT = process.env.PORT_CHAT || 8003;
 
 const HTTP = 'http://';
 const WS = 'ws://';
