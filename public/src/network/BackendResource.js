@@ -4,7 +4,7 @@ const PORT_CHAT = process.env.PORT_CHAT || 8006;
 
 const HTTP = 'http://';
 const WS = 'ws://';
-const BACKEND_PREFIX = '95.163.212.32:';
+const BACKEND_PREFIX = 'localhost:';
 const LOCAL_PREFIX = '127.0.0.1:';
 const END_SLASH = '/';
 let CURRENT_MODE = BACKEND_PREFIX;
