@@ -77,14 +77,7 @@
         color: white;
     }
 
-    &__error-message {
-        position: absolute;
-        bottom: -40px;
+    &__message {
         text-align: center;
-        color: white;
-    }
-
-    &-success-message {
-        color: green;
     }
 }
