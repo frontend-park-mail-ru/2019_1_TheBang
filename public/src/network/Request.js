@@ -16,7 +16,6 @@ function fetchWithTimeout(url, request, timeout = 3000) {
 class Request {
 	static request(path, method, data, url = [BackendResource.BASE_HTTPS, path].join('')) {
 		const request = {
-			mode: 'cors',
 			method: method,
 			body: data,
 			credentials: 'include'
