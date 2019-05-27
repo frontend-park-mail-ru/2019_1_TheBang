@@ -26,7 +26,7 @@ class GameLobbyPage extends ContentMixin {
 				return
 			}
 			EventBus.emit(GameNetworkEvents.GET_ROOMS);
-		}, 50);
+		}, 500);
 
 
 		const change = () => {
