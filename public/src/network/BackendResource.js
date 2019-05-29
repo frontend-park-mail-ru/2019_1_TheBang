@@ -23,8 +23,8 @@
 
 const BackendResource = {
 	BASE_HTTPS: '/api/auth/',
-	CHAT_WSS: '/api/chat/ws/',
-	GAME_WSS: '/api/game/ws/',
+	CHAT_WSS: '/api/chatws/',
+	GAME_WSS: '/api/gamews/',
 	GAME_HTTPS:'/api/game/',
 	CHAT_HTTPS: '/api/chat/',
 };
