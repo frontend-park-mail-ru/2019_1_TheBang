@@ -32,7 +32,8 @@ class Game {
 		const touchPad = screen.width < 600;
 
 		if (roomID) {
-			const url = [BackendResource.GAME_WSS, 'room/', roomID].join('');
+			let url = [BackendResource.GAME_WSS, 'room/', roomID].join('');
+			url = 'ws://' + document.location.hostname + ':' + document.location.port + url;
 			const connection = new WebSocket(url);
 
 			const user = Store.getUser();
