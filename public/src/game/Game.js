@@ -3,6 +3,7 @@ import GamePage from 'src/views/GamePage';
 import GameEndPage from 'src/views/GameEndPage';
 import Store from 'src/Store';
 import onPageLoad from 'src/app';
+import volumeController from 'src/pug-mixins/music/music';
 
 //TODO тут дохуя рефакторинга
 
@@ -29,6 +30,7 @@ class Game {
      */
 
 	static start(roomID) {
+
 		const touchPad = screen.width < 600;
 
 		if (roomID) {
@@ -61,6 +63,14 @@ class Game {
 					const element = game.getTargetRender();
 					element.innerHTML = game.render();
 
+					const song = require('../../music/game.ogg');
+					const audio = new Audio(song);
+					audio.setAttribute('loop', '');
+					audio.setAttribute('autoplay', 'true')
+					audio.setAttribute('muted', 'muted');
+					document.querySelector(".container").appendChild(audio);
+					volumeController();
+					
 					let direction = '';
 
 					const DOWN = 40;
@@ -244,6 +254,14 @@ class Game {
 			};
 			return
 		}
+
+		const song = require('../../music/game.ogg');
+		const audio = new Audio(song);
+		audio.setAttribute('loop', '');
+		audio.setAttribute('autoplay', 'true')
+		audio.setAttribute('muted', 'muted');
+		document.querySelector(".container").appendChild(audio);
+		volumeController();
 
 		const maze = [
 			[0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0],

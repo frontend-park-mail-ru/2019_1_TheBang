@@ -4,6 +4,7 @@ import 'src/pug-mixins/animation/rotate.scss';
 import 'src/pug-mixins/controlls/controlls.scss';
 import 'src/pug-mixins/left-board/left-board.scss';
 import 'src/pug-mixins/right-board/right-board.scss';
+import 'src/pug-mixins/music/music.scss';
 import Store from 'src/Store';
 
 class GameContent {

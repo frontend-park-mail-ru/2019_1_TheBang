@@ -3,6 +3,8 @@
         .frame__buttons
             include /pug-mixins/link/link.pug
             +link('', '', 'home')
+            include /pug-mixins/music/music.pug
+            +music()
         .frame__game-info
             .frame__user-info
                 .frame__avatar
@@ -23,6 +25,8 @@
             +right-board()
     .frame__footer
         .frame__show
+            include /pug-mixins/music/music.pug
+            +music()
             include /pug-mixins/link/link.pug
             +link('', '', 'home')
     .frame__controlls
