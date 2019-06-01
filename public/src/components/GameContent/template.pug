@@ -14,6 +14,9 @@
         .frame__help Keys: &larr; &rarr; &uarr; &darr;
     .frame__game-container
         .frame__timer
+        .frame__music
+            include /pug-mixins/player/player
+            +player()
         .frame__space
             include /pug-mixins/left-board/left-board.pug
             +left-board()
@@ -23,6 +26,8 @@
             +right-board()
     .frame__footer
         .frame__show
+            include /pug-mixins/player/player
+            +player()
             include /pug-mixins/link/link.pug
             +link('', '', 'home')
     .frame__controlls
