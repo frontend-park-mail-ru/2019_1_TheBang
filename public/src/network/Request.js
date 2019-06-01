@@ -49,7 +49,7 @@ class Request {
 
 	// будем отдавать с диска как статику
 	static image(name) {
-		return ['icon/', name || 'default_img'].join('');
+		return ['/api/auth/icon/', name || 'default_img'].join('');
 	}
 }
 
