@@ -2,6 +2,9 @@ import MenuContent from 'src/components/MenuContent/MenuContent';
 import Store from 'src/Store';
 import EventBus from 'src/events/EventBus';
 import NetworkEvents from 'src/events/NetworkEvents';
+import volumeController from 'src/pug-mixins/music/music';
+import musicNextController from 'src/pug-mixins/music-next/music-next';
+import musicPrevController from 'src/pug-mixins/music-prev/music-prev';
 
 
 class BasePage {
@@ -39,6 +42,10 @@ class BasePage {
 
 			button.addEventListener('click', btnHandler);
 		}
+
+		volumeController();
+		musicNextController();
+		musicPrevController();
 	}
 }
 

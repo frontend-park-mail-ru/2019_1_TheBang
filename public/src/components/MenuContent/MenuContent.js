@@ -2,6 +2,10 @@ import 'src/components/MenuContent/style.scss';
 import 'src/pug-mixins/animation/rotate.scss';
 import 'src/pug-mixins/button/button.scss';
 import 'src/pug-mixins/mobile-input/mobile-input.scss';
+import 'src/pug-mixins/player/player.scss';
+import 'src/pug-mixins/music/music.scss';
+import 'src/pug-mixins/music-next/music-next.scss';
+import 'src/pug-mixins/music-prev/music-prev.scss';
 import menuComponent from 'src/components/MenuContent/template.pug';
 
 

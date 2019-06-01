@@ -4,6 +4,8 @@ import GameEndPage from 'src/views/GameEndPage';
 import Store from 'src/Store';
 import onPageLoad from 'src/app';
 import volumeController from 'src/pug-mixins/music/music';
+import musicNextController from 'src/pug-mixins/music-next/music-next';
+import musicPrevController from 'src/pug-mixins/music-prev/music-prev';
 
 //TODO тут дохуя рефакторинга
 
@@ -63,13 +65,9 @@ class Game {
 					const element = game.getTargetRender();
 					element.innerHTML = game.render();
 
-					const song = require('../../music/game.ogg');
-					const audio = new Audio(song);
-					audio.setAttribute('loop', '');
-					audio.setAttribute('autoplay', 'true')
-					audio.setAttribute('muted', 'muted');
-					document.querySelector(".container").appendChild(audio);
 					volumeController();
+					musicNextController();
+					musicPrevController();
 					
 					let direction = '';
 
@@ -255,13 +253,9 @@ class Game {
 			return
 		}
 
-		const song = require('../../music/game.ogg');
-		const audio = new Audio(song);
-		audio.setAttribute('loop', '');
-		audio.setAttribute('autoplay', 'true')
-		audio.setAttribute('muted', 'muted');
-		document.querySelector(".container").appendChild(audio);
 		volumeController();
+		musicNextController();
+		musicPrevController();
 
 		const maze = [
 			[0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0],
@@ -305,6 +299,11 @@ class Game {
 			'rotate__middle-no-clockwise',
 			'rotate__slow-clockwise',
 		];
+
+		const ROTATE_CLASSES_DIAMOND = [
+			'rotate__fast-clockwise-ultra',
+			'rotate__fast-no-clockwise-ultra'
+		]
 
 		const generateDiamond = () => {
 			let count = 0;
@@ -357,6 +356,7 @@ class Game {
 						block.classList.add(ROTATE_CLASSES[Math.floor(Math.random() * ROTATE_CLASSES.length)]);
 						break;
 					case DIAMOND:
+						block.classList.add(ROTATE_CLASSES_DIAMOND[Math.floor(Math.random() * ROTATE_CLASSES_DIAMOND.length)]);
 						block.classList.add('frame__block-diamond');
 						break;
 					}
@@ -633,6 +633,11 @@ class Game {
 			'rotate__slow-clockwise',
 		];
 
+		const ROTATE_CLASSES_DIAMOND = [
+			'rotate__fast-clockwise-ultra',
+			'rotate__fast-no-clockwise-ultra'
+		]
+
 		const homeLinks = [].slice.call(document.getElementsByClassName('link-home'));
 		console.log(homeLinks);
 		const homeEvent = (e) => {
@@ -685,6 +690,7 @@ class Game {
 						break;
 					case DIAMOND || undefined:
 						block.classList.add('frame__block-diamond');
+						block.classList.add(ROTATE_CLASSES_DIAMOND[Math.floor(Math.random() * ROTATE_CLASSES_DIAMOND.length)]);
 						break;
 					}
 

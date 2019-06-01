@@ -39,6 +39,38 @@ function onPageLoad(event, ControllerRender, ...ControllerArgs) {
  */
 function firstLoad() {
 	EventBus.emit(NetworkEvents.GET_USER);
+
+	const containPlaylist = document.querySelector('.song');
+
+	if (!containPlaylist) {
+		const songs = [
+			{src: require('../music/cosmic.ogg')},
+			{src: require('../music/game.ogg')},
+			{src: require('../music/galaxy.ogg')},
+			{src: require('../music/nirvana.ogg')},
+			{src: require('../music/apocalyptica.ogg')},
+			{src: require('../music/main.wav')}
+		]
+		
+		const ul = document.createElement('ul');
+		ul.style.display = 'none';
+		songs.forEach((song) => {
+			const li = document.createElement('li');
+			li.setAttribute('src-audio', song.src);
+			li.classList.add('song');
+			ul.appendChild(li);
+		});
+
+		const currentSong = ul.firstElementChild;
+		currentSong.classList.add('play');
+		const audio = new Audio(currentSong.getAttribute('src-audio'));
+		audio.setAttribute('loop', '');
+		audio.setAttribute('autoplay', 'true')
+		audio.setAttribute('muted', 'muted');
+
+		const target = document.querySelector('body');
+		target.append(ul, audio);
+	}
 }
 
 

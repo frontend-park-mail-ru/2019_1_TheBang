@@ -82,4 +82,36 @@
             transform: rotate(0deg);
         }
     }
+
+    &__fast-clockwise-ultra {
+        animation-name: cog6;
+        animation-duration: 10s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        }
+
+        @keyframes cog6 {
+        from {
+            transform:rotate(0deg);
+        }
+        to {
+            transform:rotate(360deg);
+        }
+    }
+
+    &__fast-no-clockwise-ultra {
+        animation-name: cog7;
+        animation-duration: 10s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        }
+
+        @keyframes cog7 {
+        from {
+            transform:rotate(360deg);
+        }
+        to {
+            transform:rotate(0deg);
+        }
+    }
 }
