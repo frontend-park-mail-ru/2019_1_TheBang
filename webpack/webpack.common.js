@@ -19,6 +19,14 @@ module.exports =  {
 			},
 
 			{
+				test: /\.(ogg|mp3|wav)$/,
+				loader: 'file-loader',
+				query: {
+					name: '[name][hash].[ext]'
+				}
+			},
+
+			{
 				test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2|webp)$/,
 				loader: 'url-loader',
 				query: {

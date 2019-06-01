@@ -1,0 +1,8 @@
+mixin player()
+    .player
+        include /pug-mixins/music-prev/music-prev
+        +music-prev()
+        include /pug-mixins/music/music
+        +music()
+        include /pug-mixins/music-next/music-next
+        +music-next()

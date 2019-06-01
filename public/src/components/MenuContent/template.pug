@@ -4,6 +4,8 @@ a.menu__header(href='#')
 nav.menu__nav
     case is_auth
         when true
+            include /pug-mixins/player/player.pug
+            +player()
             include /pug-mixins/link/link.pug
             +link('Профиль', 'profile', 'menu')
             +link('Сингплеер', 'game', 'menu')
@@ -17,6 +19,8 @@ nav.menu__nav
                 +link('Презентация', 'presentation', 'secondary')
                 
         when false
+            include /pug-mixins/player/player.pug
+            +player()
             include /pug-mixins/link/link.pug
             +link('Авторизация', 'auth', 'menu')
             +link('Регистрация', 'signup', 'menu')

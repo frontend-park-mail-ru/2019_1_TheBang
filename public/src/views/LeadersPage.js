@@ -6,7 +6,7 @@ import EventBus from 'src/events/EventBus';
 import NetworkEvents from 'src/events/NetworkEvents';
 
 const PAGE_COUNT_ITEMS = 6;
-const CACHE_PAGE = [];
+// const CACHE_PAGE = [];
 let CURRENT_PAGE = 1;
 
 
@@ -36,10 +36,10 @@ class LeadersPage extends ContentMixin {
 	static setPageData() {
 		LeadersPage.checkPageExist();
 
-		if (CACHE_PAGE[CURRENT_PAGE]) {
-			LeadersPage.createRows(CACHE_PAGE[CURRENT_PAGE]);
-			return
-		}
+		// if (CACHE_PAGE[CURRENT_PAGE]) {
+		// 	LeadersPage.createRows(CACHE_PAGE[CURRENT_PAGE]);
+		// 	return
+		// }
 
 		EventBus.emit(NetworkEvents.GET_LEADERBOARD, CURRENT_PAGE);
 	}
@@ -47,24 +47,24 @@ class LeadersPage extends ContentMixin {
 	static checkPageExist() {
 		const prev = CURRENT_PAGE - 1;
 		const next = CURRENT_PAGE + 1;
-		const prevPage = document.querySelector('.paginator__left');
-		const nextPage = document.querySelector('.paginator__right');
+		// const prevPage = document.querySelector('.paginator__left');
+		// const nextPage = document.querySelector('.paginator__right');
 
-		if (CACHE_PAGE[prev]) {
-			prevPage.classList.remove('hidden');
-		} else if (CACHE_PAGE[prev] === null) {
-			prevPage.classList.add('hidden');
-		} else {
-			EventBus.emit(NetworkEvents.CHECK_LEADERBOARD, prev);
-		}
+		// if (CACHE_PAGE[prev]) {
+		// 	prevPage.classList.remove('hidden');
+		// } else if (CACHE_PAGE[prev] === null) {
+		// 	prevPage.classList.add('hidden');
+		// } else {
+		EventBus.emit(NetworkEvents.CHECK_LEADERBOARD, prev);
+		// }
 
-		if (CACHE_PAGE[next]) {
-			nextPage.classList.remove('hidden');
-		} else if (CACHE_PAGE[next] === null) {
-			nextPage.classList.add('hidden');
-		} else {
-			EventBus.emit(NetworkEvents.CHECK_LEADERBOARD, next);
-		}
+		// if (CACHE_PAGE[next]) {
+		// 	nextPage.classList.remove('hidden');
+		// } else if (CACHE_PAGE[next] === null) {
+		// 	nextPage.classList.add('hidden');
+		// } else {
+		EventBus.emit(NetworkEvents.CHECK_LEADERBOARD, next);
+		// }
 	}
 
 	static createRows(data) {
@@ -98,7 +98,7 @@ class LeadersPage extends ContentMixin {
 		const data = result.data;
 		const pageNumber = Number(result.pageNumber);
 
-		CACHE_PAGE[pageNumber] = data;
+		// CACHE_PAGE[pageNumber] = data;
 		LeadersPage.createRows(data, pageNumber);
 	}
 
@@ -114,33 +114,33 @@ class LeadersPage extends ContentMixin {
 
 	static onExistPage(result) {
 		const pageNumber = result.pageNumber;
-		const data = result.data;
+		// const data = result.data;
 		const prev = CURRENT_PAGE - 1;
-		const next = CURRENT_PAGE + 1;
+		// const next = CURRENT_PAGE + 1;
 		const prevPage = document.querySelector('.paginator__left');
 		const nextPage = document.querySelector('.paginator__right');
 
 		if (pageNumber === prev) {
 			prevPage.classList.remove('hidden');
-			CACHE_PAGE[prev] = data;
+			// CACHE_PAGE[prev] = data;
 		} else {
 			nextPage.classList.remove('hidden');
-			CACHE_PAGE[next] = data;
+			// CACHE_PAGE[next] = data;
 		}
 	}
 
 	static onNotExistPage(pageNumber) {
 		const prev = CURRENT_PAGE - 1;
-		const next = CURRENT_PAGE + 1;
+		// const next = CURRENT_PAGE + 1;
 		const prevPage = document.querySelector('.paginator__left');
 		const nextPage = document.querySelector('.paginator__right');
 
 		if (pageNumber === prev) {
 			prevPage.classList.add('hidden');
-			CACHE_PAGE[prev] = null;
+			// CACHE_PAGE[prev] = null;
 		} else {
 			nextPage.classList.add('hidden');
-			CACHE_PAGE[next] = null;
+			// CACHE_PAGE[next] = null;
 		}
 	}
 }

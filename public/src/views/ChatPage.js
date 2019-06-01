@@ -17,7 +17,10 @@ class ChatPage extends ContentMixin {
 		TIMESTAMP_ANCHOR = Date.now();
 		EventBus.emit(NetworkEvents.GET_MESSAGES, TIMESTAMP_ANCHOR);
 
-		const url = [BackendResource.CHAT_WSS, 'chat'].join('');
+		let url = [BackendResource.CHAT_WSS, 'chat'].join('');
+		url = 'ws://' + document.location.hostname + ':' + document.location.port + url;
+		console.log(url);
+		// url = 'ws://' + document.location.hostname + ':' + document.location.port + url;
 		const connection = new WebSocket(url);
 
 		const btn = document.querySelector('.chat__button');
