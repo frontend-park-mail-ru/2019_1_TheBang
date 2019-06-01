@@ -44,13 +44,13 @@ function firstLoad() {
 
 	if (!containPlaylist) {
 		const songs = [
-			{src: require('../music/cosmic.ogg')},
+			{src: require('../music/best_ever_song.wav')},
 			{src: require('../music/game.ogg')},
 			{src: require('../music/galaxy.ogg')},
 			{src: require('../music/nirvana.ogg')},
 			{src: require('../music/apocalyptica.ogg')},
 			{src: require('../music/main.wav')}
-		]
+		];
 		
 		const ul = document.createElement('ul');
 		ul.style.display = 'none';
