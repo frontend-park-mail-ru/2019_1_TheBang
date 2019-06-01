@@ -28,7 +28,7 @@ class ChatContent {
 
 		const avatar = document.createElement('img');
 		avatar.classList.add('chat__avatar');
-		avatar.src = data.photo_url.split('/').pop();
+		avatar.src = '/api/auth/icon/' + data.photo_url.split('/').pop();
 		// data.photo_url;
 
 		const sendTime = document.createElement('div');
