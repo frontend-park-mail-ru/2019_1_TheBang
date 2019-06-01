@@ -47,8 +47,9 @@ class Request {
 		return Request.request(path, method, data, url)
 	}
 
+	// будем отдавать с диска как статику
 	static image(name) {
-		return [BackendResource.BASE_HTTPS, 'icon/', name || 'default_img'].join('');
+		return ['icon/', name || 'default_img'].join('');
 	}
 }
 

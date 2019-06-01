@@ -37,7 +37,7 @@ class Game {
 
 		if (roomID) {
 			let url = [BackendResource.GAME_WSS, 'room/', roomID].join('');
-			url = 'ws://' + document.location.hostname + ':' + document.location.port + url;
+			url = 'wss://' + document.location.hostname + ':' + document.location.port + url;
 			const connection = new WebSocket(url);
 
 			const user = Store.getUser();
